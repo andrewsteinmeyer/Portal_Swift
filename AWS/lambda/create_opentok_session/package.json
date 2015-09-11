@@ -1,0 +1,31 @@
+{
+  "name": "opentok-sessionId-lambda",
+  "version": "0.0.1",
+  "description": "Lambda function to generate Opentok sessionId for ePortal",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*test.js",
+    "start": "mocha test/*test.js -w -R min"
+  },
+  "author": "Andrew Steinmeyer <jandrewsteinmeyer@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "~1.2.0",
+    "opentok": "~2.3.0",
+    "async": "~1.4.2"
+  },
+  "devDependencies": {
+    "run-sequence": "^1.0.2",
+    "stream": "0.0.2",
+    "yargs": "~3.15.0",
+    "aws-sdk": "~2.1.42",
+    "del": "~1.2.0",
+    "guid": "0.0.12",
+    "gulp": "~3.9.0",
+    "gulp-install": "~0.4.0",
+    "gulp-rename": "~1.2.2",
+    "gulp-util": "~3.0.6",
+    "gulp-zip": "~3.0.2",
+    "mocha": "~2.2.5"
+  }
+}

@@ -1,0 +1,38 @@
+PODS:
+  - AWSCognito (2.2.2):
+    - AWSCore (= 2.2.2)
+  - AWSCore (2.2.2)
+  - AWSLambda (2.2.2):
+    - AWSCore (= 2.2.2)
+  - CSStickyHeaderFlowLayout (0.2.8)
+  - Fabric (1.2.8):
+    - Fabric/Base (= 1.2.8)
+  - Fabric/Base (1.2.8)
+  - Firebase (2.3.3)
+  - OpenTok (2.6.0)
+  - TwitterCore (1.8.1)
+  - TwitterKit (1.8.1)
+
+DEPENDENCIES:
+  - AWSCognito (= 2.2.2)
+  - AWSCore (= 2.2.2)
+  - AWSLambda (= 2.2.2)
+  - CSStickyHeaderFlowLayout (= 0.2.8)
+  - Fabric (= 1.2.8)
+  - Firebase (= 2.3.3)
+  - OpenTok (= 2.6)
+  - TwitterCore (= 1.8.1)
+  - TwitterKit (= 1.8.1)
+
+SPEC CHECKSUMS:
+  AWSCognito: c7364b3ac4bf8e5849eead5c678513084750c32e
+  AWSCore: 3e969334460cc7ba16504fb2e074f59f95880800
+  AWSLambda: 6606d7d64ada65b9523373090bc94afce68392dc
+  CSStickyHeaderFlowLayout: e919dd425fa12bba1155f66d87edfe540eb8f89a
+  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
+  Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
+  OpenTok: 2b99bd75055554f4028735fa84e4242e4932d245
+  TwitterCore: 0a26fb8054bc23d8986344d3dcb6602255b6aec5
+  TwitterKit: 88daaebdb8bfb5847d76d8ae159841248427931d
+
+COCOAPODS: 0.38.2
