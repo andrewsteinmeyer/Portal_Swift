@@ -16,6 +16,12 @@ class TabBarController: UITabBarController {
     setupBroadcastTabBarItem()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+  }
+  
   func setupBroadcastTabBarItem() {
     // retrieve area of tab bar that contains the broadcast icon
     let tabBarRect = self.tabBar.frame
