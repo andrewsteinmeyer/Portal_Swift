@@ -20,7 +20,7 @@ class SaleOptionTextField: UITextField {
   override func deleteBackward() {
     super.deleteBackward()
     
-    if let textFieldDelegate = delegate as? SaleOptionsTableViewController {
+    if let textFieldDelegate = delegate as? SaleOptionsViewController {
       if (textFieldDelegate.respondsToSelector("textFieldDidDelete")) {
         textFieldDelegate.textFieldDidDelete()
       }

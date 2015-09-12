@@ -42,6 +42,9 @@ struct Constants {
   static let BroadcastVC = "BroadcastViewController"
   static let SaleOptionsVC = "SaleOptionsTableViewController"
   
+  // Photo Album
+  static let PhotoAlbumTitle = "Portal"
+  
   // SaleOption Settings
   struct SaleOption {
     static let ProductImageLimit = 5
@@ -50,4 +53,10 @@ struct Constants {
     static let EditImageSegue = "EditImageSegue"
   }
   
+  // Notifications
+  struct Notification {
+    static let ImagePickerPresented = "com.dsmlabs.ePortal.ImagePickerPresentedNotification"
+    static let ImagePickerDismissed = "com.dsmlabs.ePortal.ImagePickerDismissedNotification"
+  }
+    
 }

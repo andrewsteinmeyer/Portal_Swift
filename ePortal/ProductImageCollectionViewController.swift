@@ -9,12 +9,16 @@
 import UIKit
 import Photos
 
-class ProductImageCollectionViewController: UICollectionViewController, EditImageViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProductImageCollectionViewController: UICollectionViewController {
   
   var selectedAssets: SelectedAssets!
   
   private var _addImagePlaceholderCell = 0
   private var _assetThumbnailSize = CGSizeZero
+  private var _cameraImages: PHFetchResult!
+  private var _imagesCollection: PHAssetCollection!
+  
+  var lastIndexPath: NSIndexPath!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,6 +27,9 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
     if selectedAssets == nil {
       selectedAssets = SelectedAssets()
     }
+    
+    // get user permissions for photos
+    requestPhotoLibraryAuthorization()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -34,7 +41,8 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
     let cellSize = (collectionView!.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
     _assetThumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     
-    // put placeholder cell after selected image cells
+    // set image placeholder cell 
+    // this cell should come right after the last selected asset cell
     if let selectedAssets = selectedAssets?.assets {
       _addImagePlaceholderCell = selectedAssets.count
     }
@@ -55,10 +63,10 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
       let count = selectedAssets!.assets.count
       destination.title = "Photos \(count)/\(Constants.SaleOption.ProductImageLimit)"
       
-      // request all photos from photo album and sort by creation date
+      // request all photos from photo album and sort by creation date (most recent first)
       // user will select images from the results
       let options = PHFetchOptions()
-      options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+      options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
       destination.assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
     }
     // prepare to present edit image viewcontroller for the chosen image
@@ -79,23 +87,114 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
     }
   }
   
-  //MARK: Product Image Picker
+  deinit {
+    // Unregister observer
+    PHPhotoLibrary.sharedPhotoLibrary().unregisterChangeObserver(self)
+  }
+
+}
+
+//MARK: Product Image Picker
+
+extension ProductImageCollectionViewController {
+  
+  func pickPhoto() {
+    // use camera if available
+    // otherwise, go straight to photo library
+    if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+      showPhotoMenu()
+    } else {
+      choosePhotoFromLibrary()
+    }
+  }
   
   func requestPhotoLibraryAuthorization() {
-    // Request Permissions and Create Album
+    // request permissions and create album
     PHPhotoLibrary.requestAuthorization { status in
       dispatch_async(GlobalMainQueue) {
         switch status {
         case .Authorized:
-          // user authorized access
-          // show user the image picker
-          self.performSegueWithIdentifier(Constants.SaleOption.ImagePickerSegue, sender: nil)
-          break
+          // Register observer
+          PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
+          
+          //look for Portal photo album
+          let options = PHFetchOptions()
+          options.predicate = NSPredicate(format: "title = %@", Constants.PhotoAlbumTitle)
+          let collections = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .AlbumRegular, options: options)
+          
+          if collections.count > 0 {
+            // album already exists
+            self._imagesCollection = collections[0] as! PHAssetCollection
+            
+            // fetch images that user has taken with camera
+            // sort by most recent first
+            let options = PHFetchOptions()
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            self._cameraImages = PHAsset.fetchAssetsInAssetCollection(self._imagesCollection, options: options)
+          } else {
+            // create the album
+            var assetPlaceholder: PHObjectPlaceholder?
+            
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+              let changeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(Constants.PhotoAlbumTitle)
+              assetPlaceholder = changeRequest.placeholderForCreatedAssetCollection
+              }, completionHandler: { success, error in
+                if !success {
+                  println("Failed to create album")
+                  println(error)
+                  return
+                }
+                
+                let collections = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([assetPlaceholder!.localIdentifier], options: nil)
+                if collections.count > 0 {
+                  self._imagesCollection = collections[0] as! PHAssetCollection
+                  
+                  // fetch images that user has taken with camera
+                  // sort by most recent first
+                  let options = PHFetchOptions()
+                  options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                  self._cameraImages = PHAsset.fetchAssetsInAssetCollection(self._imagesCollection, options: options)
+                }
+            })
+          }
+          
         default:
           self.showNoAccessAlert()
         }
       }
     }
+  }
+  
+  func showPhotoMenu() {
+    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+    alertController.addAction(cancelAction)
+    
+    let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: { _ in self.takePhotoWithCamera() })
+    alertController.addAction(takePhotoAction)
+    
+    let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .Default, handler: { _ in self.choosePhotoFromLibrary() })
+    alertController.addAction(chooseFromLibraryAction)
+    
+    presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+  func takePhotoWithCamera() {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .Camera
+    imagePicker.delegate = self
+    imagePicker.allowsEditing = false
+    imagePicker.view.tintColor = UIColor.themeColor()
+    presentViewController(imagePicker, animated: true, completion: nil)
+    
+    // notify observers when camera is presented (BroadcastViewController)
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerPresented, object: nil)
+  }
+  
+  func choosePhotoFromLibrary() {
+    // show user the image picker
+    self.performSegueWithIdentifier(Constants.SaleOption.ImagePickerSegue, sender: nil)
   }
   
   func showNoAccessAlert() {
@@ -108,7 +207,39 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
     self.presentViewController(alert, animated: true, completion: nil)
   }
   
-  // MARK: UICollectionViewDataSource
+  func saveImage(image: UIImage, toCollection collection: PHAssetCollection) {
+    // Create placeholder object
+    var imagePlaceholder: PHObjectPlaceholder!
+    
+    PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+      // Create assetChangeRequest and grab placeholder object
+      let assetChangeRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+      imagePlaceholder = assetChangeRequest.placeholderForCreatedAsset
+      
+      // Create assetColletionChangeRequest and pass asset placeholder object to add the new stitch
+      let assetCollectionChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: collection, assets: nil)
+      assetCollectionChangeRequest.addAssets([imagePlaceholder])
+      
+      }, completionHandler: { _, _ in
+        // Fetch the asset and add modification data to it
+        let fetchResult = PHAsset.fetchAssetsWithLocalIdentifiers([imagePlaceholder.localIdentifier], options: nil)
+        let imageAsset = fetchResult[0] as! PHAsset
+        
+        // add new photo from camera to selected assets
+        // bump placeholder cell forward by one cell
+        self.selectedAssets.assets.insert(imageAsset, atIndex: 0)
+        self._addImagePlaceholderCell += 1
+    })
+  }
+
+  
+}
+
+
+//MARK: UICollectionViewController Delegate/Source
+
+extension ProductImageCollectionViewController {
+  // UICollectionViewDataSource
   
   override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return 1
@@ -151,15 +282,23 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
         }
       }
     }
+    
     // show placeholder image in the cell after the last selected image
     if (row == _addImagePlaceholderCell) {
       cell.isPlaceholderImage = true
     }
     
+    // store last indexPath in collectionView
+    // this will get popped off collectionView when the user takes a picture with the camera
+    // to make room for the picture to be inserted at the beginning of the collectionview
+    if (indexPath.row == (Constants.SaleOption.ProductImageLimit - 1)) {
+      lastIndexPath = indexPath
+    }
+    
     return cell
   }
   
-  // MARK: UICollectionViewDelegate
+  // UICollectionViewDelegate
   
   override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
     if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ProductViewCell {
@@ -178,56 +317,91 @@ class ProductImageCollectionViewController: UICollectionViewController, EditImag
     return false
   }
   
-  // MARK: EditImageViewControllerDelegate
+}
+
+
+// MARK: EditImageViewControllerDelegate
+
+extension ProductImageCollectionViewController: EditImageViewControllerDelegate {
+  
   func editImageViewControllerDidDeleteAsset(assetToDelete: PHAsset) {
     // Update selected Assets
     selectedAssets.assets = selectedAssets.assets.filter { asset in
       !(asset == assetToDelete)
     }
   }
-  
-  //MARK: UIImagePickerControllerDelegate
-  
-  func takePhotoWithCamera() {
-    let imagePicker = UIImagePickerController()
-    imagePicker.sourceType = .Camera
-    imagePicker.delegate = self
-    imagePicker.allowsEditing = false
-    imagePicker.view.tintColor = UIColor.themeColor()
-    presentViewController(imagePicker, animated: true, completion: nil)
-  }
+
+}
+
+//MARK: UIImagePickerControllerDelegate
+
+extension ProductImageCollectionViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-    let image = info[UIImagePickerControllerEditedImage] as! UIImage?
+    let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+    saveImage(image, toCollection: self._imagesCollection)
     
     dismissViewControllerAnimated(true, completion: nil)
+    
+    // notify observers when camera is dismissed (BroadcastViewController)
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerDismissed, object: nil)
   }
   
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     dismissViewControllerAnimated(true, completion: nil)
+    
+    // notify observers when camera is dismissed (BroadcastViewController)
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerDismissed, object: nil)
   }
+
+}
+
+//MARK: PHPhotoLibraryChangeObserver
+
+extension ProductImageCollectionViewController: PHPhotoLibraryChangeObserver {
   
-  
-  func pickPhoto() {
-    if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-      showPhotoMenu()
-    } else {
-      requestPhotoLibraryAuthorization()
+  func photoLibraryDidChange(changeInstance: PHChange!)  {
+    
+    // put on main because we are working with UI
+    dispatch_async(GlobalMainQueue) {
+      // Respond to changes
+      if let collectionChanges = changeInstance.changeDetailsForFetchResult(self._cameraImages) {
+        self._cameraImages = collectionChanges.fetchResultAfterChanges
+        
+        let select = self.selectedAssets.assets
+        
+        if collectionChanges.hasMoves ||
+          !collectionChanges.hasIncrementalChanges {
+            // reload entire view bc changes were not incremental
+            self.collectionView!.reloadData()
+        } else {
+          // perform incremental updates
+          self.collectionView!.performBatchUpdates({
+            
+            let insertedIndexes = collectionChanges.insertedIndexes
+            if insertedIndexes?.count > 0 {
+              let indexPath = self.lastIndexPath!
+              // remove last item
+              self.collectionView!.deleteItemsAtIndexPaths([indexPath])
+              // add new item to front
+              self.collectionView!.insertItemsAtIndexPaths(self.indexPathsFromIndexSet(insertedIndexes!, section: 0))
+            }
+            }, completion: { _ in
+                self.collectionView!.reloadData()
+            })
+        }
+      }
     }
   }
   
-  func showPhotoMenu() {
-    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-    
-    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-    alertController.addAction(cancelAction)
-    
-    let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: { _ in self.takePhotoWithCamera() })
-    alertController.addAction(takePhotoAction)
-    
-    let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .Default, handler: { _ in self.requestPhotoLibraryAuthorization() })
-    alertController.addAction(chooseFromLibraryAction)
-    
-    presentViewController(alertController, animated: true, completion: nil)
+  // Create an array of index paths from an index set
+  func indexPathsFromIndexSet(indexSet:NSIndexSet, section:Int) -> [NSIndexPath] {
+    var indexPaths: [NSIndexPath] = []
+    indexSet.enumerateIndexesUsingBlock { i, _ in
+      indexPaths.append(NSIndexPath(forItem: i, inSection: section))
+    }
+    return indexPaths
   }
+  
+  
 }

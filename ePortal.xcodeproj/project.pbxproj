@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */; };
 		4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */; };
-		4E50B1501B8D58110072B85C /* SaleOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsTableViewController.swift */; };
+		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
 		4E50B1611B8D7C8E0072B85C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */; };
 		4E69767F1B82CB5C00FF4A32 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E69767E1B82CB5C00FF4A32 /* libc++.dylib */; };
 		4E6976811B82CB6500FF4A32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */; };
@@ -151,7 +151,7 @@
 		297C4E7EF63B5D75EDC45552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionLabel.swift; sourceTree = "<group>"; };
 		4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionTextField.swift; sourceTree = "<group>"; };
-		4E50B14E1B8D58110072B85C /* SaleOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsTableViewController.swift; sourceTree = "<group>"; };
+		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
 		4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4E69767E1B82CB5C00FF4A32 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -404,7 +404,7 @@
 				4E9460451B704C9B0084C9C6 /* DiscoverNavigationController.swift */,
 				4E94604E1B704F670084C9C6 /* DiscoverCollectionViewController.swift */,
 				4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */,
-				4E50B14E1B8D58110072B85C /* SaleOptionsTableViewController.swift */,
+				4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */,
 				4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */,
 				4EFF31E31B9C5D8D00147B38 /* ProductImageCollectionViewController.swift */,
 				4EAE8C961B9F9C050085E143 /* EditImageNavigationController.swift */,
@@ -778,7 +778,7 @@
 				4EAE8C9B1B9FAAB10085E143 /* CheckMark2.swift in Sources */,
 				4EA65E5E1B5DBC7B00B18107 /* Spring.swift in Sources */,
 				4EAE8C971B9F9C050085E143 /* EditImageNavigationController.swift in Sources */,
-				4E50B1501B8D58110072B85C /* SaleOptionsTableViewController.swift in Sources */,
+				4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */,
 				4EA65E5A1B5DBC7B00B18107 /* LoadingView.swift in Sources */,
 				4EA65E631B5DBC7B00B18107 /* SpringTextField.swift in Sources */,
 				4EFF31DE1B9A36F300147B38 /* SelectedAssets.swift in Sources */,

@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
-class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherDelegate {
+
+
+class BroadcastViewController: UIViewController, SaleOptionsViewControllerDelegate {
   
   var _session: OTSession!
   var _publisher: OTPublisher!
@@ -30,6 +32,10 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
     
     // initialize broadcast
     _broadcast = Broadcast()
+    
+    //register observer to listen for camera presentation and dismissal
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "stopCapturing", name: Constants.Notification.ImagePickerPresented, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "startCapturing", name: Constants.Notification.ImagePickerDismissed, object: nil)
     
     // request session id and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
@@ -56,14 +62,21 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
     }
   }
   
+  //make sure to remove this as an observer when cleaning up
+  //otherwise, a notification might be sent to a deallocated instance (app could crash)
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
     // Only present SaleOptionsViewController on first appearance
     // instantiate SaleOptionsViewController and pass the broadcast data
     if _firstAppearance {
-      let viewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.SaleOptionsVC) as! SaleOptionsTableViewController
+      let viewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.SaleOptionsVC) as! SaleOptionsViewController
       viewController.broadcast = broadcast
+      viewController.delegate = self
       self.presentViewController(viewController, animated: true) {
         // make broadcastViewController's view visible after the SaleOptionsViewController is presented
         // after user dismisses the SaleOptionsViewController, the broadcastViewController will be present
@@ -71,6 +84,12 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
       }
       _firstAppearance = false
     }
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
   }
   
   func doConnect() {
@@ -106,7 +125,19 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
     }
   }
   
+  func stopCapturing() {
+    println("got to stop capture after imagepicker presented")
+    _publisher?.videoCapture.stopCapture()
+  }
   
+  func startCapturing() {
+    println("got to start capture after imagepicker dismissed")
+    _publisher?.videoCapture.startCapture()
+    // call async so ui can continue
+    dispatch_async(GlobalUserInitiatedQueue) {
+      self._publisher?.cameraPosition = .Back
+    }
+  }
   
   func cleanupPublisher() {
     if (_publisher != nil) {
@@ -123,11 +154,22 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
     return UIStatusBarStyle.LightContent
   }
   
+}
+
+extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   
+  func saleOptionsViewControllerDidCancelSale() {
+    self.dismissViewControllerAnimated(false, completion: nil)
+  }
+}
+
+
+extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   //MARK: OTSessionDelegate Callbacks
   
   func sessionDidConnect(session: OTSession!) {
-    self.doPublish()
+    NSLog("session did connect")
+    //self.doPublish()
   }
   
   func sessionDidDisconnect(session: OTSession!) {
@@ -160,8 +202,9 @@ class BroadcastViewController: UIViewController, OTSessionDelegate, OTPublisherD
   
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
     broadcast.isPublishing(true, onStream: stream.streamId)
-    println("Now publishing")
+    NSLog("Now publishing")
     println("StreamId: \(stream.streamId)")
+    _publisher.videoCapture.stopCapture()
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {

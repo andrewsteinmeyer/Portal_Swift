@@ -1,5 +1,5 @@
 //
-//  SaleOptionsTableViewController.swift
+//  SaleOptionsViewController.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 6/25/15.
@@ -9,7 +9,11 @@
 import UIKit
 import Photos
 
-class SaleOptionsTableViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
+protocol SaleOptionsViewControllerDelegate {
+  func saleOptionsViewControllerDidCancelSale()
+}
+
+class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
   
   @IBOutlet weak var titleField: UITextField!
   @IBOutlet weak var closeButton: UIButton!
@@ -24,22 +28,24 @@ class SaleOptionsTableViewController: UITableViewController, UITextViewDelegate,
   @IBOutlet weak var centsTextField: SaleOptionTextField!
   @IBOutlet weak var quantityTextField: SaleOptionTextField!
   
-  @IBAction func closeSale(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: nil)
-  }
+  var broadcast: Broadcast!
+  var delegate: SaleOptionsViewControllerDelegate?
   
+  // text input type
   enum SaleOptionTag: Int {
     case Minutes = 1, Seconds, Dollars, Cents, Quantity, Title
   }
   
-  var broadcast: Broadcast!
-  
-  // text
+  // text inputs
   private var _textFields: [UITextField]!
   private var _shouldJumpFieldOnDelete = [SaleOptionTag: Bool]()
   private var _activeTextField: UITextField!
   private var _placeholderLabel: UILabel!
   
+  @IBAction func closeSale(sender: AnyObject) {
+    self.delegate?.saleOptionsViewControllerDidCancelSale()
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -320,7 +326,7 @@ class SaleOptionsTableViewController: UITableViewController, UITextViewDelegate,
 
 //MARK: TableView Delegate
 
-extension SaleOptionsTableViewController: UITableViewDelegate {
+extension SaleOptionsViewController: UITableViewDelegate {
   override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 30.0
   }
@@ -361,7 +367,7 @@ extension SaleOptionsTableViewController: UITableViewDelegate {
 
 //MARK: TextView and TextField Delegate
 
-extension SaleOptionsTableViewController: UITextViewDelegate, UITextFieldDelegate {
+extension SaleOptionsViewController: UITextViewDelegate, UITextFieldDelegate {
 
   func textViewDidChange(textView: UITextView) {
     _placeholderLabel.hidden = count(descriptionTextView.text) != 0
