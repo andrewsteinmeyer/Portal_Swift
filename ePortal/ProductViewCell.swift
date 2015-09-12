@@ -38,6 +38,10 @@ class ProductViewCell: UICollectionViewCell {
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
+    // initialize values
+    isPlaceholderImage = false
+    isCoverImage = false
+    
     // round cell corners
     self.layer.cornerRadius = 3
     
