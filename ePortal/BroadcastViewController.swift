@@ -8,7 +8,7 @@
 
 
 
-class BroadcastViewController: UIViewController, SaleOptionsViewControllerDelegate {
+class BroadcastViewController: UIViewController {
   
   var _session: OTSession!
   var _publisher: OTPublisher!
@@ -156,6 +156,8 @@ class BroadcastViewController: UIViewController, SaleOptionsViewControllerDelega
   
 }
 
+//MARK: SaleOptionsViewController Delegate
+
 extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   
   func saleOptionsViewControllerDidCancelSale() {
@@ -163,9 +165,10 @@ extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   }
 }
 
+//MARK: OTSession/Publisher Delegate
 
 extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
-  //MARK: OTSessionDelegate Callbacks
+  // OTSession
   
   func sessionDidConnect(session: OTSession!) {
     NSLog("session did connect")
@@ -198,7 +201,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     println("didFailWithError: \(error)")
   }
 
-  //MARK: OTPublisher delegate callbacks
+  // OTPublisher 
   
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
     broadcast.isPublishing(true, onStream: stream.streamId)
