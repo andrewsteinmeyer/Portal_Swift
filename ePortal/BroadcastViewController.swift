@@ -33,9 +33,8 @@ class BroadcastViewController: UIViewController {
     // initialize broadcast
     _broadcast = Broadcast()
     
-    //register observer to listen for camera presentation and dismissal
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "stopCapturing", name: Constants.Notification.ImagePickerPresented, object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "startCapturing", name: Constants.Notification.ImagePickerDismissed, object: nil)
+    //register observer to listen for notification to start publishing
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "startPublishing", name: Constants.Notification.StartPublishingBroadcast, object: nil)
     
     // request session id and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
@@ -125,18 +124,9 @@ class BroadcastViewController: UIViewController {
     }
   }
   
-  func stopCapturing() {
-    println("got to stop capture after imagepicker presented")
-    _publisher?.videoCapture.stopCapture()
-  }
-  
-  func startCapturing() {
-    println("got to start capture after imagepicker dismissed")
-    _publisher?.videoCapture.startCapture()
-    // call async so ui can continue
-    dispatch_async(GlobalUserInitiatedQueue) {
-      self._publisher?.cameraPosition = .Back
-    }
+  func startPublishing() {
+    println("got to start publishing broadcast in broadcast controller")
+    self.doPublish()
   }
   
   func cleanupPublisher() {
@@ -172,7 +162,6 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   
   func sessionDidConnect(session: OTSession!) {
     NSLog("session did connect")
-    //self.doPublish()
   }
   
   func sessionDidDisconnect(session: OTSession!) {
@@ -182,7 +171,6 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   
   func session(session: OTSession!, streamCreated stream: OTStream!) {
     println("session streamCreated: \(stream.streamId)")
-   
   }
   
   func session(session: OTSession!, streamDestroyed stream: OTStream!) {
@@ -207,7 +195,6 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     broadcast.isPublishing(true, onStream: stream.streamId)
     NSLog("Now publishing")
     println("StreamId: \(stream.streamId)")
-    _publisher.videoCapture.stopCapture()
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {

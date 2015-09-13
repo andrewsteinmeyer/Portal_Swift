@@ -10,8 +10,10 @@ import UIKit
 
 let cellIdentifier = "DiscoverViewCell"
 let headerViewIdentifier = "DiscoverHeaderView"
-//let sectionHeaderIdentifier = "DiscoverSectionHeader"
 let kHeaderViewHeight: CGFloat = 200
+
+// not using section header for now
+// let sectionHeaderIdentifier = "DiscoverSectionHeader"
 
 class DiscoverCollectionViewController: UICollectionViewController {
   
@@ -19,14 +21,15 @@ class DiscoverCollectionViewController: UICollectionViewController {
     ClientManager.sharedInstance.logoutWithCompletionHandler() {
       task in
       
+      // logout of database
       DatabaseManager.sharedInstance.logout()
       
       dispatch_async(GlobalMainQueue) {
         println("completing logout")
+        
+        // return user to login screen
         let navVC = UIApplication.sharedApplication().keyWindow?.rootViewController as! UINavigationController
-        
         navVC.popToRootViewControllerAnimated(true)
-        
       }
       
       return nil
@@ -36,9 +39,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
+    // setup custom layout
     reloadLayout()
     
     // Register cell classes
@@ -50,10 +51,12 @@ class DiscoverCollectionViewController: UICollectionViewController {
   }
   
   func reloadLayout() {
+    // set header size and item size
+    // not using section header so disable sticky header for now
     if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
       layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, kHeaderViewHeight)
       layout.itemSize = CGSizeMake(self.view.frame.size.width, layout.itemSize.height)
-      layout.disableStickyHeaders = false
+      layout.disableStickyHeaders = true
     }
   }
   

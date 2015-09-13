@@ -27,6 +27,7 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   @IBOutlet weak var dollarsTextField: SaleOptionTextField!
   @IBOutlet weak var centsTextField: SaleOptionTextField!
   @IBOutlet weak var quantityTextField: SaleOptionTextField!
+  @IBOutlet weak var broadcastButton: DesignableButton!
   
   var broadcast: Broadcast!
   var delegate: SaleOptionsViewControllerDelegate?
@@ -44,6 +45,12 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   
   @IBAction func closeSale(sender: AnyObject) {
     self.delegate?.saleOptionsViewControllerDidCancelSale()
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  @IBAction func startBroadcast(sender: AnyObject) {
+    // notify observers when camera is dismissed (BroadcastViewController)
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.StartPublishingBroadcast, object: nil)
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   
@@ -137,6 +144,7 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
         }
       }
       
+      // add items to toolbar, add toolbar to keyboard
       toolbar.items = items
       toolbar.sizeToFit()
       textField.inputAccessoryView = toolbar

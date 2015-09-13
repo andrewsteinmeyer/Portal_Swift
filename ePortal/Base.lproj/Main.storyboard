@@ -393,6 +393,9 @@
                                             <real key="value" value="23"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="startBroadcast:" destination="NNj-EX-AzV" eventType="touchUpInside" id="xrz-6H-eAY"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -526,7 +529,7 @@
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -676,6 +679,7 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="broadcastButton" destination="Gwk-BU-yxI" id="Q5A-3p-ium"/>
                         <outlet property="centsTextField" destination="qAu-KY-ftl" id="a57-w1-BZV"/>
                         <outlet property="closeButton" destination="ZTi-Iz-6y0" id="fO3-xe-H7J"/>
                         <outlet property="descriptionLabel" destination="UJ1-uP-XZJ" id="5JL-Cl-xva"/>

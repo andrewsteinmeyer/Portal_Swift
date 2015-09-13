@@ -342,16 +342,10 @@ extension ProductImageCollectionViewController:  UIImagePickerControllerDelegate
     saveImage(image, toCollection: self._imagesCollection)
     
     dismissViewControllerAnimated(true, completion: nil)
-    
-    // notify observers when camera is dismissed (BroadcastViewController)
-    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerDismissed, object: nil)
   }
   
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     dismissViewControllerAnimated(true, completion: nil)
-    
-    // notify observers when camera is dismissed (BroadcastViewController)
-    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerDismissed, object: nil)
   }
 
 }

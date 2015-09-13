@@ -55,8 +55,7 @@ struct Constants {
   
   // Notifications
   struct Notification {
-    static let ImagePickerPresented = "com.dsmlabs.ePortal.ImagePickerPresentedNotification"
-    static let ImagePickerDismissed = "com.dsmlabs.ePortal.ImagePickerDismissedNotification"
+    static let StartPublishingBroadcast = "com.dsmlabs.ePortal.startPublishingBroadcast"
   }
     
 }
