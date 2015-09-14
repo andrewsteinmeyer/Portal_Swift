@@ -8,10 +8,9 @@
 
 import Firebase
 
-/*
-DatabaseManager handles calls out to Firebase
+/*!
+* DatabaseManager handles calls out to Firebase for persistence
 */
-
 final class DatabaseManager {
   
   private var _root: Firebase
@@ -44,6 +43,10 @@ final class DatabaseManager {
     })
   }
   
+  /*!
+  * Request firebase token with AWS lambda function and login to firebase database.
+  * Use AWS Identity Id to generate unique firebase token
+  */
   func logInWithIdentityId(id: String, providerData data: [String: String]?, completionHandler: AWSContinuationBlock) {
     LambdaHandler.sharedInstance.generateFirebaseTokenWithId(id).continueWithBlock() {
       task in

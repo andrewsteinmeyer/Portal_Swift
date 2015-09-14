@@ -6,14 +6,17 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
-
+/*
+  BroadcastViewController handles connecting to an session
+  and publishing the broadcast
+*/
 
 class BroadcastViewController: UIViewController {
   
-  var _session: OTSession!
-  var _publisher: OTPublisher!
-  var _broadcast: Broadcast!
-  var _firstAppearance = true
+  private var _session: OTSession!
+  private var _publisher: OTPublisher!
+  private var _broadcast: Broadcast!
+  private var _firstAppearance = true
   
   var broadcast: Broadcast {
     get {
@@ -36,7 +39,7 @@ class BroadcastViewController: UIViewController {
     //register observer to listen for notification to start publishing
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "startPublishing", name: Constants.Notification.StartPublishingBroadcast, object: nil)
     
-    // request session id and token from opentok using aws lambda
+    // request sessionId and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
       task in
       
@@ -49,11 +52,13 @@ class BroadcastViewController: UIViewController {
           //println("token: \(token),\n apiKey: \(apiKey),\n sessionId: \(sessionId)")
           
           if (apiKey == nil || token == nil || sessionId == nil) {
-            println("Error invalid response from generateOpentokSessionIdWithToken")
+            println("Error invalid response from aws lambda generateOpentokSessionIdWithToken()")
           }
           else {
-            strongSelf.broadcast.saveSessionDetails(sessionId!, token: token!, apiKey: apiKey!)
-            strongSelf.doConnect()
+            // update broadcast object with sessionId and connect
+            // default token is 24 hours, do not store apiKey or token locally
+            strongSelf.broadcast.saveSessionId(sessionId!)
+            strongSelf.doConnectToSession(sessionId!, WithToken: token!, apiKey: apiKey!)
           }
         }
       }
@@ -70,8 +75,11 @@ class BroadcastViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
+    // hide status bar
+    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+    
     // Only present SaleOptionsViewController on first appearance
-    // instantiate SaleOptionsViewController and pass the broadcast data
+    // instantiate SaleOptionsViewController and pass the broadcast object
     if _firstAppearance {
       let viewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.SaleOptionsVC) as! SaleOptionsViewController
       viewController.broadcast = broadcast
@@ -85,19 +93,13 @@ class BroadcastViewController: UIViewController {
     }
   }
   
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-  }
-  
-  func doConnect() {
+  func doConnectToSession(sessionId: String, WithToken token: String, apiKey: String) {
     // Initalize a new instance of OTSession and begin the connection process
-    _session = OTSession(apiKey: broadcast.apiKey, sessionId: broadcast.sessionId, delegate: self)
+    _session = OTSession(apiKey: apiKey, sessionId: sessionId, delegate: self)
     
     if (_session != nil) {
       var error: OTError?
-      _session?.connectWithToken(broadcast.token, error: &error)
+      _session?.connectWithToken(token, error: &error)
       if error != nil {
         println("Unable to connect to session \(error?.localizedDescription)")
       }
@@ -198,10 +200,12 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {
+    broadcast.isPublishing = false
     self.cleanupPublisher()
   }
   
   func publisher(publisher: OTPublisherKit!, didFailWithError error: OTError) {
+    broadcast.isPublishing = false
     println("publisher didFailWithError %@", error)
     self.cleanupPublisher()
   }

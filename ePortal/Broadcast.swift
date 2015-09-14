@@ -8,28 +8,32 @@
 
 // information for broadcast
 class Broadcast {
-  var user: FBUser!
-  var sessionId: String!
-  var token: String!
-  var apiKey: String!
-  var isPublishing: Bool!
-  var streamId: String!
-  var sale: Sale!
+  private var _user: FBUser!
+  private var _sessionId: String!
+  private var _isPublishing: Bool!
+  private var _streamId: String!
+  private var _sale: Sale!
   
-  init() {
-    sale = Sale()
-    isPublishing = false
+  var isPublishing: Bool! {
+    get {
+      return _isPublishing
+    } set(newValue) {
+      _isPublishing = newValue
+    }
   }
   
-  func saveSessionDetails(sessionId: String, token: String, apiKey: String) {
-    self.sessionId = sessionId
-    self.token = token
-    self.apiKey = apiKey
+  init() {
+    _sale = Sale()
+    _isPublishing = false
+  }
+  
+  func saveSessionId(sessionId: String) {
+    _sessionId = sessionId
   }
   
   func isPublishing(publishing: Bool, onStream streamId: String) {
-    self.isPublishing = publishing
-    self.streamId = streamId
+    _isPublishing = publishing
+    _streamId = streamId
   }
 }
 

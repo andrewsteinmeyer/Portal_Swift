@@ -187,9 +187,6 @@ extension ProductImageCollectionViewController {
     imagePicker.allowsEditing = false
     imagePicker.view.tintColor = UIColor.themeColor()
     presentViewController(imagePicker, animated: true, completion: nil)
-    
-    // notify observers when camera is presented (BroadcastViewController)
-    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.ImagePickerPresented, object: nil)
   }
   
   func choosePhotoFromLibrary() {
