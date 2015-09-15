@@ -9,6 +9,9 @@
 import UIKit
 import TwitterKit
 
+/*!
+* LoginViewController handles user login to app
+*/
 class LoginViewController: UIViewController {
 
   @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
@@ -32,7 +35,6 @@ class LoginViewController: UIViewController {
     
     toggleLoginButton()
     loginUser()
-    
   }
   
   //MARK: - Alerts and indicators
@@ -79,47 +81,52 @@ class LoginViewController: UIViewController {
   }
 }
 
+//MARK: User Login
+
 extension LoginViewController {
   
-  //MARK: User Login
-  
+  /*!
+  * Use AWS Cognito to create an Identity Id and authorize the user
+  * The Identity Id is then used to securely log in to Firebase database
+  */
   func loginUser() {
+    /// Log in client with AWS Cognito
     ClientManager.sharedInstance.loginWithCompletionHandler() {
       task in
       
       let id = ClientManager.sharedInstance.getIdentityId()
       let twitterData = ClientManager.sharedInstance.getTwitterUserData()
       
+      /// Log in to database using the AWS Cognito Identity Id
       DatabaseManager.sharedInstance.logInWithIdentityId(id, providerData: twitterData) {
         task in
       
+        /// push to tabBarController on success
         if (task.error == nil) {
           dispatch_async(GlobalMainQueue) {
             let navVC = self.navigationController
             let mainTabVC = navVC!.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as! UIViewController
-            
             navVC!.pushViewController(mainTabVC, animated: true)
             
             afterDelay(0.6) {
               self.toggleLoginButton()
             }
-            
-            //we were using segue, but pushing now so that we can pop back to rootViewController on logout
-            //self.performSegueWithIdentifier("ShowMainTabBarController", sender: nil)
           }
         }
+        /// present alert to user if error logging in to app
         else {
           dispatch_async(GlobalMainQueue) {
-            self.alertWithTitle("Error logging in with Twitter", message: "Sorry, better luck next time")
+            self.alertWithTitle("Error logging in with Twitter credentials", message: "Sorry, better luck next time")
             
             afterDelay(0.6) {
               self.toggleLoginButton()
             }
           }
         }
-        
+        // end AWS task with nil
         return nil
       }
+      // end AWS task with nil
       return nil
     }
   }

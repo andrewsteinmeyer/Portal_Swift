@@ -10,12 +10,11 @@ import KeychainAccess
 import TwitterKit
 import Fabric
 
-/*
- ClientManager handles login details for the client using AWS Cognito
+/*!
+* ClientManager handles login details for the client using AWS Cognito
 */
-
 final class ClientManager {
-
+  
   private var _credentialsProvider: AWSCognitoCredentialsProvider!
   private var _completionHandler: AWSContinuationBlock!
   private var _keychain: Keychain!
@@ -36,7 +35,6 @@ final class ClientManager {
         _firstName = fullNameArr[0]
         _lastName = fullNameArr[1]
       }
-      
     }
   }
 
@@ -164,7 +162,7 @@ final class ClientManager {
   //MARK: Twitter
   
   func isLoggedInWithTwitter() -> Bool {
-    var loggedIn = Twitter.sharedInstance().session() != nil;
+    var loggedIn = Twitter.sharedInstance().session() != nil
     return self._keychain[Constants.AWS.TwitterProvider] != nil && loggedIn
   }
   

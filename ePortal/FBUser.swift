@@ -26,8 +26,12 @@ class FBUser {
   
   weak var delegate: FBUserDelegate?
   
+  /*!
+  * Load the user and set the given location, with the given initial data
+  * Setup the callback block to call when the user data updates in firebase
+  */
   class func loadFromRoot(root: Firebase, withUserData userData: [String:String], completionBlock block: FUserCompletionBlock) -> FBUser {
-    // load the user and set the given location, with the given initial data, and setup the callback for when it updates
+    
     let userId = userData["userId"]
     let peopleRef = root.childByAppendingPath("people").childByAppendingPath(userId)
     
@@ -38,12 +42,13 @@ class FBUser {
     _loaded = false
     _userId = ref.key
     
-    // Setup initial data that we already have
+    // Setup initial data that we already have (provided by AWS Cognito login provider)
     _firstName = userData["firstName"]
     _lastName = userData["lastName"]
     _fullName = userData["fullName"]
     _ref = ref
     
+    // register to watch for changes at user url in firebase
     self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self] snapshot in
       
       if let strongSelf = self {
@@ -51,7 +56,7 @@ class FBUser {
         
         if (val == nil) {
           // First login, no values to load from firebase
-          // Initial values have been set using provider data when user logged in
+          // Initial user info is set using AWS Cognito provider data (ie. Twitter)
         } else {
           // update data for user from firebase snapshot
           let data = JSON(val)
@@ -64,12 +69,24 @@ class FBUser {
           // just call delegate for updates
           //TODO: self.delegate.userDidUpdate(self)
         } else {
+          // execute block on initial login
           userBlock(user: strongSelf)
         }
+        
+        // set loaded flag
         strongSelf._loaded = true
       }
     })
-    
+  }
+  
+  /*!
+  * Remove the observer and clear the handle observer handle
+  */
+  func stopObserving() {
+    if (_valueHandle != nil) {
+      _ref.removeObserverWithHandle(_valueHandle!)
+      _valueHandle = nil
+    }
   }
   
   func updateFromRoot(root: Firebase) {

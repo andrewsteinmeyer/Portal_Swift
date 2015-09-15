@@ -8,10 +8,14 @@
 
 typealias FAuthCompletionBlock = (error: NSError?, user: FAuthData?) -> Void
 
+/*!
+* This class manages multiple concurrent auth requests (login, logout, status)
+* against the same Firebase database
+*/
 class FBAuthData {
-  private var _blocks: [String: FAuthCompletionBlock]
+  private var _blocks: [Int: FAuthCompletionBlock]
   private var _ref: Firebase
-  private var _luid: UInt
+  private var _luid: Int
   private var _user: FAuthData?
   private var _authHandle: UInt?
   private var _providerData: [String:String]?
@@ -28,7 +32,7 @@ class FBAuthData {
       user in
       
       if let strongSelf = self {
-        // Handle user logout
+        // Handle user logout (we had a user and now we don't)
         if ( (user == nil) && (strongSelf._user != nil) ) {
           println("FBAuthData: logging out user")
           strongSelf.onAuthStatusError(error: nil, user: nil)
@@ -43,7 +47,12 @@ class FBAuthData {
     }
   }
   
+  /*!
+  * Login to database with firebase token generated from AWS lambda function.
+  * Provider data is initial user data from provider used to login to AWS Cognito
+  */
   func logInWithToken(token: String, providerData: [String:String]?) -> AWSTask {
+    // set any initial user data from AWS cognito
     if let data = providerData {
       self._providerData = data
     }
@@ -56,9 +65,11 @@ class FBAuthData {
       // update the user's authData
       self.onAuthStatusError(error: err, user: authData)
       
+      // log in attempt failed
       if (err != nil) {
         task.setError(err)
       }
+      // log in attempt succesful
       else {
         self.populateSearchIndicesForUser(authData)
         task.setResult(authData)
@@ -69,11 +80,12 @@ class FBAuthData {
     return task.task
   }
   
+  /*!
+  * Add the user's information to the search index.
+  * List each user in the search index twice, once by first name and once by last name.
+  * We include the user uid at the end to guarantee uniqueness
+  */
   func populateSearchIndicesForUser(user: FAuthData) {
-    /*
-    For each user, we list them in the search index twice. Once by first name and once by last name.
-    We include the id at the end to guarantee uniqueness.
-    */
     let firstNameRef = _ref.root.childByAppendingPath("search/firstName")
     let lastNameRef = _ref.root.childByAppendingPath("search/lastName")
     
@@ -87,11 +99,10 @@ class FBAuthData {
   }
   
   // Assumes block is already on the heap
-  func checkAuthStatus(block: FAuthCompletionBlock) -> UInt {
+  func checkAuthStatus(block: FAuthCompletionBlock) -> Int {
     var handle = _luid++
-    let luid = String(handle)
     
-    _blocks[luid] = block
+    _blocks[handle] = block
     
     if (_user != nil) {
       // we already have a user logged in
@@ -123,6 +134,10 @@ class FBAuthData {
     return handle
   }
   
+  func stopWatchingAuthStatus(handle: Int) {
+    _blocks[handle] = nil
+  }
+  
   func onAuthStatusError(#error: NSError?, user: FAuthData?) {
     if (user != nil) {
       _user = user
@@ -145,7 +160,9 @@ class FBAuthData {
   
 }
 
-
+/*!
+* Singleton used by DatabaseManager to manage FBAuthData instances
+*/
 final class FBAuth {
   private var firebases: [String: FBAuthData]
   
@@ -153,7 +170,7 @@ final class FBAuth {
     self.firebases = [String: FBAuthData]()
   }
   
-  func checkAuthForRef(ref: Firebase, withBlock block: FAuthCompletionBlock) -> UInt {
+  func checkAuthForRef(ref: Firebase, withBlock block: FAuthCompletionBlock) -> Int {
     let firebaseId = ref.root.description
     
     // Pass to the FBAuthData object, which manages multiple auth requests against the same Firebase
@@ -205,7 +222,7 @@ final class FBAuth {
     return SingletonWrapper.singleton
   }
   
-  // Pass through methods to singleton
+  // Pass through methods to the singleton
   class func loginRef(ref: Firebase, withToken token: String, providerData data: [String:String]?) -> AWSTask {
     return self.sharedInstance.loginRef(ref, withToken: token, providerData: data)
   }
@@ -214,7 +231,7 @@ final class FBAuth {
     return self.sharedInstance.logoutRef(ref)
   }
   
-  class func watchAuthForRef(ref: Firebase, withBlock block: FAuthCompletionBlock) -> UInt {
+  class func watchAuthForRef(ref: Firebase, withBlock block: FAuthCompletionBlock) -> Int {
     return self.sharedInstance.checkAuthForRef(ref, withBlock: block)
   }
 }

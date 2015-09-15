@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
-/*
-  BroadcastViewController handles connecting to an session
-  and publishing the broadcast
+/*!
+* BroadcastViewController handles connecting to an session
+* and publishing the broadcast
 */
-
 class BroadcastViewController: UIViewController {
   
   private var _session: OTSession!
@@ -62,6 +61,7 @@ class BroadcastViewController: UIViewController {
           }
         }
       }
+      // end AWS task with nil
       return nil
     }
   }
@@ -116,7 +116,8 @@ class BroadcastViewController: UIViewController {
         println("Unable to publish \(error?.localizedDescription)")
       }
       
-      // call async so ui can continue
+      // call async so UI can continue
+      // seems to speed up publisher presentation
       dispatch_async(GlobalUserInitiatedQueue) {
         self._publisher?.cameraPosition = .Back
       }
