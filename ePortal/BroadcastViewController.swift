@@ -7,9 +7,9 @@
 //
 
 /*!
-* BroadcastViewController handles connecting to an session
-* and publishing the broadcast
-*/
+ * BroadcastViewController handles connecting to an session
+ * and publishing the broadcast
+ */
 class BroadcastViewController: UIViewController {
   
   private var _session: OTSession!

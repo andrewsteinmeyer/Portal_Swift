@@ -10,8 +10,8 @@ import UIKit
 import TwitterKit
 
 /*!
-* LoginViewController handles user login to app
-*/
+ * LoginViewController handles user login to app
+ */
 class LoginViewController: UIViewController {
 
   @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
@@ -86,9 +86,9 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
   
   /*!
-  * Use AWS Cognito to create an Identity Id and authorize the user
-  * The Identity Id is then used to securely log in to Firebase database
-  */
+   * Use AWS Cognito to create an Identity Id and authorize the user
+   * The Identity Id is then used to securely log in to Firebase database
+   */
   func loginUser() {
     /// Log in client with AWS Cognito
     ClientManager.sharedInstance.loginWithCompletionHandler() {

@@ -27,9 +27,9 @@ class FBUser {
   weak var delegate: FBUserDelegate?
   
   /*!
-  * Load the user and set the given location, with the given initial data
-  * Setup the callback block to call when the user data updates in firebase
-  */
+   * Load the user and set the given location, with the given initial data
+   * Setup the callback block to call when the user data updates in firebase
+   */
   class func loadFromRoot(root: Firebase, withUserData userData: [String:String], completionBlock block: FUserCompletionBlock) -> FBUser {
     
     let userId = userData["userId"]
@@ -80,8 +80,8 @@ class FBUser {
   }
   
   /*!
-  * Remove the observer and clear the handle observer handle
-  */
+   * Remove the observer and clear the handle observer handle
+   */
   func stopObserving() {
     if (_valueHandle != nil) {
       _ref.removeObserverWithHandle(_valueHandle!)

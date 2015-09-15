@@ -9,9 +9,9 @@
 typealias FAuthCompletionBlock = (error: NSError?, user: FAuthData?) -> Void
 
 /*!
-* This class manages multiple concurrent auth requests (login, logout, status)
-* against the same Firebase database
-*/
+ * This class manages multiple concurrent auth requests (login, logout, status)
+ * against the same Firebase database
+ */
 class FBAuthData {
   private var _blocks: [Int: FAuthCompletionBlock]
   private var _ref: Firebase
@@ -48,9 +48,9 @@ class FBAuthData {
   }
   
   /*!
-  * Login to database with firebase token generated from AWS lambda function.
-  * Provider data is initial user data from provider used to login to AWS Cognito
-  */
+   * Login to database with firebase token generated from AWS lambda function.
+   * Provider data is initial user data given by the provider that was used to login via AWS Cognito
+   */
   func logInWithToken(token: String, providerData: [String:String]?) -> AWSTask {
     // set any initial user data from AWS cognito
     if let data = providerData {
@@ -81,10 +81,10 @@ class FBAuthData {
   }
   
   /*!
-  * Add the user's information to the search index.
-  * List each user in the search index twice, once by first name and once by last name.
-  * We include the user uid at the end to guarantee uniqueness
-  */
+   * Add the user's information to the search index.
+   * List each user in the search index twice, once by first name and once by last name.
+   * We include the user uid at the end to guarantee uniqueness
+   */
   func populateSearchIndicesForUser(user: FAuthData) {
     let firstNameRef = _ref.root.childByAppendingPath("search/firstName")
     let lastNameRef = _ref.root.childByAppendingPath("search/lastName")
@@ -98,7 +98,10 @@ class FBAuthData {
     lastNameRef.childByAppendingPath(lastNameKey).setValue(user.uid)
   }
   
-  // Assumes block is already on the heap
+  /*!
+   * Monitor authorization status of the user.
+   * The database manager provides the callback block to execute.
+   */
   func checkAuthStatus(block: FAuthCompletionBlock) -> Int {
     var handle = _luid++
     
@@ -161,8 +164,8 @@ class FBAuthData {
 }
 
 /*!
-* Singleton used by DatabaseManager to manage FBAuthData instances
-*/
+ * Singleton used by DatabaseManager to manage FBAuthData instances
+ */
 final class FBAuth {
   private var firebases: [String: FBAuthData]
   

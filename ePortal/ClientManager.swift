@@ -11,8 +11,8 @@ import TwitterKit
 import Fabric
 
 /*!
-* ClientManager handles login details for the client using AWS Cognito
-*/
+ * ClientManager handles login details for the client using AWS Cognito
+ */
 final class ClientManager {
   
   private var _credentialsProvider: AWSCognitoCredentialsProvider!

@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
-/*
-Responsible for invoking calls out to AWS Lambda backend
-*/
-
+/*!
+ * Responsible for invoking calls out to AWS Lambda backend
+ */
 final class LambdaHandler {
   
   private var _lambdaInvoker: AWSLambdaInvoker!
