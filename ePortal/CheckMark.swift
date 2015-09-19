@@ -67,7 +67,7 @@ class CheckMark: UIView {
     bezierPath.moveToPoint(CGPoint(x: CGRectGetMinX(group) + 0.27083 * CGRectGetWidth(group), y: CGRectGetMinY(group) + 0.54167 * CGRectGetHeight(group)))
     bezierPath.addLineToPoint(CGPoint(x: CGRectGetMinX(group) + 0.41667 * CGRectGetWidth(group), y: CGRectGetMinY(group) + 0.68750 * CGRectGetHeight(group)))
     bezierPath.addLineToPoint(CGPoint(x: CGRectGetMinX(group) + 0.75000 * CGRectGetWidth(group), y: CGRectGetMinY(group) + 0.35417 * CGRectGetHeight(group)))
-    bezierPath.lineCapStyle = kCGLineCapSquare
+    bezierPath.lineCapStyle = CGLineCap.Square
     
     UIColor.whiteColor().setStroke()
     bezierPath.lineWidth = 1

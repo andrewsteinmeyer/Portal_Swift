@@ -14,7 +14,7 @@ PODS:
   - TwitterKit (1.8.1)
 
 DEPENDENCIES:
-  - AWSCognito (= 2.2.2)
+  - AWSCognito
   - AWSCore (= 2.2.2)
   - AWSLambda (= 2.2.2)
   - CSStickyHeaderFlowLayout (= 0.2.8)

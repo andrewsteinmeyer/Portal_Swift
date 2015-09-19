@@ -140,8 +140,8 @@ extension ProductImageCollectionViewController {
               assetPlaceholder = changeRequest.placeholderForCreatedAssetCollection
               }, completionHandler: { success, error in
                 if !success {
-                  println("Failed to create album")
-                  println(error)
+                  print("Failed to create album")
+                  print(error)
                   return
                 }
                 
@@ -214,8 +214,8 @@ extension ProductImageCollectionViewController {
       imagePlaceholder = assetChangeRequest.placeholderForCreatedAsset
       
       // Create assetColletionChangeRequest and pass asset placeholder object to add the new stitch
-      let assetCollectionChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: collection, assets: nil)
-      assetCollectionChangeRequest.addAssets([imagePlaceholder])
+      let assetCollectionChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: collection)
+      assetCollectionChangeRequest!.addAssets([imagePlaceholder])
       
       }, completionHandler: { _, _ in
         // Fetch the asset and add modification data to it
@@ -334,7 +334,7 @@ extension ProductImageCollectionViewController: EditImageViewControllerDelegate 
 
 extension ProductImageCollectionViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     let image = info[UIImagePickerControllerOriginalImage] as! UIImage
     saveImage(image, toCollection: self._imagesCollection)
     
@@ -351,15 +351,13 @@ extension ProductImageCollectionViewController:  UIImagePickerControllerDelegate
 
 extension ProductImageCollectionViewController: PHPhotoLibraryChangeObserver {
   
-  func photoLibraryDidChange(changeInstance: PHChange!)  {
+  func photoLibraryDidChange(changeInstance: PHChange)  {
     
     // put on main because we are working with UI
     dispatch_async(GlobalMainQueue) {
       // Respond to changes
       if let collectionChanges = changeInstance.changeDetailsForFetchResult(self._cameraImages) {
         self._cameraImages = collectionChanges.fetchResultAfterChanges
-        
-        let select = self.selectedAssets.assets
         
         if collectionChanges.hasMoves ||
           !collectionChanges.hasIncrementalChanges {

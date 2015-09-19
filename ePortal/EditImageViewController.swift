@@ -38,7 +38,7 @@ class EditImageViewController: UIViewController {
     }
     
     // set recognizer to toggle state of check mark on tap
-    var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "toggleCheckmark")
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "toggleCheckmark")
     tap.cancelsTouchesInView = false
     checkMark.addGestureRecognizer(tap)
     

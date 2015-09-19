@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
   }
   
   func alertWithTitle(title: String, message: String) {
-    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
     
     self.presentViewController(alert, animated: true, completion: nil)
@@ -105,7 +105,7 @@ extension LoginViewController {
         if (task.error == nil) {
           dispatch_async(GlobalMainQueue) {
             let navVC = self.navigationController
-            let mainTabVC = navVC!.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as! UIViewController
+            let mainTabVC = navVC!.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as UIViewController!
             navVC!.pushViewController(mainTabVC, animated: true)
             
             afterDelay(0.6) {

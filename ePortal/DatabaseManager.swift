@@ -48,6 +48,7 @@ final class DatabaseManager {
   func cleanup() {
     for url in _feeds {
       //TODO
+      //print(url)
     }
   }
   
@@ -101,7 +102,7 @@ final class DatabaseManager {
   func onAuthStatus(user: FAuthData?) {
     if let userData = user {
       var initData: [String: String] = [ "userId": userData.uid ]
-      if var providerData = _providerData {
+      if let providerData = _providerData {
         initData.unionInPlace(providerData)
       }
       
@@ -149,7 +150,7 @@ final class DatabaseManager {
    */
   func logout() {
     if (self.isAuthenticated()) {
-      println("logging out of firebase")
+      print("logging out of firebase")
       FBAuth.logoutRef(self._root)
     }
     

@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 xcodeproj 'ePortal.xcodeproj'
 
 pod 'AWSCore', '2.2.2'
-pod 'AWSCognito', '2.2.2'
+pod 'AWSCognito'
 pod 'AWSLambda', '2.2.2'
 pod 'Fabric', '1.2.8'
 pod 'TwitterKit', '1.8.1'

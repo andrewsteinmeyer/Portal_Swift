@@ -79,7 +79,7 @@ final class ClientManager {
     else {
       if (self._credentialsProvider.logins != nil) {
         //should not get into this block until we add more login providers
-        var merge = NSMutableDictionary(dictionary: self._credentialsProvider.logins)
+        let merge = NSMutableDictionary(dictionary: self._credentialsProvider.logins)
         merge.addEntriesFromDictionary(logins!)
       
         self._credentialsProvider.logins = merge as [NSObject: AnyObject]
@@ -103,8 +103,8 @@ final class ClientManager {
       //TODO: Set Current Device Token stuff for Cognito sync, see CognitoSyncDemo
       
       if (task.error == nil) {
-        println("received AWS credentials")
-        println("Cognito id: \(task.result)")
+        print("received AWS credentials")
+        print("Cognito id: \(task.result)")
       }
       return task
       
@@ -116,11 +116,11 @@ final class ClientManager {
     self._completionHandler = completionHandler
     
     if ((self._keychain[Constants.AWS.TwitterProvider]) != nil) {
-      println("logging in with twitter")
+      print("logging in with twitter")
       loginWithTwitter()
     }
     else if (self._credentialsProvider == nil) {
-      println("no login info yet, just setting up aws credentials")
+      print("no login info yet, just setting up aws credentials")
       self.completeLogin(nil)
     }
   }
@@ -146,7 +146,7 @@ final class ClientManager {
   }
   
   func wipeAll() {
-    println("wiping credentials")
+    print("wiping credentials")
     self._credentialsProvider.logins = nil
     self._credentialsProvider.clearKeychain()
   }
@@ -162,7 +162,7 @@ final class ClientManager {
   //MARK: Twitter
   
   func isLoggedInWithTwitter() -> Bool {
-    var loggedIn = Twitter.sharedInstance().session() != nil
+    let loggedIn = Twitter.sharedInstance().session() != nil
     return self._keychain[Constants.AWS.TwitterProvider] != nil && loggedIn
   }
   
@@ -172,18 +172,18 @@ final class ClientManager {
         if let sessionId = session.userID {
           Twitter.sharedInstance().APIClient.loadUserWithID(sessionId) { user, error in
             if let user = user {
-              println("Twitter user: \(user.name)")
+              print("Twitter user: \(user.name)")
               self.setTwitterUserData(user)
               self.completeTwitterLogin()
             }
             else {
-              println("error requesting user data with Twitter session id: \(error?.localizedDescription)")
+              print("error requesting user data with Twitter session id: \(error?.localizedDescription)")
             }
           }
         }
       }
       else {
-        println("error logging in with Twitter: \(error.localizedDescription)")
+        print("error logging in with Twitter: \(error.localizedDescription)")
       }
     }
   }

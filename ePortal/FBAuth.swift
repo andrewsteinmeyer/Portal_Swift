@@ -34,7 +34,7 @@ class FBAuthData {
       if let strongSelf = self {
         // Handle user logout (we had a user and now we don't)
         if ( (user == nil) && (strongSelf._user != nil) ) {
-          println("FBAuthData: logging out user")
+          print("FBAuthData: logging out user")
           strongSelf.onAuthStatusError(error: nil, user: nil)
         }
       }
@@ -57,7 +57,7 @@ class FBAuthData {
       self._providerData = data
     }
     
-    var task = AWSTaskCompletionSource()
+    let task = AWSTaskCompletionSource()
     
     _ref.authWithCustomToken(token) {
       err, authData in
@@ -103,7 +103,7 @@ class FBAuthData {
    * The database manager provides the callback block to execute.
    */
   func checkAuthStatus(block: FAuthCompletionBlock) -> Int {
-    var handle = _luid++
+    let handle = _luid++
     
     _blocks[handle] = block
     
@@ -111,7 +111,7 @@ class FBAuthData {
       // we already have a user logged in
       // force async to be consistent
       
-      var callback = { [weak self]
+      let callback = { [weak self]
         () -> Void in
         if let strongSelf = self {
           block(error: nil, user: strongSelf._user!)
@@ -141,7 +141,7 @@ class FBAuthData {
     _blocks[handle] = nil
   }
   
-  func onAuthStatusError(#error: NSError?, user: FAuthData?) {
+  func onAuthStatusError(error error: NSError?, user: FAuthData?) {
     if (user != nil) {
       _user = user
     }

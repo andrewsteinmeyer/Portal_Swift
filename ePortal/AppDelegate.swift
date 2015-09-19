@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     
     if ClientManager.sharedInstance.isLoggedIn() {
-      let mainTabVC = navVC.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as! UIViewController
+      let mainTabVC = navVC.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as UIViewController!
       navVC.pushViewController(mainTabVC, animated: false)
       
       ClientManager.sharedInstance.resumeSessionWithCompletionHandler() {
@@ -37,13 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let id = ClientManager.sharedInstance.getIdentityId()
         let twitterData = ClientManager.sharedInstance.getTwitterUserData()
-        println("resumed in AppDelegate so skipping login page")
+        print("resumed in AppDelegate so skipping login page")
         
         DatabaseManager.sharedInstance.resumeSessionWithCompletionHandler(id, providerData: twitterData) {
           task in
           
-          println("Task result: \(task.result)")
-          println("back in AppDelegate after Database login attempt")
+          print("Task result: \(task.result)")
+          print("back in AppDelegate after Database login attempt")
           
           return nil
         }

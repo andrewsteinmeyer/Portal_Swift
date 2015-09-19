@@ -25,7 +25,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
       DatabaseManager.sharedInstance.logout()
       
       dispatch_async(GlobalMainQueue) {
-        println("completing logout")
+        print("completing logout")
         
         // return user to login screen
         let navVC = UIApplication.sharedApplication().keyWindow?.rootViewController as! UINavigationController
@@ -43,10 +43,10 @@ class DiscoverCollectionViewController: UICollectionViewController {
     reloadLayout()
     
     // Register cell classes
-    var headerViewNib = UINib(nibName: headerViewIdentifier, bundle: nil)
+    let headerViewNib = UINib(nibName: headerViewIdentifier, bundle: nil)
     self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: headerViewIdentifier)
     
-    var discoverViewNib = UINib(nibName: cellIdentifier, bundle: nil)
+    let discoverViewNib = UINib(nibName: cellIdentifier, bundle: nil)
     self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: cellIdentifier)
   }
   
@@ -62,7 +62,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
   
 }
 
-extension DiscoverCollectionViewController: UICollectionViewDataSource {
+extension DiscoverCollectionViewController {
   
   // MARK: UICollectionViewDataSource
   
@@ -76,7 +76,7 @@ extension DiscoverCollectionViewController: UICollectionViewDataSource {
   }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = self.collectionView?.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+    let cell = self.collectionView?.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell!
     
     // Configure the cell
     
@@ -94,7 +94,7 @@ extension DiscoverCollectionViewController: UICollectionViewDataSource {
       return cell
     */
     case CSStickyHeaderParallaxHeader:
-      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
+      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
       
       return cell
     default:

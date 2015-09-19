@@ -218,9 +218,8 @@ class AssetsViewController: UICollectionViewController, UICollectionViewDelegate
     lastCacheFrameCenter = currentFrameCenter
     let numOffscreenAssetsToCache = 60
     
-    var visibleIndexes = collectionView?.indexPathsForVisibleItems()
-      as! [NSIndexPath]
-    visibleIndexes.sort { a, b in
+    var visibleIndexes = collectionView?.indexPathsForVisibleItems() as [NSIndexPath]!
+    visibleIndexes.sortInPlace { a, b in
       a.item < b.item
     }
     if visibleIndexes.count == 0 {
@@ -257,7 +256,7 @@ class AssetsViewController: UICollectionViewController, UICollectionViewDelegate
     var indexesToStartCaching: [NSIndexPath] = []
     for i in firstItemToCache..<lastItemToCache {
       let indexPath = NSIndexPath(forItem: i, inSection: 0)
-      if !contains(cachingIndexes, indexPath) {
+      if !cachingIndexes.contains(indexPath) {
         indexesToStartCaching.append(indexPath)
       }
     }
@@ -284,9 +283,9 @@ class AssetsViewController: UICollectionViewController, UICollectionViewDelegate
   }
   
   // update fetch results if user has updated a photo
-  func photoLibraryDidChange(changeInstance: PHChange!)  {
+  func photoLibraryDidChange(changeInstance: PHChange)  {
     // Respond to changes
-    if let collectionChanges = changeInstance.changeDetailsForFetchResult(self.assetsFetchResults) {
+    if let collectionChanges = changeInstance.changeDetailsForFetchResult(self.assetsFetchResults!) {
       self.assetsFetchResults = collectionChanges.fetchResultAfterChanges
       
       if collectionChanges.hasMoves ||

@@ -35,7 +35,7 @@ class ProductViewCell: UICollectionViewCell {
     }
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
     // initialize values
@@ -83,7 +83,7 @@ class ProductViewCell: UICollectionViewCell {
     placeholderImageView.frame = CGRect(x: (self.bounds.width - 26)/2, y: (self.bounds.height - 18)/2, width: 26, height: 18)
   }
   
-  func togglePlaceholderImage(#isPlaceholder: Bool) {
+  func togglePlaceholderImage(isPlaceholder isPlaceholder: Bool) {
     if isPlaceholder == true {
       placeholderImageView.layer.opacity = 1
     } else {
@@ -91,7 +91,7 @@ class ProductViewCell: UICollectionViewCell {
     }
   }
   
-  func highlightImage(#isCoverImage: Bool) {
+  func highlightImage(isCoverImage isCoverImage: Bool) {
     if isCoverImage == true {
       highlightBorder.opacity = 1
       border.opacity = 0

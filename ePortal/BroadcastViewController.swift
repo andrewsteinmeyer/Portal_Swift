@@ -45,13 +45,13 @@ class BroadcastViewController: UIViewController {
       dispatch_async(GlobalMainQueue) {
         if let strongSelf = self {
           var data = JSON(task.result)
-          var token = data["token"].string
-          var sessionId = data["sessionId"].string
-          var apiKey = data["apiKey"].string
+          let token = data["token"].string
+          let sessionId = data["sessionId"].string
+          let apiKey = data["apiKey"].string
           //println("token: \(token),\n apiKey: \(apiKey),\n sessionId: \(sessionId)")
           
           if (apiKey == nil || token == nil || sessionId == nil) {
-            println("Error invalid response from aws lambda generateOpentokSessionIdWithToken()")
+            print("Error invalid response from aws lambda generateOpentokSessionIdWithToken()")
           }
           else {
             // update broadcast object with sessionId and connect
@@ -101,7 +101,7 @@ class BroadcastViewController: UIViewController {
       var error: OTError?
       _session?.connectWithToken(token, error: &error)
       if error != nil {
-        println("Unable to connect to session \(error?.localizedDescription)")
+        print("Unable to connect to session \(error?.localizedDescription)")
       }
     }
   }
@@ -113,7 +113,7 @@ class BroadcastViewController: UIViewController {
       var error: OTError?
       _session?.publish(_publisher, error: &error)
       if error != nil {
-        println("Unable to publish \(error?.localizedDescription)")
+        print("Unable to publish \(error?.localizedDescription)")
       }
       
       // call async so UI can continue
@@ -128,7 +128,7 @@ class BroadcastViewController: UIViewController {
   }
   
   func startPublishing() {
-    println("got to start publishing broadcast in broadcast controller")
+    print("got to start publishing broadcast in broadcast controller")
     self.doPublish()
   }
   
@@ -169,27 +169,27 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   
   func sessionDidDisconnect(session: OTSession!) {
     let alertMessage = "Session disconnected: \(session.sessionId)"
-    println("sessionDidDisconnect: \(alertMessage)")
+    print("sessionDidDisconnect: \(alertMessage)")
   }
   
   func session(session: OTSession!, streamCreated stream: OTStream!) {
-    println("session streamCreated: \(stream.streamId)")
+    print("session streamCreated: \(stream.streamId)")
   }
   
   func session(session: OTSession!, streamDestroyed stream: OTStream!) {
-    println("session streamDestroyed: \(stream.streamId)")
+    print("session streamDestroyed: \(stream.streamId)")
   }
   
   func session(session: OTSession!, connectionCreated connection: OTConnection!) {
-    println("session connectionCreated: \(connection.connectionId)")
+    print("session connectionCreated: \(connection.connectionId)")
   }
   
   func session(session: OTSession!, connectionDestroyed connection: OTConnection!) {
-    println("session connectionDestroyed: \(connection.connectionId)")
+    print("session connectionDestroyed: \(connection.connectionId)")
   }
   
   func session(session: OTSession!, didFailWithError error: OTError!) {
-    println("didFailWithError: \(error)")
+    print("didFailWithError: \(error)")
   }
 
   // OTPublisher 
@@ -197,7 +197,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
     broadcast.isPublishing(true, onStream: stream.streamId)
     NSLog("Now publishing")
-    println("StreamId: \(stream.streamId)")
+    print("StreamId: \(stream.streamId)")
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {
@@ -207,7 +207,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   
   func publisher(publisher: OTPublisherKit!, didFailWithError error: OTError) {
     broadcast.isPublishing = false
-    println("publisher didFailWithError %@", error)
+    print("publisher didFailWithError %@", error)
     self.cleanupPublisher()
   }
   
