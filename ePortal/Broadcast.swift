@@ -6,13 +6,19 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
+typealias FSaveCompletionBlock = (error: NSError?) -> Void
+
 // information for broadcast
 class Broadcast {
   private var _user: FBUser!
   private var _sessionId: String!
   private var _isPublishing: Bool!
   private var _streamId: String!
-  private var _sale: Sale!
+  
+  var title: String!
+  var description: String!
+  var price: Int!
+  var quantity: Int!
   
   var isPublishing: Bool! {
     get {
@@ -23,7 +29,6 @@ class Broadcast {
   }
   
   init() {
-    _sale = Sale()
     _isPublishing = false
   }
   
@@ -35,15 +40,8 @@ class Broadcast {
     _isPublishing = publishing
     _streamId = streamId
   }
-}
-
-// information for the sale
-class Sale {
-  var title: String!
-  var price: Int!
   
-  init() {
-    
+  func saveWithCompletionBlock(block: FSaveCompletionBlock) {
+    block(error: nil)
   }
-  
 }

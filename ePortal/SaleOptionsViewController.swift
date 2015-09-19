@@ -13,12 +13,12 @@ protocol SaleOptionsViewControllerDelegate {
   func saleOptionsViewControllerDidCancelSale()
 }
 
-class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
+class SaleOptionsViewController: UITableViewController {
   
-  @IBOutlet weak var titleField: UITextField!
+  @IBOutlet weak var titleField: SaleTitleTextField!
   @IBOutlet weak var closeButton: UIButton!
   @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var descriptionTextView: UITextView!
+  @IBOutlet weak var descriptionTextView: SaleDescriptionTextView!
   @IBOutlet weak var dollarSignLabel: UILabel!
   @IBOutlet weak var timeColonLabel: UILabel!
   @IBOutlet weak var priceDotLabel: UILabel!
@@ -28,6 +28,9 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   @IBOutlet weak var centsTextField: SaleOptionTextField!
   @IBOutlet weak var quantityTextField: SaleOptionTextField!
   @IBOutlet weak var broadcastButton: DesignableButton!
+  @IBOutlet weak var saleTimeView: SaleOptionFieldView!
+  @IBOutlet weak var priceView: SaleOptionFieldView!
+  @IBOutlet weak var quantityView: SaleOptionFieldView!
   
   var broadcast: Broadcast!
   var delegate: SaleOptionsViewControllerDelegate?
@@ -41,7 +44,6 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   private var _textFields: [UITextField]!
   private var _shouldJumpFieldOnDelete = [SaleOptionTag: Bool]()
   private var _activeTextField: UITextField!
-  private var _placeholderLabel: UILabel!
   
   @IBAction func closeSale(sender: AnyObject) {
     self.delegate?.saleOptionsViewControllerDidCancelSale()
@@ -49,9 +51,21 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   }
   
   @IBAction func startBroadcast(sender: AnyObject) {
-    // notify observers when camera is dismissed (BroadcastViewController)
-    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.StartPublishingBroadcast, object: nil)
-    self.dismissViewControllerAnimated(true, completion: nil)
+    
+    if broadcastIsReady() {
+      broadcast.saveWithCompletionBlock() {
+        error in
+      
+        if error != nil {
+          print("error saving broadcast to firebase")
+        }
+        else {
+          // notify observers when camera is dismissed (BroadcastViewController)
+          NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.StartPublishingBroadcast, object: nil)
+          self.dismissViewControllerAnimated(true, completion: nil)
+        }
+      }
+    }
   }
   
   override func viewDidLoad() {
@@ -59,51 +73,16 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
     
     // Looks for taps on view to dismiss keyboard
     // don't cancel touches in view so that we do not impede tap on photo picker
-    var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboardDidEndEditing")
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboardDidEndEditing")
     tap.cancelsTouchesInView = false
     view.addGestureRecognizer(tap)
   
     // track textFields
     _textFields = [minutesTextField, secondsTextField, dollarsTextField, centsTextField, quantityTextField, titleField]
     
-    // set appearance and focus on titleField
-    configureAppearance()
-    titleField.becomeFirstResponder()
-  }
-  
-  func configureAppearance() {
-    // set delegates for text
-    descriptionTextView.delegate = self
-    minutesTextField.delegate = self
-    secondsTextField.delegate = self
-    dollarsTextField.delegate = self
-    centsTextField.delegate = self
-    quantityTextField.delegate = self
-    
-    // title should have theme color tint
-    titleField.tintColor = UIColor.themeColor()
-    
-    // set description text appearance
-    descriptionTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
-    descriptionTextView.layer.borderWidth = 0.75
-    descriptionTextView.layer.cornerRadius = 3
-    descriptionTextView.tintColor = UIColor.themeColor()
-   
-    // set placeholder appearance
-    // placeholder is visible inside description text until user enters a description
-    _placeholderLabel = UILabel(frame: CGRectMake(0, 0, descriptionTextView.bounds.width - 10, descriptionTextView.bounds.height))
-    _placeholderLabel.numberOfLines = 0
-    _placeholderLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-    _placeholderLabel.text = "Enter a description to let everyone know more about your product!"
-    _placeholderLabel.font = UIFont(name: "Lato-Regular", size: 14)
-    _placeholderLabel.sizeToFit()
-    _placeholderLabel.frame.origin = CGPointMake(5, descriptionTextView.font.pointSize / 2)
-    _placeholderLabel.textColor = UIColor.lightGrayColor()
-    _placeholderLabel.hidden = count(descriptionTextView.text) != 0
-    descriptionTextView.addSubview(_placeholderLabel)
-    
     // add navigation between text fields
     addKeyboardNavigationButtons()
+    titleField.becomeFirstResponder()
   }
   
   func addKeyboardNavigationButtons() {
@@ -125,16 +104,16 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
           textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
           
         case .Seconds, .Dollars, .Cents:
-          var prev = UIBarButtonItem(title: "Previous", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToPrevField"))
-          var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-          var next = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToNextField"))
+          let prev = UIBarButtonItem(title: "Previous", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToPrevField"))
+          let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+          let next = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToNextField"))
           items = [prev, flexSpace, next]
           textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
           
         case .Quantity:
-          var prev = UIBarButtonItem(title: "Previous", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToPrevField"))
-          var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-          var done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: Selector("dismissKeyboard"))
+          let prev = UIBarButtonItem(title: "Previous", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("goToPrevField"))
+          let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+          let done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: Selector("dismissKeyboard"))
           items = [prev, flexSpace, done]
           textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
           
@@ -159,13 +138,13 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
       if let tag = SaleOptionTag(rawValue: textField.tag) {
         switch tag {
         case .Minutes, .Seconds:
-          if (secondsTextField.text.length == 0
-              && minutesTextField.text.length == 0) {
+          if (secondsTextField.text!.length == 0
+              && minutesTextField.text!.length == 0) {
             timeColonLabel.textColor = UIColor.lightGrayColor()
           }
         case .Dollars, .Cents:
-          if (centsTextField.text.length == 0
-            && dollarsTextField.text.length == 0) {
+          if (centsTextField.text!.length == 0
+            && dollarsTextField.text!.length == 0) {
             priceDotLabel.textColor = UIColor.lightGrayColor()
             dollarSignLabel.textColor = UIColor.lightGrayColor()
           }
@@ -192,45 +171,99 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
     }
   }
   
+  /*!
+   * Mark the active textfield on editingDidBegin update
+   * Autofill textfields that might need values, clear warnings
+   */
   func setActiveTextField(textField: UITextField) {
     _activeTextField = textField
     
     if let tag = SaleOptionTag(rawValue: textField.tag) {
       if (tag != .Cents
-        && centsTextField.text.length == 0
-        && dollarsTextField.text.length != 0) {
-        centsTextField.text = centsTextField.text.stringByAppendingString("00")
+        && centsTextField.text!.length == 0
+        && dollarsTextField.text!.length != 0) {
+        centsTextField.text = centsTextField.text!.stringByAppendingString("00")
       }
       else if (tag != .Dollars
-        && dollarsTextField.text.length == 0
-        && centsTextField.text.length != 0) {
-          dollarsTextField.text = dollarsTextField.text.stringByAppendingString("0")
+        && dollarsTextField.text!.length == 0
+        && centsTextField.text!.length != 0) {
+          dollarsTextField.text = dollarsTextField.text!.stringByAppendingString("0")
       }
       else if (tag != .Seconds
-        && secondsTextField.text.length == 0
-        && minutesTextField.text.length != 0) {
-        secondsTextField.text = secondsTextField.text.stringByAppendingString("00")
+        && secondsTextField.text!.length == 0
+        && minutesTextField.text!.length != 0) {
+        secondsTextField.text = secondsTextField.text!.stringByAppendingString("00")
       }
       else if (tag != .Minutes
-        && minutesTextField.text.length == 0
-        && secondsTextField.text.length != 0) {
-        minutesTextField.text = minutesTextField.text.stringByAppendingString("00")
+        && minutesTextField.text!.length == 0
+        && secondsTextField.text!.length != 0) {
+        minutesTextField.text = minutesTextField.text!.stringByAppendingString("00")
+      }
+      
+      /// remove warnings if they exist
+      switch tag {
+      case .Dollars, .Cents:
+        priceView.clearWarning()
+      case .Minutes, .Seconds:
+        saleTimeView.clearWarning()
+      case .Quantity:
+        quantityView.clearWarning()
+      case .Title:
+        titleField.clearWarning()
       }
     }
   }
   
+  /*!
+   * Review input fields and validate data
+   */
+  func broadcastIsReady() -> Bool {
+    // validate quantity
+    if (quantityTextField.text!.length == 0 ||
+      quantityTextField.text!.length > 0 && Int(quantityTextField.text!)! == 0) {
+      quantityView.showWarning()
+      self.alertWithTitle("Invalid quantity", message: "You are planning on selling something, right?", handler: nil)
+      
+      return false
+    }
+    
+    var isReady = true
+    
+    if titleField.text!.length == 0 {
+      isReady = false
+      titleField.showWarning()
+    }
+    if descriptionTextView.text.length == 0 {
+      isReady = false
+      descriptionTextView.showWarning()
+    }
+    if dollarsTextField.text!.length == 0 || centsTextField.text!.length == 0 {
+      isReady = false
+      priceView.showWarning()
+    }
+    if minutesTextField.text!.length == 0 || secondsTextField.text!.length == 0 {
+      isReady = false
+      saleTimeView.showWarning()
+    }
+    
+    if isReady == false {
+      self.alertWithTitle("So Close!", message: "You are missing some information about your sale.  Please fill in the missing information so we can start this thing!", handler: nil)
+    }
+    
+    return isReady
+  }
+  
+  /*!
+   * Check textfields on editingDidEnd update
+   */
   func sanitizeInput(textField: UITextField) {
     if let tag = SaleOptionTag(rawValue: textField.tag) {
       switch tag {
       case .Seconds, .Cents:
         // add a zero if only one digit was entered
-        let length = count(textField.text.utf16)
+        let length = textField.text!.utf16.count
         if (length == 1) {
-          textField.text = textField.text.stringByAppendingString("0")
-        }
-      case .Quantity:
-        if (quantityTextField.text != nil && quantityTextField.text.toInt() <= 0 ) {
-          self.alertWithTitle("Sale quantity must be greater than zero.", message: "You are planning on selling something, right?")
+          textField.text = textField.text!.stringByAppendingString("0")
         }
       default:
         // do nothing for other textFields
@@ -238,31 +271,34 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
       }
       
       if (tag == .Seconds) {
-        if (minutesTextField.text.length != 0 && secondsTextField.text.length == 0) {
-          secondsTextField.text = secondsTextField.text.stringByAppendingString("00")
-        } else if (secondsTextField.text.toInt() > 59) {
+        if (minutesTextField.text!.length != 0 && secondsTextField.text!.length == 0) {
+          secondsTextField.text = secondsTextField.text!.stringByAppendingString("00")
+        } else if (Int(secondsTextField.text!) > 59) {
           secondsTextField.text = "59"
         }
       } else if (tag == .Cents
-        && dollarsTextField.text.length != 0
-        && centsTextField.text.length == 0) {
-        centsTextField.text = centsTextField.text.stringByAppendingString("00")
+        && dollarsTextField.text!.length != 0
+        && centsTextField.text!.length == 0) {
+        centsTextField.text = centsTextField.text!.stringByAppendingString("00")
       }
     }
   }
   
+  /*!
+   * Check to update textfield properties when the values change
+   */
   func textFieldDidChange(textField: UITextField) {
     if let tag = SaleOptionTag(rawValue: textField.tag) {
-      let textCount = textField.text.length
+      let textCount = textField.text!.length
       
       switch tag {
       case .Minutes, .Seconds:
-        timeColonLabel.textColor = (minutesTextField.text.length != 0 || secondsTextField.text.length != 0) ? UIColor.blackColor() : UIColor.lightGrayColor()
+        timeColonLabel.textColor = (minutesTextField.text!.length != 0 || secondsTextField.text!.length != 0) ? UIColor.blackColor() : UIColor.lightGrayColor()
         if (textCount == 2) {
           goToNextField()
         }
       case .Dollars, .Cents:
-        if (dollarsTextField.text.length != 0 || centsTextField.text.length != 0) {
+        if (dollarsTextField.text!.length != 0 || centsTextField.text!.length != 0) {
           priceDotLabel.textColor = UIColor.blackColor()
           dollarSignLabel.textColor = UIColor.blackColor()
         } else {
@@ -285,7 +321,7 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
   func textFieldDidDelete() {
     if let textField = _activeTextField {
       if let tag = SaleOptionTag(rawValue: textField.tag) {
-        let textCount = textField.text.length
+        let textCount = textField.text!.length
         
         switch tag {
         case .Seconds, .Cents:
@@ -315,10 +351,9 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
     view.endEditing(true)
   }
  
-  func alertWithTitle(title: String, message: String) {
-    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-    
+  func alertWithTitle(title: String, message: String, handler: ((UIAlertAction!) -> Void)!) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: handler))
     self.presentViewController(alert, animated: true, completion: nil)
   }
   
@@ -334,7 +369,7 @@ class SaleOptionsViewController: UITableViewController, UITextViewDelegate, UITe
 
 //MARK: TableView Delegate
 
-extension SaleOptionsViewController: UITableViewDelegate {
+extension SaleOptionsViewController {
   override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 30.0
   }
@@ -353,11 +388,12 @@ extension SaleOptionsViewController: UITableViewDelegate {
   
   override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     if let headerView = view as? UITableViewHeaderFooterView {
-      headerView.textLabel.textColor = UIColor.blackColor()
-      headerView.textLabel.font = UIFont(name: "Lato-Bold", size: 14)
+      headerView.textLabel!.textColor = UIColor.blackColor()
+      headerView.textLabel!.font = UIFont(name: "Lato-Bold", size: 14)
     }
   }
   
+  /// needed to customize table view cell separator inset
   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
     if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
       cell.separatorInset = UIEdgeInsetsZero
@@ -378,34 +414,42 @@ extension SaleOptionsViewController: UITableViewDelegate {
 extension SaleOptionsViewController: UITextViewDelegate, UITextFieldDelegate {
 
   func textViewDidChange(textView: UITextView) {
-    _placeholderLabel.hidden = count(descriptionTextView.text) != 0
+    if textView is SaleDescriptionTextView {
+      descriptionTextView.togglePlaceholder()
+    }
   }
   
   func textViewDidBeginEditing(textView: UITextView) {
-    if (minutesTextField.text.length != 0
-        && secondsTextField.text.length == 0) {
-        secondsTextField.text = secondsTextField.text.stringByAppendingString("00")
-    } else if (secondsTextField.text.length != 0
-              && minutesTextField.text.length == 0) {
-        minutesTextField.text = minutesTextField.text.stringByAppendingString("00")
-    } else if (dollarsTextField.text.length != 0
-              && centsTextField.text.length == 0) {
-        centsTextField.text = centsTextField.text.stringByAppendingString("00")
-    } else if (centsTextField.text.length != 0
-              && dollarsTextField.text.length == 0) {
-        dollarsTextField.text = dollarsTextField.text.stringByAppendingString("0")
+    /// clear warning if one exists
+    if textView is SaleDescriptionTextView {
+      descriptionTextView.clearWarning()
+    }
+    
+    if (minutesTextField.text!.length != 0
+        && secondsTextField.text!.length == 0) {
+        secondsTextField.text = secondsTextField.text!.stringByAppendingString("00")
+    } else if (secondsTextField.text!.length != 0
+              && minutesTextField.text!.length == 0) {
+        minutesTextField.text = minutesTextField.text!.stringByAppendingString("00")
+    } else if (dollarsTextField.text!.length != 0
+              && centsTextField.text!.length == 0) {
+        centsTextField.text = centsTextField.text!.stringByAppendingString("00")
+    } else if (centsTextField.text!.length != 0
+              && dollarsTextField.text!.length == 0) {
+        dollarsTextField.text = dollarsTextField.text!.stringByAppendingString("0")
     }
   }
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     if let tag = SaleOptionTag(rawValue: textField.tag) {
-      let textCount = textField.text.length
+      let textCount = textField.text!.length
       
       switch tag {
       case .Minutes, .Seconds, .Cents:
-        // flag for if backspace should jump the user to the previous textField
+        // flag for when a backspace should jump the user to the previous textField
+        // set to true when the user is deleting the last character in the minutes, seconds or cents field
         if (tag == .Seconds || tag == .Cents) {
-          _shouldJumpFieldOnDelete[tag] = (textField.text.length == 1 && string.length == 0) ? false : true
+          _shouldJumpFieldOnDelete[tag] = (textField.text!.length == 1 && string.length == 0) ? false : true
         }
         
         // limit to 2 numbers

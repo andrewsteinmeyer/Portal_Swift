@@ -9,13 +9,19 @@
 import UIKit
 
 class SaleTitleTextField: UITextField {
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    self.tintColor = UIColor.themeColor()
+  }
+  
+  func showWarning() {
+    self.layer.borderColor = UIColor.themeColor().CGColor
+    self.layer.borderWidth = 1
+  }
+  
+  func clearWarning() {
+    self.layer.borderWidth = 0
+  }
 
 }

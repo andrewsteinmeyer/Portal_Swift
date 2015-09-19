@@ -1,5 +1,5 @@
 //
-//  SaleFieldView.swift
+//  SaleOptionFieldView.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 9/16/15.
@@ -8,14 +8,16 @@
 
 import UIKit
 
-class SaleFieldView: UIView {
+class SaleOptionFieldView: DesignableView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+  func showWarning() {
+    self.layer.borderColor = UIColor.themeColor().CGColor
+    self.layer.borderWidth = 1
+  }
+  
+  func clearWarning() {
+    self.layer.borderColor = UIColor.lightGrayColor().CGColor
+    self.layer.borderWidth = 0.5
+  }
 
 }

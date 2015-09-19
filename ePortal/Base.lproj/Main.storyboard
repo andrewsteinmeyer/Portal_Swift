@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfz-EB-Nhj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfz-EB-Nhj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -285,13 +285,16 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What would you like to sell?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ib-0O-KHC">
+                                <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What would you like to sell?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ib-0O-KHC" customClass="SaleTitleTextField" customModule="ePortal" customModuleProvider="target">
                                     <rect key="frame" x="15" y="48" width="335" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="USw-Kw-x6I"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="26"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="NNj-EX-AzV" id="LQC-gp-7rW"/>
+                                    </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTi-Iz-6y0" customClass="DesignableButton" customModule="ePortal" customModuleProvider="target">
                                     <rect key="frame" x="336" y="6" width="35" height="35"/>
@@ -314,7 +317,7 @@
                                         <action selector="closeSale:" destination="NNj-EX-AzV" eventType="touchUpInside" id="MHx-zY-mxX"/>
                                     </connections>
                                 </button>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5WM-kK-gzl" customClass="DesignableTextView" customModule="ePortal" customModuleProvider="target">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5WM-kK-gzl" customClass="SaleDescriptionTextView" customModule="ePortal" customModuleProvider="target">
                                     <rect key="frame" x="8" y="269" width="359" height="128"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -333,6 +336,9 @@
                                             <real key="value" value="3"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outlet property="delegate" destination="NNj-EX-AzV" id="RUe-47-Lc5"/>
+                                    </connections>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHOTOS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfq-fD-k9f">
                                     <rect key="frame" x="15" y="99" width="102" height="23"/>
@@ -408,8 +414,10 @@
                             <tableViewSection headerTitle="Details" id="jMz-Bc-0LU">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="GS9-2h-8gX">
+                                        <rect key="frame" x="0.0" y="472" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GS9-2h-8gX" id="oVx-om-C1c">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sale Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ1-uP-XZJ" customClass="SaleOptionLabel" customModule="ePortal" customModuleProvider="target">
@@ -424,13 +432,16 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ypu-wR-Txy">
                                                     <rect key="frame" x="145" y="0.0" width="230" height="43"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-wB-pJp" customClass="DesignableView" customModule="ePortal" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-wB-pJp" customClass="SaleOptionFieldView" customModule="ePortal" customModuleProvider="target">
                                                             <rect key="frame" x="30" y="7" width="112" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IPW-EX-M8v" customClass="SaleOptionTextField" customModule="ePortal" customModuleProvider="target">
                                                                     <rect key="frame" x="79" y="0.0" width="34" height="30"/>
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="NNj-EX-AzV" id="OjB-nW-vwe"/>
+                                                                    </connections>
                                                                 </textField>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAs-yc-yQ3">
                                                                     <rect key="frame" x="70" y="3" width="9" height="21"/>
@@ -448,6 +459,9 @@
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="NNj-EX-AzV" id="adK-tU-UEN"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -500,8 +514,10 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="QYd-Ic-7RW">
+                                        <rect key="frame" x="0.0" y="516" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QYd-Ic-7RW" id="7bN-B1-vJQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6am-qx-dyx" customClass="SaleOptionLabel" customModule="ePortal" customModuleProvider="target">
@@ -516,20 +532,26 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUz-9H-ULf">
                                                     <rect key="frame" x="145" y="0.0" width="230" height="43"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHt-Yi-w6u" customClass="DesignableView" customModule="ePortal" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHt-Yi-w6u" customClass="SaleOptionFieldView" customModule="ePortal" customModuleProvider="target">
                                                             <rect key="frame" x="30" y="7" width="112" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="35" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dN9-y0-3Cw" customClass="SaleOptionTextField" customModule="ePortal" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="30"/>
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="NNj-EX-AzV" id="wZk-rG-bsB"/>
+                                                                    </connections>
                                                                 </textField>
                                                                 <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qAu-KY-ftl" customClass="SaleOptionTextField" customModule="ePortal" customModuleProvider="target">
                                                                     <rect key="frame" x="79" y="0.0" width="34" height="30"/>
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="NNj-EX-AzV" id="8Cs-Y5-3zH"/>
+                                                                    </connections>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -603,8 +625,10 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="uta-dt-8K4">
+                                        <rect key="frame" x="0.0" y="560" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uta-dt-8K4" id="3vt-i7-gKq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUN-ql-vpX" customClass="SaleOptionLabel" customModule="ePortal" customModuleProvider="target">
@@ -619,13 +643,16 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uP-Em-mg7">
                                                     <rect key="frame" x="145" y="0.0" width="230" height="43"/>
                                                     <subviews>
-                                                        <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogc-4g-b0E" customClass="DesignableView" customModule="ePortal" customModuleProvider="target">
+                                                        <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogc-4g-b0E" customClass="SaleOptionFieldView" customModule="ePortal" customModuleProvider="target">
                                                             <rect key="frame" x="30" y="7" width="112" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="15" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dua-TS-EOh" customClass="SaleOptionTextField" customModule="ePortal" customModuleProvider="target">
                                                                     <rect key="frame" x="48" y="0.0" width="49" height="30"/>
                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="NNj-EX-AzV" id="Zne-q0-IKz"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -688,7 +715,10 @@
                         <outlet property="dollarsTextField" destination="dN9-y0-3Cw" id="0dm-UP-LNe"/>
                         <outlet property="minutesTextField" destination="vWo-Zj-HXX" id="xnp-yv-ZKf"/>
                         <outlet property="priceDotLabel" destination="5Mj-hk-XhT" id="vP9-jy-haN"/>
+                        <outlet property="priceView" destination="mHt-Yi-w6u" id="VPW-yp-XOm"/>
                         <outlet property="quantityTextField" destination="Dua-TS-EOh" id="byn-qQ-9K9"/>
+                        <outlet property="quantityView" destination="Ogc-4g-b0E" id="mrD-HQ-iAo"/>
+                        <outlet property="saleTimeView" destination="Gzj-wB-pJp" id="kA1-YW-EXa"/>
                         <outlet property="secondsTextField" destination="IPW-EX-M8v" id="cd4-7L-GFx"/>
                         <outlet property="timeColonLabel" destination="QAs-yc-yQ3" id="lRH-BT-ysS"/>
                         <outlet property="titleField" destination="3Ib-0O-KHC" id="BzJ-0r-bjc"/>
@@ -714,7 +744,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductViewCell" id="igZ-ff-dPo" customClass="ProductViewCell" customModule="ePortal" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="10" y="0.0" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
@@ -770,7 +800,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetCell" id="iLl-jp-1in" customClass="AssetCell" customModule="ePortal" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>

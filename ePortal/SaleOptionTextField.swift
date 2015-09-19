@@ -9,14 +9,14 @@
 import UIKit
 
 class SaleOptionTextField: UITextField {
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    //self.backgroundColor = UIColor.whiteColor()
     self.layer.cornerRadius = 3
     self.tintColor = UIColor.themeColor()
     self.font = UIFont(name: "Lato-Regular", size: 15)
   }
   
+  /// notify SaleOptionsViewController that delete was tapped
   override func deleteBackward() {
     super.deleteBackward()
     
@@ -27,5 +27,4 @@ class SaleOptionTextField: UITextField {
     }
   }
   
-
 }
