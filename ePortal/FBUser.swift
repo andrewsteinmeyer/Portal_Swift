@@ -24,6 +24,12 @@ class FBUser {
   private var _ref: Firebase
   private var _valueHandle: UInt?
   
+  var userId: String {
+    get {
+      return _userId
+    }
+  }
+  
   weak var delegate: FBUserDelegate?
   
   /*!
@@ -49,6 +55,7 @@ class FBUser {
     _ref = ref
     
     // register to watch for changes at user url in firebase
+    // changes are specific to the user at root/people/userid
     self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self] snapshot in
       
       if let strongSelf = self {
@@ -67,7 +74,7 @@ class FBUser {
         
         if (strongSelf._loaded == true) {
           // just call delegate for updates
-          //TODO: self.delegate.userDidUpdate(self)
+          strongSelf.delegate!.userDidUpdate(strongSelf)
         } else {
           // execute block on initial login
           userBlock(user: strongSelf)

@@ -21,6 +21,18 @@ final class DatabaseManager {
   private var _broadcasts: [String: String]
   private var _providerData: [String: String]?
   
+  var root: Firebase {
+    get {
+      return _root
+    }
+  }
+  
+  var userId: String? {
+    get {
+        return _loggedInUser?.userId ?? nil
+    }
+  }
+  
   private init() {
     // firebase root for database calls
     _root = Firebase(url: Constants.Firebase.RootUrl)
@@ -101,6 +113,7 @@ final class DatabaseManager {
    */
   func onAuthStatus(user: FAuthData?) {
     if let userData = user {
+      // add userId given by firebase to data
       var initData: [String: String] = [ "userId": userData.uid ]
       if let providerData = _providerData {
         initData.unionInPlace(providerData)
@@ -110,6 +123,7 @@ final class DatabaseManager {
       _userRef = _root.childByAppendingPath("users").childByAppendingPath(userData.uid)
       
       // populate user with updated information from Firebase and set up observers
+      // callback block only gets called on first login
       _loggedInUser = FBUser.loadFromRoot(_root, withUserData: initData) {
         user in
         

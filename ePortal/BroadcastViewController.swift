@@ -32,8 +32,8 @@ class BroadcastViewController: UIViewController {
     // do not want to see broadcast view until after the Sale Options view has loaded
     self.view.alpha = 0
     
-    // initialize broadcast
-    _broadcast = Broadcast()
+    // initialize broadcast with firebase ref
+    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, userId: DatabaseManager.sharedInstance.userId)
     
     //register observer to listen for notification to start publishing
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "startPublishing", name: Constants.Notification.StartPublishingBroadcast, object: nil)
@@ -195,18 +195,18 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   // OTPublisher 
   
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
-    broadcast.isPublishing(true, onStream: stream.streamId)
+    _broadcast.isPublishing(true, onStream: stream.streamId)
     NSLog("Now publishing")
     print("StreamId: \(stream.streamId)")
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {
-    broadcast.isPublishing = false
+    _broadcast.isPublishing = false
     self.cleanupPublisher()
   }
   
   func publisher(publisher: OTPublisherKit!, didFailWithError error: OTError) {
-    broadcast.isPublishing = false
+    _broadcast.isPublishing = false
     print("publisher didFailWithError %@", error)
     self.cleanupPublisher()
   }

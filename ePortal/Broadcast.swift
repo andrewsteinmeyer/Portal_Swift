@@ -10,15 +10,17 @@ typealias FSaveCompletionBlock = (error: NSError?) -> Void
 
 // information for broadcast
 class Broadcast {
-  private var _user: FBUser!
+  private var _ref: Firebase
+  private var _userId: String?
   private var _sessionId: String!
   private var _isPublishing: Bool!
   private var _streamId: String!
   
-  var title: String!
-  var description: String!
-  var price: Int!
-  var quantity: Int!
+  private var _title: String!
+  private var _description: String!
+  private var _price: Double!
+  private var _allottedTime: String!
+  private var _quantity: Int!
   
   var isPublishing: Bool! {
     get {
@@ -28,7 +30,13 @@ class Broadcast {
     }
   }
   
-  init() {
+  init(root: Firebase, userId: String?) {
+    // set broadcast url path
+    let broadcastRef = root.childByAppendingPath("broadcasts").childByAppendingPath(userId)
+    
+    _ref = broadcastRef
+    _userId = broadcastRef.key
+    
     _isPublishing = false
   }
   
@@ -41,7 +49,30 @@ class Broadcast {
     _streamId = streamId
   }
   
+  func setDetails(title: String, description: String, price: String, time: String, quantity: String) {
+    _title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    _description = description.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    _price = Double(price)
+    _allottedTime = time.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    _quantity = Int(quantity)
+  }
+  
   func saveWithCompletionBlock(block: FSaveCompletionBlock) {
-    block(error: nil)
+    
+    let newBroadcast = ["title": _title,
+                        "description": _description,
+                        "price": _price,
+                        "time": _allottedTime,
+                        "quantity": _quantity]
+    
+    _ref.setValue(newBroadcast) {
+      (error: NSError?, ref: Firebase!) in
+      
+      if error != nil {
+        block(error: error)
+      } else {
+        block(error: nil)
+      }
+    }
   }
 }

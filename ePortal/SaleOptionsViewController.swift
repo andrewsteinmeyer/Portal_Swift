@@ -51,8 +51,8 @@ class SaleOptionsViewController: UITableViewController {
   }
   
   @IBAction func startBroadcast(sender: AnyObject) {
-    
     if broadcastIsReady() {
+      setBroadcastDetails()
       broadcast.saveWithCompletionBlock() {
         error in
       
@@ -60,7 +60,8 @@ class SaleOptionsViewController: UITableViewController {
           print("error saving broadcast to firebase")
         }
         else {
-          // notify observers when camera is dismissed (BroadcastViewController)
+          // dismiss the SaleOptionViewController and notify observer in BroadcastViewController
+          // BroadcastViewController will begin publishing the broadcast
           NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.StartPublishingBroadcast, object: nil)
           self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -215,45 +216,6 @@ class SaleOptionsViewController: UITableViewController {
   }
   
   /*!
-   * Review input fields and validate data
-   */
-  func broadcastIsReady() -> Bool {
-    // validate quantity
-    if (quantityTextField.text!.length == 0 ||
-      quantityTextField.text!.length > 0 && Int(quantityTextField.text!)! == 0) {
-      quantityView.showWarning()
-      self.alertWithTitle("Invalid quantity", message: "You are planning on selling something, right?", handler: nil)
-      
-      return false
-    }
-    
-    var isReady = true
-    
-    if titleField.text!.length == 0 {
-      isReady = false
-      titleField.showWarning()
-    }
-    if descriptionTextView.text.length == 0 {
-      isReady = false
-      descriptionTextView.showWarning()
-    }
-    if dollarsTextField.text!.length == 0 || centsTextField.text!.length == 0 {
-      isReady = false
-      priceView.showWarning()
-    }
-    if minutesTextField.text!.length == 0 || secondsTextField.text!.length == 0 {
-      isReady = false
-      saleTimeView.showWarning()
-    }
-    
-    if isReady == false {
-      self.alertWithTitle("So Close!", message: "You are missing some information about your sale.  Please fill in the missing information so we can start this thing!", handler: nil)
-    }
-    
-    return isReady
-  }
-  
-  /*!
    * Check textfields on editingDidEnd update
    */
   func sanitizeInput(textField: UITextField) {
@@ -275,6 +237,13 @@ class SaleOptionsViewController: UITableViewController {
           secondsTextField.text = secondsTextField.text!.stringByAppendingString("00")
         } else if (Int(secondsTextField.text!) > 59) {
           secondsTextField.text = "59"
+        } else if (Int(minutesTextField.text!) > 14) {
+          secondsTextField.text = "00"
+        }
+      } else if (tag == .Minutes) {
+        if (Int(minutesTextField.text!) > 15) {
+          minutesTextField.text = "15"
+          secondsTextField.text = "00"
         }
       } else if (tag == .Cents
         && dollarsTextField.text!.length != 0
@@ -343,6 +312,55 @@ class SaleOptionsViewController: UITableViewController {
         _shouldJumpFieldOnDelete[tag] = true
       }
     }
+  }
+  
+  /*!
+  * Review input fields and validate data
+  */
+  func broadcastIsReady() -> Bool {
+    // validate quantity
+    if (quantityTextField.text!.length == 0 ||
+      quantityTextField.text!.length > 0 && Int(quantityTextField.text!)! == 0) {
+        quantityView.showWarning()
+        self.alertWithTitle("Invalid quantity", message: "You are planning on selling something, right?", handler: nil)
+        
+        return false
+    }
+    
+    var isReady = true
+    
+    if titleField.text!.length == 0 {
+      isReady = false
+      titleField.showWarning()
+    }
+    if descriptionTextView.text.length == 0 {
+      isReady = false
+      descriptionTextView.showWarning()
+    }
+    if dollarsTextField.text!.length == 0 || centsTextField.text!.length == 0 {
+      isReady = false
+      priceView.showWarning()
+    }
+    if minutesTextField.text!.length == 0 || secondsTextField.text!.length == 0 {
+      isReady = false
+      saleTimeView.showWarning()
+    }
+    
+    if isReady == false {
+      self.alertWithTitle("So Close!", message: "You are missing some information about your sale.  Please fill in the missing information so we can start this thing!", handler: nil)
+    }
+    
+    return isReady
+  }
+  
+  func setBroadcastDetails() {
+    let title = titleField.text!
+    let description = descriptionTextView.text!
+    let price = "\(dollarsTextField.text!).\(centsTextField.text!)"
+    let time = "\(minutesTextField.text!):\(secondsTextField.text!)"
+    let quantity = quantityTextField.text!
+    
+    broadcast.setDetails(title, description: description, price: price, time: time, quantity: quantity)
   }
   
   func dismissKeyboardDidEndEditing(){
