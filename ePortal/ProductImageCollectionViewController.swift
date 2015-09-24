@@ -213,7 +213,7 @@ extension ProductImageCollectionViewController {
       let assetChangeRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
       imagePlaceholder = assetChangeRequest.placeholderForCreatedAsset
       
-      // Create assetColletionChangeRequest and pass asset placeholder object to add the new stitch
+      // Create assetColletionChangeRequest and pass asset placeholder object
       let assetCollectionChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: collection)
       assetCollectionChangeRequest!.addAssets([imagePlaceholder])
       
@@ -222,7 +222,7 @@ extension ProductImageCollectionViewController {
         let fetchResult = PHAsset.fetchAssetsWithLocalIdentifiers([imagePlaceholder.localIdentifier], options: nil)
         let imageAsset = fetchResult[0] as! PHAsset
         
-        // add new photo from camera to selected assets
+        // add the photo asset from camera to the front of the selected assets array
         // bump placeholder cell forward by one cell
         self.selectedAssets.assets.insert(imageAsset, atIndex: 0)
         self._addImagePlaceholderCell += 1
@@ -352,10 +352,9 @@ extension ProductImageCollectionViewController:  UIImagePickerControllerDelegate
 extension ProductImageCollectionViewController: PHPhotoLibraryChangeObserver {
   
   func photoLibraryDidChange(changeInstance: PHChange)  {
-    
     // put on main because we are working with UI
     dispatch_async(GlobalMainQueue) {
-      // Respond to changes
+      // Respond to changes in collection
       if let collectionChanges = changeInstance.changeDetailsForFetchResult(self._cameraImages) {
         self._cameraImages = collectionChanges.fetchResultAfterChanges
         
