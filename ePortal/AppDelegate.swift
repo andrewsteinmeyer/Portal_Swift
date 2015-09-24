@@ -55,6 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
+    // Store the completion handler
+    AWSS3TransferUtility.interceptApplication(application, handleEventsForBackgroundURLSession: identifier, completionHandler: completionHandler)
+  }
+  
   func initializeDependencies() {
     ClientManager.sharedInstance.initializeDependencies()
   }
@@ -62,10 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func customizeAppearance() {
     UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     UITabBar.appearance().tintColor = UIColor.themeColor()
-    
-    //UITabBar.appearance().barTintColor = UIColor.blackColor()
-    //UINavigationBar.appearance().barTintColor = UIColor.themeColor()
-    //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
   }
   
 }

@@ -12,6 +12,7 @@
 #import <AWSCore/AWSCore.h>
 #import <AWSLambda/AWSLambda.h>
 #import <AWSCognito/AWSCognito.h>
+#import <AWSS3/AWSS3.h>
 
 #import <Firebase/Firebase.h>
 #import <OpenTok/OpenTok.h>

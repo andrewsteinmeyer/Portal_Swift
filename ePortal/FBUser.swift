@@ -16,21 +16,22 @@ protocol FBUserDelegate: class {
 
 class FBUser {
   
+  private var _ref: Firebase
+  private var _valueHandle: UInt?
+  
   private var _loaded: Bool
   private var _userId: String
   private var _firstName: String?
   private var _lastName: String?
   private var _fullName: String?
-  private var _ref: Firebase
-  private var _valueHandle: UInt?
+  
+  weak var delegate: FBUserDelegate?
   
   var userId: String {
     get {
       return _userId
     }
   }
-  
-  weak var delegate: FBUserDelegate?
   
   /*!
    * Load the user and set the given location, with the given initial data
@@ -45,18 +46,19 @@ class FBUser {
   }
   
   init(initRef ref: Firebase, initialData userData: [String:String], andBlock userBlock: FUserCompletionBlock) {
-    _loaded = false
+    _ref = ref
     _userId = ref.key
+    _loaded = false
     
-    // Setup initial data that we already have (provided by AWS Cognito login provider)
+    // Store initial data that we already have (provided by AWS Cognito login provider)
     _firstName = userData["firstName"]
     _lastName = userData["lastName"]
     _fullName = userData["fullName"]
-    _ref = ref
     
     // register to watch for changes at user url in firebase
     // changes are specific to the user at root/people/userid
-    self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self] snapshot in
+    self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self]
+      snapshot in
       
       if let strongSelf = self {
         let val: AnyObject! = snapshot.value
@@ -87,7 +89,7 @@ class FBUser {
   }
   
   /*!
-   * Remove the observer and clear the handle observer handle
+   * Remove the observer and clear the observer handle
    */
   func stopObserving() {
     if (_valueHandle != nil) {

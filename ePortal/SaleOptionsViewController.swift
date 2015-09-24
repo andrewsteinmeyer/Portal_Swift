@@ -11,6 +11,7 @@ import Photos
 
 protocol SaleOptionsViewControllerDelegate {
   func saleOptionsViewControllerDidCancelSale()
+  func saleOptionsViewControllerDidStartBroadcast()
 }
 
 class SaleOptionsViewController: UITableViewController {
@@ -52,19 +53,26 @@ class SaleOptionsViewController: UITableViewController {
   
   @IBAction func startBroadcast(sender: AnyObject) {
     if broadcastIsReady() {
-      setBroadcastDetails()
-      broadcast.saveWithCompletionBlock() {
-        error in
-      
-        if error != nil {
-          print("error saving broadcast to firebase")
+      setBroadcastDetails().continueWithBlock() {
+        task in
+        
+        dispatch_async(GlobalMainQueue) {
+          self.broadcast.saveWithCompletionBlock() {
+            error in
+          
+            if error != nil {
+              print("error saving broadcast to firebase")
+            }
+            else {
+              // notify broadcast controller to start broadcast
+              // dismiss SaleOptionsViewController to reveal broadcast
+              self.delegate?.saleOptionsViewControllerDidStartBroadcast()
+              self.dismissViewControllerAnimated(true, completion: nil)
+            }
+          }
         }
-        else {
-          // dismiss the SaleOptionViewController and notify observer in BroadcastViewController
-          // BroadcastViewController will begin publishing the broadcast
-          NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notification.StartPublishingBroadcast, object: nil)
-          self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        
+        return nil
       }
     }
   }
@@ -353,14 +361,71 @@ class SaleOptionsViewController: UITableViewController {
     return isReady
   }
   
-  func setBroadcastDetails() {
-    let title = titleField.text!
-    let description = descriptionTextView.text!
-    let price = "\(dollarsTextField.text!).\(centsTextField.text!)"
-    let time = "\(minutesTextField.text!):\(secondsTextField.text!)"
-    let quantity = quantityTextField.text!
+  /*!
+   * Setup the broadcast object using information that the user input
+   * Broadcast object will then be saved to firebase database
+   */
+  func setBroadcastDetails() -> AWSTask {
+    // retrieve selected image assets and save to AWS S3
+    let productImageVC = self.childViewControllers[0] as! ProductImageCollectionViewController
+    let assets = productImageVC.selectedAssets.assets as [PHAsset]
     
-    broadcast.setDetails(title, description: description, price: price, time: time, quantity: quantity)
+    return saveImages(assets).continueWithBlock() {
+      task in
+      
+      // collect broadcast data
+      let title = self.titleField.text!
+      let description = self.descriptionTextView.text!
+      let price = "\(self.dollarsTextField.text!).\(self.centsTextField.text!)"
+      let time = "\(self.minutesTextField.text!):\(self.secondsTextField.text!)"
+      let quantity = self.quantityTextField.text!
+      
+      // give the details to the broadcast
+      self.broadcast.setDetails(title, description: description, price: price, time: time, quantity: quantity)
+      
+      return task
+    }
+  }
+  
+  /*!
+   * Iterate over images that user selected and save to AWS S3
+   * Store S3 image urls on the broadcast object for reference later
+   */
+  func saveImages(assets: [PHAsset]) -> AWSTask {
+    var tasks = [AWSTask]()
+    var assetCount = 0
+    for asset in assets {
+      // increment asset count for image storage on AWS S3
+      assetCount++
+      
+      // create imageUrl for S3 bucket storage
+      // add imageUrl to broadcast
+      let imageUrl = "\(self.broadcast.publisherId)" + "-" + "\(assetCount)"
+      self.broadcast.addImage(imageUrl)
+      
+      // prepare request and fetch images using the respective photo asset
+      let options = PHImageRequestOptions()
+      options.networkAccessAllowed = true
+      
+      // grab image using the photo asset
+      PHImageManager.defaultManager().requestImageDataForAsset(asset, options: options) {
+        result, _, _, info in
+        
+        // create upload task to save the image to S3 bucket
+        let task = (AWSS3TransferUtility.defaultS3TransferUtility()!.uploadData(result!,
+                                                                                bucket: Constants.AWS.S3.SaleImagesBucket,
+                                                                                key: imageUrl,
+                                                                                contentType: "image/jpeg",
+                                                                                expression: nil,
+                                                                                completionHander: nil) )
+        
+        // add task to task group
+        tasks.append(task)
+      }
+    }
+    
+    // complete after all images have been saved
+    return AWSTask(forCompletionOfAllTasks: tasks)
   }
   
   func dismissKeyboardDidEndEditing(){

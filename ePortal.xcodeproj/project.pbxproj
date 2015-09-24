@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E1E1C861BAD821D00D06C97 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E1C7D1BAD81FA00D06C97 /* KeychainAccess.framework */; };
-		4E1E1C871BAD823400D06C97 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E1E1C7D1BAD81FA00D06C97 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4E1E1C881BAD823400D06C97 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E1E1C811BAD81FA00D06C97 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E1E1C8B1BAD838000D06C97 /* SaleTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E1C8A1BAD838000D06C97 /* SaleTitleTextField.swift */; settings = {ASSET_TAGS = (); }; };
 		4E2BAD7E1BADA5F1003EA49A /* SaleDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2BAD7D1BADA5F1003EA49A /* SaleDescriptionTextView.swift */; settings = {ASSET_TAGS = (); }; };
 		4E2BAD801BADA9AE003EA49A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
@@ -44,6 +41,8 @@
 		4E30A4F31BACDF5D00C28F59 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30A4D61BACDF5D00C28F59 /* UnwindSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */; };
 		4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */; };
+		4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; };
+		4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
 		4E50B1611B8D7C8E0072B85C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */; };
@@ -115,37 +114,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4E1E1C7C1BAD81FA00D06C97 /* PBXContainerItemProxy */ = {
+		4E43A0EF1BAF726F009444D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 140F195C1A49D79400B0016A;
 			remoteInfo = "KeychainAccess-iOS";
 		};
-		4E1E1C7E1BAD81FA00D06C97 /* PBXContainerItemProxy */ = {
+		4E43A0F11BAF726F009444D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 140F19671A49D79500B0016A;
 			remoteInfo = "KeychainAccess-iOSTests";
 		};
-		4E1E1C801BAD81FA00D06C97 /* PBXContainerItemProxy */ = {
+		4E43A0F31BAF726F009444D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 140C8F0A1A4EBE3100F85556;
 			remoteInfo = "KeychainAccess-Mac";
 		};
-		4E1E1C821BAD81FA00D06C97 /* PBXContainerItemProxy */ = {
+		4E43A0F51BAF726F009444D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 140C8F141A4EBE3100F85556;
 			remoteInfo = "KeychainAccess-MacTests";
 		};
-		4E1E1C841BAD81FA00D06C97 /* PBXContainerItemProxy */ = {
+		4E43A0F71BAF726F009444D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 14FDD4601B49B9AD00C39FE8;
 			remoteInfo = "KeychainAccess-watchOS";
@@ -166,8 +165,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E1E1C871BAD823400D06C97 /* KeychainAccess.framework in CopyFiles */,
-				4E1E1C881BAD823400D06C97 /* KeychainAccess.framework in CopyFiles */,
+				4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +173,6 @@
 
 /* Begin PBXFileReference section */
 		297C4E7EF63B5D75EDC45552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4E1E1C8A1BAD838000D06C97 /* SaleTitleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTitleTextField.swift; sourceTree = "<group>"; };
 		4E2BAD7D1BADA5F1003EA49A /* SaleDescriptionTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleDescriptionTextView.swift; sourceTree = "<group>"; };
 		4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -211,6 +208,7 @@
 		4E30A4D61BACDF5D00C28F59 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionLabel.swift; sourceTree = "<group>"; };
 		4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionTextField.swift; sourceTree = "<group>"; };
+		4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
 		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
 		4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -293,7 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E1E1C861BAD821D00D06C97 /* KeychainAccess.framework in Frameworks */,
+				4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */,
 				4E69769B1B82CC1900FF4A32 /* VideoToolbox.framework in Frameworks */,
 				4E6976991B82CC0B00FF4A32 /* UIKit.framework in Frameworks */,
 				4E6976971B82CC0000FF4A32 /* SystemConfiguration.framework in Frameworks */,
@@ -347,18 +345,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4E1E1C751BAD81FA00D06C97 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4E1E1C7D1BAD81FA00D06C97 /* KeychainAccess.framework */,
-				4E1E1C7F1BAD81FA00D06C97 /* KeychainAccess-iOSTests.xctest */,
-				4E1E1C811BAD81FA00D06C97 /* KeychainAccess.framework */,
-				4E1E1C831BAD81FA00D06C97 /* KeychainAccess-MacTests.xctest */,
-				4E1E1C851BAD81FA00D06C97 /* KeychainAccess.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4E30A4B81BACDF5D00C28F59 /* Spring */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,10 +382,22 @@
 			path = Spring;
 			sourceTree = "<group>";
 		};
+		4E43A0E81BAF726F009444D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */,
+				4E43A0F21BAF726F009444D8 /* KeychainAccess-iOSTests.xctest */,
+				4E43A0F41BAF726F009444D8 /* KeychainAccess.framework */,
+				4E43A0F61BAF726F009444D8 /* KeychainAccess-MacTests.xctest */,
+				4E43A0F81BAF726F009444D8 /* KeychainAccess.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4E6C42061B5DB4DD009B22AF = {
 			isa = PBXGroup;
 			children = (
-				4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */,
+				4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */,
 				4E6C42111B5DB4DD009B22AF /* ePortal */,
 				4E6C42271B5DB4DD009B22AF /* ePortalTests */,
 				4E6C42101B5DB4DD009B22AF /* Products */,
@@ -666,8 +664,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4E1E1C751BAD81FA00D06C97 /* Products */;
-					ProjectRef = 4E1E1C741BAD81FA00D06C97 /* KeychainAccess.xcodeproj */;
+					ProductGroup = 4E43A0E81BAF726F009444D8 /* Products */;
+					ProjectRef = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -679,39 +677,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4E1E1C7D1BAD81FA00D06C97 /* KeychainAccess.framework */ = {
+		4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E1E1C7C1BAD81FA00D06C97 /* PBXContainerItemProxy */;
+			remoteRef = 4E43A0EF1BAF726F009444D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E1E1C7F1BAD81FA00D06C97 /* KeychainAccess-iOSTests.xctest */ = {
+		4E43A0F21BAF726F009444D8 /* KeychainAccess-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KeychainAccess-iOSTests.xctest";
-			remoteRef = 4E1E1C7E1BAD81FA00D06C97 /* PBXContainerItemProxy */;
+			remoteRef = 4E43A0F11BAF726F009444D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E1E1C811BAD81FA00D06C97 /* KeychainAccess.framework */ = {
+		4E43A0F41BAF726F009444D8 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E1E1C801BAD81FA00D06C97 /* PBXContainerItemProxy */;
+			remoteRef = 4E43A0F31BAF726F009444D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E1E1C831BAD81FA00D06C97 /* KeychainAccess-MacTests.xctest */ = {
+		4E43A0F61BAF726F009444D8 /* KeychainAccess-MacTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KeychainAccess-MacTests.xctest";
-			remoteRef = 4E1E1C821BAD81FA00D06C97 /* PBXContainerItemProxy */;
+			remoteRef = 4E43A0F51BAF726F009444D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E1E1C851BAD81FA00D06C97 /* KeychainAccess.framework */ = {
+		4E43A0F81BAF726F009444D8 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E1E1C841BAD81FA00D06C97 /* PBXContainerItemProxy */;
+			remoteRef = 4E43A0F71BAF726F009444D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

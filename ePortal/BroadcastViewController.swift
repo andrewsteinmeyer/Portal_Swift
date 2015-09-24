@@ -33,10 +33,7 @@ class BroadcastViewController: UIViewController {
     self.view.alpha = 0
     
     // initialize broadcast with firebase ref
-    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, userId: DatabaseManager.sharedInstance.userId)
-    
-    //register observer to listen for notification to start publishing
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "startPublishing", name: Constants.Notification.StartPublishingBroadcast, object: nil)
+    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: DatabaseManager.sharedInstance.userId)
     
     // request sessionId and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
@@ -55,8 +52,8 @@ class BroadcastViewController: UIViewController {
           }
           else {
             // update broadcast object with sessionId and connect
-            // default token is 24 hours, do not store apiKey or token locally
-            strongSelf.broadcast.saveSessionId(sessionId!)
+            // default token expires in 24 hours, do not store apiKey or token locally
+            strongSelf.broadcast.sessionId = sessionId!
             strongSelf.doConnectToSession(sessionId!, WithToken: token!, apiKey: apiKey!)
           }
         }
@@ -64,12 +61,6 @@ class BroadcastViewController: UIViewController {
       // end AWS task with nil
       return nil
     }
-  }
-  
-  //make sure to remove this as an observer when cleaning up
-  //otherwise, a notification might be sent to a deallocated instance (app could crash)
-  deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -154,7 +145,12 @@ class BroadcastViewController: UIViewController {
 extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   
   func saleOptionsViewControllerDidCancelSale() {
-    self.dismissViewControllerAnimated(false, completion: nil)
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func saleOptionsViewControllerDidStartBroadcast() {
+    print("got to start publishing broadcast in broadcast controller")
+    self.doPublish()
   }
 }
 
@@ -196,7 +192,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
     _broadcast.isPublishing(true, onStream: stream.streamId)
-    NSLog("Now publishing")
+    NSLog("Now publishing on stream...")
     print("StreamId: \(stream.streamId)")
   }
 
