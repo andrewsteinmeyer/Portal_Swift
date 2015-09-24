@@ -132,7 +132,7 @@ final class DatabaseManager {
         //TODO: self.delegate.loginStateDidChange(user)
       }
     } else {
-      // There is no user logged in.  If we had one before, remove observers
+      // User is no longer logged in.  If we had one before, remove observers
       if (self._loggedInUser != nil) {
         self._loggedInUser!.stopObserving()
       }
@@ -179,6 +179,8 @@ final class DatabaseManager {
     return SingletonWrapper.singleton
   }
 }
+
+//MARK: FBUserDelegate
 
 extension DatabaseManager: FBUserDelegate {
   
