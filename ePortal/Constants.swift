@@ -8,20 +8,35 @@
 import Foundation
 
 struct Constants {
+  
   // AWS Configuration
   struct AWS {
-    static let CognitoRegionType = AWSRegionType.USEast1
-    static let DefaultServiceRegionType = AWSRegionType.USEast1
-    static let CognitoIdentityPoolId = "us-east-1:e40dbc7f-9b3c-4535-9145-52e5e797dcee"
-    static let TwitterProvider = "Twitter"
+    
+    // Cognito
+    struct Cognito {
+      static let RegionType = AWSRegionType.USEast1
+      static let DefaultServiceRegionType = AWSRegionType.USEast1
+      static let IdentityPoolId = "us-east-1:e40dbc7f-9b3c-4535-9145-52e5e797dcee"
+      
+      struct Provider {
+        static let Twitter = "Twitter"
+      }
+    }
+    
+    // AWS Lambda
+    struct Lambda {
+      static let GetFirebaseToken = "generateFirebaseToken"
+      static let GetOpentokSessionId = "generateOpentokSessionId"
+    }
+    
+    // AWS S3
+    struct S3 {
+      static let SaleImagesBucket = "eportal-sale-images"
+    }
+       
   }
   
-  // AWS Lambda
-  struct Lambda {
-    static let GetFirebaseToken = "generateFirebaseToken"
-    static let GetOpentokSessionId = "generateOpentokSessionId"
-  }
-  
+ 
   // Firebase Configuration
   struct Firebase {
     static let RootUrl = "https://eportal.firebaseio.com"
