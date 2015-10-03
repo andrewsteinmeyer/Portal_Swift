@@ -39,37 +39,37 @@ class DiscoverViewCell: UICollectionViewCell {
     //contentView.layer.cornerRadius = 5
   }
   
-  func configureCellWithSnapshotData(data: JSON) {
-    // update data for user from firebase snapshot
-    let title = data["title"].string ?? ""
-    let price = data["price"].double ?? 0
-    let quantity = data["quantity"].int ?? 0
-    let photokey = data["photos"]["image1"].string ?? ""
+  func configureCellWithSnapshotData(snapshot: FDataSnapshot) {
+    let val: AnyObject! = snapshot.value
     
-    
-    self.titleLabel.text = title
-    self.priceLabel.text = "$\(String(price))"
-    self.itemsRemainingButton.setTitle(String(quantity), forState: .Normal)
-    
-    let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(photokey)
-    
-    print(cacheUrl)
-    let url = NSURL(string: cacheUrl)
-    self.productImageView.sd_setImageWithURL(url!, completed: {
-      (image: UIImage!, error: NSError!, type: SDImageCacheType, url: NSURL!) in
+    if (val != nil) {
+      // update data for user from firebase snapshot
+      let data = JSON(val)
+      let title = data["title"].string ?? ""
+      let price = data["price"].double ?? 0
+      let quantity = data["quantity"].int ?? 0
+      let photokey = data["photos"]["image1"].string ?? ""
       
-      if error != nil {
-        print(error)
-      }
-      else {
-        print("hooray")
-      }
+      self.titleLabel.text = title
+      self.priceLabel.text = "$\(String(price))"
+      self.itemsRemainingButton.setTitle(String(quantity), forState: .Normal)
       
-    })
-    
-    // TODO: Slow downloading photos
-    // start download of image from AWS S3
-    //S3Handler.sharedInstance.downloadImageForCell(self, withBucketKey: photokey)
+      // construct url and request cached image from Fastly
+      let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(photokey)
+      print(cacheUrl)
+      
+      let url = NSURL(string: cacheUrl)
+      self.productImageView.sd_setImageWithURL(url!, completed: {
+        (image: UIImage!, error: NSError!, type: SDImageCacheType, url: NSURL!) in
+        
+        if error != nil {
+          print(error)
+        }
+        else {
+          print("cached image successfully fetched")
+        }
+      })
+    }
   }
   
 }
