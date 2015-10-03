@@ -21,18 +21,7 @@ class DiscoverViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     // setup cell
-    //loadPlaceholderData()
     setupAppearance()
-    
-  }
-  
-  func loadPlaceholderData() {
-    publisherThumbnailView.image = UIImage(named: "carrie-profile")
-    publisherNameLabel.text = "Carrie Steinmeyer"
-    titleLabel.text = "Biker Jacket"
-    priceLabel.text = "$85"
-    productImageView.image = UIImage(named: "biker-jacket")
-    itemsRemainingButton.titleLabel?.text = "3"
   }
   
   func setupAppearance() {
