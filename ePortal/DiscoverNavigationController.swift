@@ -15,8 +15,8 @@ class DiscoverNavigationController: UINavigationController {
   
     //self.navigationBar.translucent = true
     //self.navigationBar.tintColor = UIColor.whiteColor()
-    // Do any additional setup after loading the view.
     
+    // set navigation bar attributes
     if let font = UIFont(name: "Lato-Bold", size: 20) {
       self.navigationBar.titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
