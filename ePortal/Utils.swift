@@ -39,6 +39,10 @@ func afterDelay(seconds: Double, closure: () -> ()) {
   dispatch_after(when, dispatch_get_main_queue(), closure)
 }
 
+func timeStamp() -> String {
+  return String(Int(NSDate().timeIntervalSince1970))
+}
+
 //MARK: Dictionary merge extension
 
 extension Dictionary {
