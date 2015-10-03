@@ -29,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     
     if ClientManager.sharedInstance.isLoggedIn() {
-      let mainTabVC = navVC.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as UIViewController!
-      navVC.pushViewController(mainTabVC, animated: false)
+      
+      let loginVC = navVC.topViewController as! LoginViewController
+      loginVC.startAnimating = true
       
       ClientManager.sharedInstance.resumeSessionWithCompletionHandler() {
         task in
@@ -42,12 +43,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DatabaseManager.sharedInstance.resumeSessionWithCompletionHandler(id, providerData: twitterData) {
           task in
           
+          // instantiate Tab Bar Controller
+          let mainTabVC = navVC.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as UIViewController!
+          
+          afterDelay(2) {
+            navVC.pushViewController(mainTabVC, animated: false)
+            loginVC.toggleLoginButton()
+          }
+          
           print("Task result: \(task.result)")
           print("back in AppDelegate after Database login attempt")
           
+          // end AWS task with nil
           return nil
         }
         
+        // end AWS task with nil
         return nil
       }
     }
