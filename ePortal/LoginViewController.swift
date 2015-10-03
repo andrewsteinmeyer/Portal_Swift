@@ -18,10 +18,18 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var loginButton: DesignableButton!
   @IBOutlet weak var portalImage: DesignableImageView!
   
+  var startAnimating = false
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // set in appDelegate to start loading spinner
+    // when proceeding to main tab bar
+    if startAnimating == true {
+      toggleLoginButton()
+    }
     
     setupLoginButton()
   }
@@ -106,10 +114,10 @@ extension LoginViewController {
           dispatch_async(GlobalMainQueue) {
             let navVC = self.navigationController
             let mainTabVC = navVC!.storyboard?.instantiateViewControllerWithIdentifier(Constants.MainTabBarVC) as UIViewController!
-            navVC!.pushViewController(mainTabVC, animated: true)
             
-            afterDelay(0.6) {
+            afterDelay(2) {
               self.toggleLoginButton()
+              navVC!.pushViewController(mainTabVC, animated: true)
             }
           }
         }
