@@ -55,15 +55,17 @@ class FBUser {
     _lastName = userData["lastName"]
     _fullName = userData["fullName"]
     
+    print("\(_firstName), \(_lastName), \(_fullName)")
+    
     // register to watch for changes at user url in firebase
-    // changes are specific to the user at root/people/userid
+    // changes are specific to the user at root/people/userId
     self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self]
       snapshot in
       
       if let strongSelf = self {
         let val: AnyObject! = snapshot.value
         
-        if (val == nil) {
+        if (val is NSNull) {
           // First login, no values to load from firebase
           // Initial user info is set using AWS Cognito provider data (ie. Twitter)
         } else {
