@@ -29,6 +29,12 @@ final class LambdaHandler {
     return self._lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokSessionId, JSONObject: params)
   }
   
+  func generateOpentokTokenForSessionId(sessionId: String) -> AWSTask {
+    // use lambda to request a session id and token from Opentok service
+    let params = [ "sessionId" : sessionId ]
+    return self._lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokTokenForSessionId, JSONObject: params)
+  }
+  
   //MARK: Singleton
   
   class var sharedInstance: LambdaHandler {
