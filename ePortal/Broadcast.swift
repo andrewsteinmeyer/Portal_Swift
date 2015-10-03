@@ -25,6 +25,8 @@ class Broadcast {
   private var _quantity: Int!
   private var _imageUrls: [String]!
   
+  private var _subscriberIds: [String]!
+  
   var publisherId: String {
     get {
       return _publisherId
@@ -49,18 +51,28 @@ class Broadcast {
     }
   }
   
+  var streamId: String {
+    get {
+      return _streamId
+    }
+  }
+  
   init(root: Firebase, publisherId: String!) {
     // set broadcast url path
     // TODO: Bug - app crashes if we don't have userId by the time the user clicks the "Broadcast" tab item
     let broadcastRef = root.childByAppendingPath("broadcasts").childByAppendingPath(publisherId)
     
+    // url to the publisher's broadcast
     _ref = broadcastRef
     _publisherId = broadcastRef.key
-    
     _isPublishing = false
     _imageUrls = []
     
+    // list of people watching
+    _subscriberIds = []
+    
     // register to watch for changes at broadcast url in firebase
+    // changes are specific to this particular broadcast at root/broadcast/publisherId
     self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self]
       snapshot in
       
@@ -108,7 +120,7 @@ class Broadcast {
     _quantity = Int(quantity)
   }
   
-  func addImage(imageUrl: String) {
+  func addImageUrl(imageUrl: String) {
     _imageUrls.append(imageUrl)
   }
   
@@ -116,7 +128,7 @@ class Broadcast {
    * Build the broadcast and save it to firebase
    */
   func saveWithCompletionBlock(block: FSaveCompletionBlock) {
-    
+    // build broadcast
     var newBroadcast: [String: AnyObject] = [
                         "publisherId": _publisherId,
                         "sessionId": _sessionId,
@@ -127,7 +139,8 @@ class Broadcast {
                         "time": _allottedTime,
                         "quantity": _quantity
                         ]
-    
+    // add images
+    // image1: url
     if let urls = _imageUrls {
       var imageCount = 0
       var images = [String: String]()
@@ -151,5 +164,18 @@ class Broadcast {
         block(error: nil)
       }
     }
+  }
+  
+  func extractData(data: JSON) {
+    // get the sessionId
+    _sessionId = data["sessionId"].string ?? ""
+    _streamId = data["streamId"].string ?? ""
+    
+    _title = data["title"].string ?? ""
+    _description = data["description"].string ?? ""
+    _price = data["price"].double ?? 0.0
+    _quantity = data["quantity"].int ?? 0
+    _allottedTime = data["time"].string ?? ""
+    
   }
 }
