@@ -17,6 +17,9 @@ let kHeaderViewHeight: CGFloat = 200
 
 class DiscoverCollectionViewController: UICollectionViewController {
   
+  private var _ref: Firebase!
+  private var _dataSource: FirebaseCollectionViewDataSource!
+  
   @IBAction func logoutUser(sender: AnyObject) {
     ClientManager.sharedInstance.logoutWithCompletionHandler() {
       task in
@@ -39,6 +42,9 @@ class DiscoverCollectionViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // set reference to firebase root
+    _ref = DatabaseManager.sharedInstance.root
+    
     // setup custom layout
     reloadLayout()
     
@@ -48,6 +54,36 @@ class DiscoverCollectionViewController: UICollectionViewController {
     
     let discoverViewNib = UINib(nibName: cellIdentifier, bundle: nil)
     self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: cellIdentifier)
+    
+    // set datasource to root/broadcasts firebase url
+    self._dataSource = BroadcastCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: "DiscoverViewCell", cellReuseIdentifier: "DiscoverViewCell", view: self.collectionView!)
+    
+    // setup callback to populate cells with broadcasts from firebase
+    self._dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
+      let snapshot = obj as! FDataSnapshot
+      
+      print(cell)
+      
+      // configure cell after we receive data
+      if let discoverCell = cell as? DiscoverViewCell {
+        discoverCell.configureCellWithSnapshot(snapshot)
+      }
+    }
+    
+    // set source to firebase source
+    self.collectionView?.dataSource = self._dataSource
+    
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // prepare to subscribe to the broadcast that the user selected
+    if (segue.identifier == Constants.Segue.Subscribe) {
+      // pass the broadcast data that we need
+      if let snapshot = sender as? FDataSnapshot {
+        let destination = segue.destinationViewController as! SubscribeViewController
+        destination.loadBroadcastFromSnapshot(snapshot)
+      }
+    }
   }
   
   func reloadLayout() {
@@ -63,74 +99,17 @@ class DiscoverCollectionViewController: UICollectionViewController {
 }
 
 extension DiscoverCollectionViewController {
-  
-  // MARK: UICollectionViewDataSource
-  
-  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return 1
-  }
-  
-  
-  override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
-  }
-  
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = self.collectionView?.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell!
-    
-    // Configure the cell
-    
-    return cell
-  }
-  
-  override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    switch kind {
-    /*
-    Decided not to use section headers, but have this here just in case
-    
-    case UICollectionElementKindSectionHeader:
-      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: sectionHeaderIdentifier, forIndexPath: indexPath) as! DiscoverSectionHeaderView
-      
-      return cell
-    */
-    case CSStickyHeaderParallaxHeader:
-      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
-      
-      return cell
-    default:
-      assert(false, "Unexpected element kind")
-    }
-  }
-  
-  // MARK: UICollectionViewDelegate
 
-  /*
-  // Uncomment this method to specify if the specified item should be highlighted during tracking
-  override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-  return true
-  }
-  */
+  //MARK: UICollectionViewDelegate
 
-  /*
-  // Uncomment this method to specify if the specified item should be selected
   override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-  return true
+    // pass cell in order to pass broadcast data to SubscribeViewController during segue
+    let row = UInt(indexPath.row)
+    let snapshot = _dataSource.objectAtIndex(row) as! FDataSnapshot
+    performSegueWithIdentifier(Constants.Segue.Subscribe, sender: snapshot)
+    
+    return true
   }
-  */
-  
-  /*
-  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-  override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-  return false
-  }
-  
-  override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-  return false
-  }
-  
-  override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-  
-  }
-  */
 
 }
+
