@@ -9,7 +9,8 @@ exports.handler = function(event, context) {
   async.waterfall([
     function generateSessionId(next) {
       //generate session Id
-      opentok.createSession(function(err, session) {
+      //use "relayed" mode for multiple viewers
+      opentok.createSession({ mediaMode : "relayed" }, function(err, session) {
         if (session) {
           var sessionId = session.sessionId;
           //console.log('sessionId: ' + sessionId);
