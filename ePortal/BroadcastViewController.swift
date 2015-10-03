@@ -189,6 +189,19 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     _broadcast.isPublishing(true, onStream: stream.streamId)
     NSLog("Now publishing on stream...")
     print("StreamId: \(stream.streamId)")
+    
+    // save broadcast to firebase once we are publishing
+    // broadcast will immediately show up in subscriber's broadcast collection view
+    // NOTE: Need delay so that images are saved to AWS before broadcast appears in firebase
+    afterDelay(2) {
+      self._broadcast.saveWithCompletionBlock() {
+        error in
+
+        if error != nil {
+          print("error saving broadcast to firebase")
+        }
+      }
+    }
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {

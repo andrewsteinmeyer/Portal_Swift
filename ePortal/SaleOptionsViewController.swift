@@ -56,21 +56,8 @@ class SaleOptionsViewController: UITableViewController {
       setBroadcastDetails().continueWithBlock() {
         task in
         
-        dispatch_async(GlobalMainQueue) {
-          self.broadcast.saveWithCompletionBlock() {
-            error in
-          
-            if error != nil {
-              print("error saving broadcast to firebase")
-            }
-            else {
-              // notify broadcast controller to start broadcast
-              // dismiss SaleOptionsViewController to reveal broadcast
-              self.delegate?.saleOptionsViewControllerDidStartBroadcast()
-              self.dismissViewControllerAnimated(true, completion: nil)
-            }
-          }
-        }
+        self.delegate?.saleOptionsViewControllerDidStartBroadcast()
+        self.dismissViewControllerAnimated(true, completion: nil)
         
         return nil
       }
@@ -394,13 +381,14 @@ class SaleOptionsViewController: UITableViewController {
   func saveImages(assets: [PHAsset]) -> AWSTask {
     var tasks = [AWSTask]()
     var assetCount = 0
+    
     for asset in assets {
       // increment asset count for image storage on AWS S3
       assetCount++
       
       // create imageUrl for S3 bucket storage
-      // add imageUrl to broadcast
-      let imageUrl = "\(self.broadcast.publisherId)" + "-" + "\(assetCount)"
+      // add imageUrl to broadcast object for reference later
+      let imageUrl = "\(self.broadcast.broadcastId)-\(assetCount)"
       self.broadcast.addImageUrl(imageUrl)
       
       // prepare request and fetch images using the respective photo asset
@@ -412,12 +400,7 @@ class SaleOptionsViewController: UITableViewController {
         result, _, _, info in
         
         // create upload task to save the image to S3 bucket
-        let task = (AWSS3TransferUtility.defaultS3TransferUtility()!.uploadData(result!,
-                                                                                bucket: Constants.AWS.S3.SaleImagesBucket,
-                                                                                key: imageUrl,
-                                                                                contentType: "image/jpeg",
-                                                                                expression: nil,
-                                                                                completionHander: nil) )
+        let task = S3Handler.sharedInstance.uploadImageData(result!, imageUrl: imageUrl)
         
         // add task to task group
         tasks.append(task)
