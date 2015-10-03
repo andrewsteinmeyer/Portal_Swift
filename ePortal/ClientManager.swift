@@ -58,6 +58,7 @@ final class ClientManager {
     self._credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.AWS.Cognito.RegionType,
                                                              identityPoolId: Constants.AWS.Cognito.IdentityPoolId)
     
+    // set logins if they exist
     if let logins = logins {
       self._credentialsProvider.logins = logins
     }
