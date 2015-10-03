@@ -41,6 +41,39 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>cdn.eportal.com.global.prod.fastly.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSAllowsArbitraryLoads</key>
+				<true/>
+			</dict>
+			<key>amazonaws.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>amazonaws.com.cn</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Light.ttf</string>
@@ -63,30 +96,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-<key>NSAppTransportSecurity</key>
-<dict>
-      <key>NSExceptionDomains</key>
-      <dict>
-            <key>amazonaws.com</key>
-            <dict>
-                  <key>NSThirdPartyExceptionMinimumTLSVersion</key>
-                  <string>TLSv1.0</string>
-                  <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-                  <false/>
-                  <key>NSIncludesSubdomains</key>
-                  <true/>
-            </dict>
-            <key>amazonaws.com.cn</key>
-            <dict>
-                  <key>NSThirdPartyExceptionMinimumTLSVersion</key>
-                  <string>TLSv1.0</string>
-                  <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-                  <false/>
-                  <key>NSIncludesSubdomains</key>
-                  <true/>
-            </dict>
-      </dict>
-</dict>
 </dict>
 </plist>
