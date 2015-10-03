@@ -26,6 +26,7 @@ class BroadcastCollectionViewDataSource: FirebaseCollectionViewDataSource {
       return cell
       */
     case CSStickyHeaderParallaxHeader:
+      // make sure the header cell uses the proper identifier
       let cell = self.collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
       
       return cell
@@ -33,6 +34,5 @@ class BroadcastCollectionViewDataSource: FirebaseCollectionViewDataSource {
       assert(false, "Unexpected element kind")
     }
   }
-
-
+  
 }
