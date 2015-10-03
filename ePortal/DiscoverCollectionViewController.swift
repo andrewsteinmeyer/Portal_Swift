@@ -62,11 +62,19 @@ class DiscoverCollectionViewController: UICollectionViewController {
     self._dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
       let snapshot = obj as! FDataSnapshot
       
-      print(cell)
-      
       // configure cell after we receive data
       if let discoverCell = cell as? DiscoverViewCell {
-        discoverCell.configureCellWithSnapshot(snapshot)
+        let val: AnyObject! = snapshot.value
+        
+        if (val != nil) {
+          // update data for user from firebase snapshot
+          let data = JSON(val)
+          let publisherId = data["publisherId"].string ?? ""
+          
+          if (publisherId != DatabaseManager.sharedInstance.userId) {
+            discoverCell.configureCellWithSnapshotData(data)
+          }
+        }
       }
     }
     
