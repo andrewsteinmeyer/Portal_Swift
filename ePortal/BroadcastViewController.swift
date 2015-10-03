@@ -7,8 +7,7 @@
 //
 
 /*!
- * BroadcastViewController handles connecting to an session
- * and publishing the broadcast
+ * BroadcastViewController handles connecting to a session and publishing the broadcast
  */
 class BroadcastViewController: UIViewController {
   
@@ -100,7 +99,7 @@ class BroadcastViewController: UIViewController {
   func doPublish() {
     _publisher = OTPublisher(delegate: self)
     
-    if (_session != nil && _publisher != nil) {
+    if (_publisher != nil) {
       var error: OTError?
       _session?.publish(_publisher, error: &error)
       if error != nil {
@@ -113,14 +112,10 @@ class BroadcastViewController: UIViewController {
         self._publisher?.cameraPosition = .Back
       }
       
+      // expand view to entire screen
       _publisher?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
       self.view.addSubview(_publisher!.view)
     }
-  }
-  
-  func startPublishing() {
-    print("got to start publishing broadcast in broadcast controller")
-    self.doPublish()
   }
   
   func cleanupPublisher() {
