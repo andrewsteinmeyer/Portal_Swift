@@ -401,7 +401,7 @@ class SaleOptionsViewController: UITableViewController {
       // create imageUrl for S3 bucket storage
       // add imageUrl to broadcast
       let imageUrl = "\(self.broadcast.publisherId)" + "-" + "\(assetCount)"
-      self.broadcast.addImage(imageUrl)
+      self.broadcast.addImageUrl(imageUrl)
       
       // prepare request and fetch images using the respective photo asset
       let options = PHImageRequestOptions()
