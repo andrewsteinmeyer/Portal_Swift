@@ -15,6 +15,7 @@
 #import <AWSS3/AWSS3.h>
 
 #import <Firebase/Firebase.h>
+#import <FirebaseUI/FirebaseUI.h>
 #import <OpenTok/OpenTok.h>
 
 #import <CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.h>
