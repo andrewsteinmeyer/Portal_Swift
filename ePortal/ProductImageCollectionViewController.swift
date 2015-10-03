@@ -52,7 +52,7 @@ class ProductImageCollectionViewController: UICollectionViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // prepare to present image picker
-    if (segue.identifier == Constants.SaleOption.ImagePickerSegue) {
+    if (segue.identifier == Constants.Segue.ImagePicker) {
       let nav = segue.destinationViewController as! ImagePickerNavigationController
       let destination = nav.viewControllers[0] as! AssetsViewController
     
@@ -70,11 +70,12 @@ class ProductImageCollectionViewController: UICollectionViewController {
       destination.assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
     }
     // prepare to present edit image viewcontroller for the chosen image
-    else if (segue.identifier == Constants.SaleOption.EditImageSegue) {
+    else if (segue.identifier == Constants.Segue.EditImage) {
       let nav = segue.destinationViewController as! EditImageNavigationController
       let destination = nav.viewControllers[0] as! EditImageViewController
       
       // pass the asset that was chosen
+      // set this controller as the delegate of the EditImageViewController
       let cell = sender as! ProductViewCell
       let indexPath = collectionView?.indexPathForCell(cell)
       let asset = selectedAssets.assets[indexPath!.row]
@@ -191,7 +192,7 @@ extension ProductImageCollectionViewController {
   
   func choosePhotoFromLibrary() {
     // show user the image picker
-    self.performSegueWithIdentifier(Constants.SaleOption.ImagePickerSegue, sender: nil)
+    self.performSegueWithIdentifier(Constants.Segue.ImagePicker, sender: nil)
   }
   
   func showNoAccessAlert() {
@@ -233,7 +234,7 @@ extension ProductImageCollectionViewController {
 }
 
 
-//MARK: UICollectionViewController Delegate/Source
+//MARK: UICollectionViewController Delegate and DataSource
 
 extension ProductImageCollectionViewController {
   // UICollectionViewDataSource
@@ -306,7 +307,7 @@ extension ProductImageCollectionViewController {
       // present image editor for cell containing a selected image
       // if we get here, the user has already authorized app to access pictures in condition above
       else if (cell.hasImage) {
-        performSegueWithIdentifier(Constants.SaleOption.EditImageSegue, sender: cell)
+        performSegueWithIdentifier(Constants.Segue.EditImage, sender: cell)
       }
     }
     
