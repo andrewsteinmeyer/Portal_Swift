@@ -27,6 +27,7 @@ struct Constants {
     struct Lambda {
       static let GetFirebaseToken = "generateFirebaseToken"
       static let GetOpentokSessionId = "generateOpentokSessionId"
+      static let GetOpentokTokenForSessionId = "generateOpentokTokenForSessionId"
     }
     
     // AWS S3
@@ -47,6 +48,11 @@ struct Constants {
     static let VideoCaptureDefaultInitialFrameRate: Double = 15
   }
   
+  // Fastly CDN Cache
+  struct Fastly {
+    static let RootUrl = "http://cdn.eportal.com.global.prod.fastly.net/"
+  }
+  
   // TabBarItem Index
   static let DiscoverTabBarItemIndex = 0
   static let BroadcastTabBarItemIndex = 1
@@ -64,13 +70,13 @@ struct Constants {
   struct SaleOption {
     static let ProductImageLimit = 5
     static let ProductViewCellIdentifier = "ProductViewCell"
-    static let ImagePickerSegue = "ImagePickerSegue"
-    static let EditImageSegue = "EditImageSegue"
   }
   
-  // Notifications
-  struct Notification {
-    static let StartPublishingBroadcast = "com.dsmlabs.ePortal.startPublishingBroadcast"
+  // Segues
+  struct Segue {
+    static let ImagePicker = "ImagePickerSegue"
+    static let EditImage = "EditImageSegue"
+    static let Subscribe = "SubscribeSegue"
   }
-    
+  
 }
