@@ -234,7 +234,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="TYQ-N6-hGI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="LYe-YJ-4Zg" customClass="CSStickyHeaderFlowLayout">
                             <size key="itemSize" width="375" height="250"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -259,6 +259,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="L7y-9r-lAK" kind="presentation" identifier="SubscribeSegue" id="6yW-XD-kaP"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9y-Ar-VJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,7 +554,7 @@
                                                                         <outlet property="delegate" destination="NNj-EX-AzV" id="8Cs-Y5-3zH"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -851,6 +854,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1m0-Ob-eLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3749.5" y="757.5"/>
+        </scene>
+        <!--Subscribe View Controller-->
+        <scene sceneID="H5c-2y-rti">
+            <objects>
+                <viewController id="L7y-9r-lAK" customClass="SubscribeViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UqY-w9-VUZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="zLx-2S-Tvj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ukz-cv-R1h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZqU-Ze-umJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2873.5" y="31.5"/>
         </scene>
         <!--Image Picker Navigation Controller-->
         <scene sceneID="Xz3-tn-mx5">

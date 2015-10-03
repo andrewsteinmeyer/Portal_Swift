@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,17 +13,18 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="road-path" translatesAutoresizingMaskIntoConstraints="NO" id="kFG-f2-Zgh">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XNm-i1-nB1">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ob-bd-5yN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launch-portal-oval" translatesAutoresizingMaskIntoConstraints="NO" id="A0k-lf-XAt">
-                            <rect key="frame" x="85" y="182" width="205" height="205"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.090196078430000007" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.090196078431372548" green="0.086274509803921567" blue="0.086274509803921567" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5Ob-bd-5yN" secondAttribute="trailing" id="E74-IN-EDp"/>
+                <constraint firstItem="5Ob-bd-5yN" firstAttribute="top" secondItem="A72-GM-Efe" secondAttribute="top" id="EfZ-YP-fmp"/>
+                <constraint firstAttribute="bottom" secondItem="5Ob-bd-5yN" secondAttribute="bottom" id="h76-q9-TEb"/>
+                <constraint firstItem="5Ob-bd-5yN" firstAttribute="leading" secondItem="A72-GM-Efe" secondAttribute="leading" id="rty-Wj-hEb"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -31,7 +32,6 @@
         </view>
     </objects>
     <resources>
-        <image name="launch-portal-oval" width="410" height="410"/>
         <image name="road-path" width="750" height="1333"/>
     </resources>
 </document>
