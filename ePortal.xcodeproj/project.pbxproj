@@ -43,7 +43,7 @@
 		4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */; };
 		4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; };
 		4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4E43A1051BB5F31B009444D8 /* BroadcastCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* BroadcastCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
 		4E50B1611B8D7C8E0072B85C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */; };
@@ -250,7 +250,7 @@
 		4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionLabel.swift; sourceTree = "<group>"; };
 		4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionTextField.swift; sourceTree = "<group>"; };
 		4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
-		4E43A1041BB5F31B009444D8 /* BroadcastCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
 		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
 		4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -428,6 +428,58 @@
 			path = Spring;
 			sourceTree = "<group>";
 		};
+		4E31C1281BC085E20053B969 /* Broadcast */ = {
+			isa = PBXGroup;
+			children = (
+				4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */,
+				4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */,
+				4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */,
+				4EFF31E31B9C5D8D00147B38 /* ProductImageCollectionViewController.swift */,
+				4EAE8C961B9F9C050085E143 /* EditImageNavigationController.swift */,
+				4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */,
+			);
+			name = Broadcast;
+			sourceTree = "<group>";
+		};
+		4E31C1291BC086440053B969 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				4E9460451B704C9B0084C9C6 /* DiscoverNavigationController.swift */,
+				4E94604E1B704F670084C9C6 /* DiscoverCollectionViewController.swift */,
+				4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		4E31C12A1BC0864B0053B969 /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				4EF4AB331BBC88A800BDADF7 /* SubscribeViewController.swift */,
+			);
+			name = Subscribe;
+			sourceTree = "<group>";
+		};
+		4E31C12B1BC086A10053B969 /* Broadcast */ = {
+			isa = PBXGroup;
+			children = (
+				4E1E1C8A1BAD838000D06C97 /* SaleTitleTextField.swift */,
+				4E2BAD7D1BADA5F1003EA49A /* SaleDescriptionTextView.swift */,
+				4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */,
+				4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */,
+				4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */,
+				4EFF31BF1B97BDA800147B38 /* ProductViewCell.swift */,
+			);
+			name = Broadcast;
+			sourceTree = "<group>";
+		};
+		4E31C12C1BC086A90053B969 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				4E94604B1B704F230084C9C6 /* DiscoverViewCell.swift */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
 		4E43A0E81BAF726F009444D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,16 +576,9 @@
 			children = (
 				4EA65E691B5DBCCE00B18107 /* LoginViewController.swift */,
 				4EDEF5DC1B7FB9F900F80FD0 /* TabBarController.swift */,
-				4E9460451B704C9B0084C9C6 /* DiscoverNavigationController.swift */,
-				4E94604E1B704F670084C9C6 /* DiscoverCollectionViewController.swift */,
-				4E43A1041BB5F31B009444D8 /* BroadcastCollectionViewDataSource.swift */,
-				4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */,
-				4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */,
-				4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */,
-				4EFF31E31B9C5D8D00147B38 /* ProductImageCollectionViewController.swift */,
-				4EAE8C961B9F9C050085E143 /* EditImageNavigationController.swift */,
-				4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */,
-				4EF4AB331BBC88A800BDADF7 /* SubscribeViewController.swift */,
+				4E31C1291BC086440053B969 /* Discover */,
+				4E31C1281BC085E20053B969 /* Broadcast */,
+				4E31C12A1BC0864B0053B969 /* Subscribe */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -541,13 +586,8 @@
 		4E94604D1B704F280084C9C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4E1E1C8A1BAD838000D06C97 /* SaleTitleTextField.swift */,
-				4E2BAD7D1BADA5F1003EA49A /* SaleDescriptionTextView.swift */,
-				4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */,
-				4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */,
-				4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */,
-				4EFF31BF1B97BDA800147B38 /* ProductViewCell.swift */,
-				4E94604B1B704F230084C9C6 /* DiscoverViewCell.swift */,
+				4E31C12C1BC086A90053B969 /* Discover */,
+				4E31C12B1BC086A10053B969 /* Broadcast */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -906,7 +946,7 @@
 				4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */,
 				4E30A4EC1BACDF5D00C28F59 /* SpringImageView.swift in Sources */,
 				4E2BAD801BADA9AE003EA49A /* SwiftyJSON.swift in Sources */,
-				4E43A1051BB5F31B009444D8 /* BroadcastCollectionViewDataSource.swift in Sources */,
+				4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				4E30A4F21BACDF5D00C28F59 /* TransitionZoom.swift in Sources */,
 				4EDEF5D91B7F608100F80FD0 /* LambdaHandler.swift in Sources */,
 				4E9460421B7043D10084C9C6 /* Colors.swift in Sources */,

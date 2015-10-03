@@ -56,7 +56,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
     self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: cellIdentifier)
     
     // set datasource to root/broadcasts firebase url
-    self._dataSource = BroadcastCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: "DiscoverViewCell", cellReuseIdentifier: "DiscoverViewCell", view: self.collectionView!)
+    self._dataSource = DiscoverCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: "DiscoverViewCell", cellReuseIdentifier: "DiscoverViewCell", view: self.collectionView!)
     
     // setup callback to populate cells with broadcasts from firebase
     self._dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in

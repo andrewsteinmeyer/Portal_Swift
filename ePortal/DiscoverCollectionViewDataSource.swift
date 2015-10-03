@@ -1,5 +1,5 @@
 //
-//  BroadcastCollectionViewDataSource.swift
+//  DiscoverCollectionViewDataSource.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 9/25/15.
@@ -11,7 +11,7 @@
  * Subclass in order to properly display the StickyHeaderView in the DiscoverCollectionViewController
  */
 
-class BroadcastCollectionViewDataSource: FirebaseCollectionViewDataSource {
+class DiscoverCollectionViewDataSource: FirebaseCollectionViewDataSource {
   
   // MARK: UICollectionViewDataSource
   
