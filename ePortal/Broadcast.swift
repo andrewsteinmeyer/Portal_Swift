@@ -14,6 +14,7 @@ class Broadcast {
   private var _valueHandle: UInt?
   
   private var _publisherId: String!
+  private var _broadcastId: String!
   private var _sessionId: String!
   private var _isPublishing: Bool!
   private var _streamId: String!
@@ -30,6 +31,12 @@ class Broadcast {
   var publisherId: String {
     get {
       return _publisherId
+    }
+  }
+  
+  var broadcastId: String {
+    get {
+      return _broadcastId
     }
   }
   
@@ -60,11 +67,15 @@ class Broadcast {
   init(root: Firebase, publisherId: String!) {
     // set broadcast url path
     // TODO: Bug - app crashes if we don't have userId by the time the user clicks the "Broadcast" tab item
-    let broadcastRef = root.childByAppendingPath("broadcasts").childByAppendingPath(publisherId)
+    
+    // set broadcastId as the userId with timestamp appended
+    let broadcastId = "\(publisherId)-\(timeStamp())"
+    let broadcastRef = root.childByAppendingPath("broadcasts").childByAppendingPath(broadcastId)
     
     // url to the publisher's broadcast
     _ref = broadcastRef
-    _publisherId = broadcastRef.key
+    _publisherId = publisherId
+    _broadcastId = broadcastId
     _isPublishing = false
     _imageUrls = []
     
@@ -105,11 +116,6 @@ class Broadcast {
   func isPublishing(publishing: Bool, onStream streamId: String) {
     _isPublishing = publishing
     _streamId = streamId
-    
-    let updated = ["streamId": _streamId,
-                   "isPublishing": _isPublishing]
-    
-    _ref.updateChildValues(updated as [NSObject : AnyObject])
   }
   
   func setDetails(title: String, description: String, price: String, time: String, quantity: String) {
@@ -132,7 +138,8 @@ class Broadcast {
     var newBroadcast: [String: AnyObject] = [
                         "publisherId": _publisherId,
                         "sessionId": _sessionId,
-                        "isPublishing": false,
+                        "streamId": _streamId,
+                        "isPublishing": _isPublishing,
                         "title": _title,
                         "description": _description,
                         "price": _price,
