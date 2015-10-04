@@ -178,6 +178,11 @@ extension ProductImageCollectionViewController {
     let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .Default, handler: { _ in self.choosePhotoFromLibrary() })
     alertController.addAction(chooseFromLibraryAction)
     
+    // Needed for iPad (testing with iPad)
+    if alertController.respondsToSelector("popoverPresentationController") {
+      alertController.popoverPresentationController?.sourceView = self.view
+    }
+    
     presentViewController(alertController, animated: true, completion: nil)
   }
   
