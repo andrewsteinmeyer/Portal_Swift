@@ -47,6 +47,13 @@
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
 		4E50B1611B8D7C8E0072B85C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */; };
+		4E643F9F1BCDD57A000D6879 /* SubscribeOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FAA1BCDDCAC000D6879 /* BroadcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FA91BCDDCAC000D6879 /* BroadcastDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FAC1BCDDCC0000D6879 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FAB1BCDDCC0000D6879 /* ChatViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FB21BCDDCDF000D6879 /* PeriscommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FAE1BCDDCDF000D6879 /* PeriscommentCell.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FB31BCDDCDF000D6879 /* PeriscommentMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FAF1BCDDCDF000D6879 /* PeriscommentMark.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FB41BCDDCDF000D6879 /* PeriscommentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FB01BCDDCDF000D6879 /* PeriscommentUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		4E643FB51BCDDCDF000D6879 /* PeriscommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FB11BCDDCDF000D6879 /* PeriscommentView.swift */; settings = {ASSET_TAGS = (); }; };
 		4E69767F1B82CB5C00FF4A32 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E69767E1B82CB5C00FF4A32 /* libc++.dylib */; };
 		4E6976811B82CB6500FF4A32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */; };
 		4E6976831B82CB7300FF4A32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6976821B82CB7300FF4A32 /* AVFoundation.framework */; };
@@ -254,6 +261,13 @@
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
 		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
 		4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeOverlayViewController.swift; sourceTree = "<group>"; };
+		4E643FA91BCDDCAC000D6879 /* BroadcastDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastDetailViewController.swift; sourceTree = "<group>"; };
+		4E643FAB1BCDDCC0000D6879 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4E643FAE1BCDDCDF000D6879 /* PeriscommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriscommentCell.swift; sourceTree = "<group>"; };
+		4E643FAF1BCDDCDF000D6879 /* PeriscommentMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriscommentMark.swift; sourceTree = "<group>"; };
+		4E643FB01BCDDCDF000D6879 /* PeriscommentUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriscommentUtils.swift; sourceTree = "<group>"; };
+		4E643FB11BCDDCDF000D6879 /* PeriscommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriscommentView.swift; sourceTree = "<group>"; };
 		4E69767E1B82CB5C00FF4A32 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4E6976821B82CB7300FF4A32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -454,6 +468,10 @@
 		4E31C12A1BC0864B0053B969 /* Subscribe */ = {
 			isa = PBXGroup;
 			children = (
+				4E643FAD1BCDDCDF000D6879 /* PeriscommentView */,
+				4E643FAB1BCDDCC0000D6879 /* ChatViewController.swift */,
+				4E643FA91BCDDCAC000D6879 /* BroadcastDetailViewController.swift */,
+				4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */,
 				4EF4AB331BBC88A800BDADF7 /* SubscribeViewController.swift */,
 			);
 			name = Subscribe;
@@ -490,6 +508,17 @@
 				4E43A0F81BAF726F009444D8 /* KeychainAccess.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4E643FAD1BCDDCDF000D6879 /* PeriscommentView */ = {
+			isa = PBXGroup;
+			children = (
+				4E643FAE1BCDDCDF000D6879 /* PeriscommentCell.swift */,
+				4E643FAF1BCDDCDF000D6879 /* PeriscommentMark.swift */,
+				4E643FB01BCDDCDF000D6879 /* PeriscommentUtils.swift */,
+				4E643FB11BCDDCDF000D6879 /* PeriscommentView.swift */,
+			);
+			path = PeriscommentView;
 			sourceTree = "<group>";
 		};
 		4E6C42061B5DB4DD009B22AF = {
@@ -948,8 +977,10 @@
 				4E2BAD801BADA9AE003EA49A /* SwiftyJSON.swift in Sources */,
 				4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				4E30A4F21BACDF5D00C28F59 /* TransitionZoom.swift in Sources */,
+				4E643FB41BCDDCDF000D6879 /* PeriscommentUtils.swift in Sources */,
 				4EDEF5D91B7F608100F80FD0 /* LambdaHandler.swift in Sources */,
 				4E9460421B7043D10084C9C6 /* Colors.swift in Sources */,
+				4E643FB21BCDDCDF000D6879 /* PeriscommentCell.swift in Sources */,
 				4EA65E981B5DCE6300B18107 /* ClientManager.swift in Sources */,
 				4E30A4D81BACDF5D00C28F59 /* AsyncImageView.swift in Sources */,
 				4E94604F1B704F670084C9C6 /* DiscoverCollectionViewController.swift in Sources */,
@@ -964,6 +995,7 @@
 				4E30A4ED1BACDF5D00C28F59 /* SpringLabel.swift in Sources */,
 				4E30A4F11BACDF5D00C28F59 /* TransitionManager.swift in Sources */,
 				4EFF31E41B9C5D8D00147B38 /* ProductImageCollectionViewController.swift in Sources */,
+				4E643FB51BCDDCDF000D6879 /* PeriscommentView.swift in Sources */,
 				4E30A4E41BACDF5D00C28F59 /* KeyboardLayoutConstraint.swift in Sources */,
 				4EFF31DD1B9A36F300147B38 /* CheckMark.swift in Sources */,
 				4EA65E961B5DC7F300B18107 /* Constants.swift in Sources */,
@@ -988,12 +1020,16 @@
 				4E30A4E21BACDF5D00C28F59 /* ImageLoader.swift in Sources */,
 				4EFF31DA1B9A36F300147B38 /* AssetCell.swift in Sources */,
 				4EF4AB341BBC88A800BDADF7 /* SubscribeViewController.swift in Sources */,
+				4E643FAC1BCDDCC0000D6879 /* ChatViewController.swift in Sources */,
+				4E643F9F1BCDD57A000D6879 /* SubscribeOverlayViewController.swift in Sources */,
 				4EA65E941B5DC62100B18107 /* Utils.swift in Sources */,
+				4E643FB31BCDDCDF000D6879 /* PeriscommentMark.swift in Sources */,
 				4EFF31DC1B9A36F300147B38 /* AssetsViewController.swift in Sources */,
 				4E30A4E01BACDF5D00C28F59 /* DesignableTextView.swift in Sources */,
 				4E30A4E11BACDF5D00C28F59 /* DesignableView.swift in Sources */,
 				4E30A4EB1BACDF5D00C28F59 /* SpringButton.swift in Sources */,
 				4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */,
+				4E643FAA1BCDDCAC000D6879 /* BroadcastDetailViewController.swift in Sources */,
 				4E30A4EA1BACDF5D00C28F59 /* SpringAnimation.swift in Sources */,
 				4E30A4DD1BACDF5D00C28F59 /* DesignableLabel.swift in Sources */,
 				4E30A4E81BACDF5D00C28F59 /* SoundPlayer.swift in Sources */,

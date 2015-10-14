@@ -14,6 +14,8 @@ class SubscribeViewController: UIViewController {
   private var _subscriber: OTSubscriber!
   private var _broadcast: Broadcast!
   
+  private var _overlayViewController: SubscribeOverlayViewController!
+  
   var broadcast: Broadcast {
     get {
       return _broadcast
@@ -25,7 +27,16 @@ class SubscribeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // Do any additional setup after loading the view.
+    // create overlay
+    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SubscribeOverlayViewController") as! SubscribeOverlayViewController
+    
+    // set frame equal to current view's bounds
+    _overlayViewController.view.frame = self.view.bounds
+    
+    // add SubscriberOverlayViewController
+    self.view.addSubview(_overlayViewController.view)
+    self.addChildViewController(_overlayViewController)
+    _overlayViewController.didMoveToParentViewController(self)
   }
 
   override func didReceiveMemoryWarning() {

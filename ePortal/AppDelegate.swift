@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     initializeDependencies()
     customizeAppearance()
     
+    /*
     let navVC = self.window!.rootViewController as! UINavigationController
     
     /*
@@ -62,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return nil
       }
     }
+    */
     
     return true
   }

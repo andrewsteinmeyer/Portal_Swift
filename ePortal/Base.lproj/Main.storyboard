@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfz-EB-Nhj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L7y-9r-lAK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -554,7 +554,7 @@
                                                                         <outlet property="delegate" destination="NNj-EX-AzV" id="8Cs-Y5-3zH"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -873,6 +873,35 @@
             </objects>
             <point key="canvasLocation" x="2873.5" y="31.5"/>
         </scene>
+        <!--Subscribe Overlay View Controller-->
+        <scene sceneID="P60-rR-Umb">
+            <objects>
+                <viewController storyboardIdentifier="SubscribeOverlayViewController" id="m6x-Oy-RiI" customClass="SubscribeOverlayViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O6k-SC-0HW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xgy-wr-etV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sV9-zP-vQG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maI-dp-t1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3316.5" y="31.5"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="dwH-GN-5J0">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="EGj-OW-0rH" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D6i-ax-ou0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3749.5" y="31.5"/>
+        </scene>
         <!--Image Picker Navigation Controller-->
         <scene sceneID="Xz3-tn-mx5">
             <objects>
@@ -1004,6 +1033,102 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Plz-3X-VKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3316.5" y="1501.5"/>
+        </scene>
+        <!--Broadcast Detail View Controller-->
+        <scene sceneID="JKz-g5-lI3">
+            <objects>
+                <viewController storyboardIdentifier="BroadcastDetailViewController" id="nXc-CI-bbP" customClass="BroadcastDetailViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tSZ-cN-YSh"/>
+                        <viewControllerLayoutGuide type="bottom" id="n2m-Pl-N31"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GGL-Oy-9Jo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-mg-Z3R">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-Nu-eGi">
+                                        <rect key="frame" x="17" y="7" width="95" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="95" id="e2K-7d-sEf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-kW-1VM">
+                                        <rect key="frame" x="27" y="84" width="320" height="499"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="8Pc-uf-LlZ"/>
+                                            <constraint firstAttribute="height" constant="499" id="Fir-iH-S98"/>
+                                        </constraints>
+                                    </containerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nx2-kW-1VM" secondAttribute="trailing" constant="28" id="M2h-20-lp5"/>
+                                    <constraint firstItem="w1U-Nu-eGi" firstAttribute="leading" secondItem="bw2-mg-Z3R" secondAttribute="leading" constant="17" id="PEq-T3-Oq0"/>
+                                    <constraint firstItem="w1U-Nu-eGi" firstAttribute="top" secondItem="bw2-mg-Z3R" secondAttribute="top" constant="7" id="Z00-DS-j6K"/>
+                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="top" secondItem="w1U-Nu-eGi" secondAttribute="bottom" constant="56" id="dZG-fx-zIb"/>
+                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="leading" secondItem="bw2-mg-Z3R" secondAttribute="leading" constant="27" id="h29-oM-lrR"/>
+                                    <constraint firstAttribute="bottom" secondItem="nx2-kW-1VM" secondAttribute="bottom" id="m5f-fP-ZPN"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.066666666669999999" green="0.066666666669999999" blue="0.066666666669999999" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="bw2-mg-Z3R" firstAttribute="leading" secondItem="GGL-Oy-9Jo" secondAttribute="leading" id="3PL-qx-PcM"/>
+                            <constraint firstItem="bw2-mg-Z3R" firstAttribute="top" secondItem="tSZ-cN-YSh" secondAttribute="bottom" constant="64" id="R42-a4-LjP"/>
+                            <constraint firstAttribute="trailing" secondItem="bw2-mg-Z3R" secondAttribute="trailing" id="RhQ-qZ-fB8"/>
+                            <constraint firstItem="bw2-mg-Z3R" firstAttribute="bottom" secondItem="n2m-Pl-N31" secondAttribute="top" id="z3v-GC-UZd"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="container" destination="nx2-kW-1VM" id="gUc-PF-HUk"/>
+                        <outlet property="scrollView" destination="bw2-mg-Z3R" id="xAg-CY-OXV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bg8-Mm-SQh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3749.5" y="-689.5"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="apV-Vl-gPV">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="52k-aY-h5l" customClass="ChatViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MEa-Xg-wIB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tk0-Cb-2SN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wVl-Gf-A6S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWl-9Z-Cub" customClass="PeriscommentView" customModule="ePortal" customModuleProvider="target">
+                                <rect key="frame" x="12" y="0.0" width="353" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.43553724150000001" green="0.49713322570000001" blue="0.97785115980000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="bottom" secondItem="Tk0-Cb-2SN" secondAttribute="top" id="7D6-3r-G6R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JWl-9Z-Cub" secondAttribute="trailing" constant="-6" id="AKX-CN-fpz"/>
+                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="top" secondItem="wVl-Gf-A6S" secondAttribute="top" id="VDA-Zg-rdG"/>
+                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="leading" secondItem="wVl-Gf-A6S" secondAttribute="leadingMargin" constant="-4" id="mQm-jc-ohw"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="periscommentView" destination="JWl-9Z-Cub" id="nXS-D2-4QL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0U-Ke-sze" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4185.5" y="31.5"/>
         </scene>
     </scenes>
     <resources>
