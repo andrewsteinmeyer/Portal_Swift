@@ -8,13 +8,6 @@
 
 import UIKit
 
-let cellIdentifier = "DiscoverViewCell"
-let headerViewIdentifier = "DiscoverHeaderView"
-let kHeaderViewHeight: CGFloat = 200
-
-// not using section header for now
-// let sectionHeaderIdentifier = "DiscoverSectionHeader"
-
 class DiscoverCollectionViewController: UICollectionViewController {
   
   private var _ref: Firebase!
@@ -49,21 +42,21 @@ class DiscoverCollectionViewController: UICollectionViewController {
     reloadLayout()
     
     // Register cell classes
-    let headerViewNib = UINib(nibName: headerViewIdentifier, bundle: nil)
-    self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: headerViewIdentifier)
+    let headerViewNib = UINib(nibName: Constants.DiscoverCollection.HeaderViewIdentifier, bundle: nil)
+    self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: Constants.DiscoverCollection.HeaderViewIdentifier)
     
-    let discoverViewNib = UINib(nibName: cellIdentifier, bundle: nil)
-    self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: cellIdentifier)
+    let discoverViewNib = UINib(nibName: Constants.DiscoverCollection.CellIdentifier, bundle: nil)
+    self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: Constants.DiscoverCollection.CellIdentifier)
     
     // set datasource to root/broadcasts firebase url
-    self._dataSource = DiscoverCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: "DiscoverViewCell", cellReuseIdentifier: "DiscoverViewCell", view: self.collectionView!)
+    self._dataSource = DiscoverCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: Constants.DiscoverCollection.CellIdentifier, cellReuseIdentifier: Constants.DiscoverCollection.CellIdentifier, view: self.collectionView!)
     
     // setup callback to populate cells with broadcasts from firebase
     self._dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
       let snapshot = obj as! FDataSnapshot
       
       // configure cell after we receive data
-      if let discoverCell = cell as? DiscoverViewCell {
+      if let discoverCell = cell as? DiscoverCollectionViewCell {
         discoverCell.configureCellWithSnapshotData(snapshot)
       }
     }
@@ -88,7 +81,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
     // set header size and item size
     // not using section header so disable sticky header for now
     if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
-      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, kHeaderViewHeight)
+      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DiscoverCollection.HeaderViewHeight)
       layout.itemSize = CGSizeMake(self.view.frame.size.width, layout.itemSize.height)
       layout.disableStickyHeaders = true
     }
@@ -101,7 +94,7 @@ extension DiscoverCollectionViewController {
   //MARK: UICollectionViewDelegate
 
   override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // pass cell in order to pass broadcast data to SubscribeViewController during segue
+    // pass the cell in order to pass broadcast data to SubscribeViewController during segue
     let row = UInt(indexPath.row)
     let snapshot = _dataSource.objectAtIndex(row) as! FDataSnapshot
     performSegueWithIdentifier(Constants.Segue.Subscribe, sender: snapshot)

@@ -37,7 +37,6 @@ struct Constants {
        
   }
   
- 
   // Firebase Configuration
   struct Firebase {
     static let RootUrl = "https://eportal.firebaseio.com"
@@ -62,9 +61,17 @@ struct Constants {
   static let MainTabBarVC = "MainTabBarController"
   static let BroadcastVC = "BroadcastViewController"
   static let SaleOptionsVC = "SaleOptionsTableViewController"
+  static let SubscribeOverlayVC = "SubscribeOverlayViewController" 
   
   // Photo Album
   static let PhotoAlbumTitle = "Portal"
+  
+  // Discover Collection Settings
+  struct DiscoverCollection {
+    static let CellIdentifier = "DiscoverCollectionViewCell"
+    static let HeaderViewIdentifier = "DiscoverCollectionViewHeaderView"
+    static let HeaderViewHeight: CGFloat = 200
+  }
   
   // SaleOption Settings
   struct SaleOption {
@@ -72,11 +79,19 @@ struct Constants {
     static let ProductViewCellIdentifier = "ProductViewCell"
   }
   
+  // Detail Collection Settings
+  struct DetailCollection {
+    static let CellIdentifier = "DetailCollectionViewCell"
+    static let HeaderViewIdentifier = "DetailCollectionViewHeaderView"
+    static let HeaderViewHeight: CGFloat = 300
+  }
+  
   // Segues
   struct Segue {
     static let ImagePicker = "ImagePickerSegue"
     static let EditImage = "EditImageSegue"
     static let Subscribe = "SubscribeSegue"
+    static let DetailCollection = "DetailCollection"
   }
   
 }

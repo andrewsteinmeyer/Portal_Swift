@@ -27,7 +27,7 @@ class DiscoverCollectionViewDataSource: FirebaseCollectionViewDataSource {
       */
     case CSStickyHeaderParallaxHeader:
       // make sure the header cell uses the proper identifier
-      let cell = self.collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
+      let cell = self.collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DiscoverCollection.HeaderViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
       
       return cell
     default:

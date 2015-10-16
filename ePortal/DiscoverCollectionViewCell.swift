@@ -1,5 +1,5 @@
 //
-//  DiscoverViewCell.swift
+//  DiscoverCollectionViewCell.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 6/20/15.
@@ -9,7 +9,7 @@
 import UIKit
 import WebImage
 
-class DiscoverViewCell: UICollectionViewCell {
+class DiscoverCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var publisherThumbnailView: UIImageView!
   @IBOutlet weak var publisherNameLabel: UILabel!
