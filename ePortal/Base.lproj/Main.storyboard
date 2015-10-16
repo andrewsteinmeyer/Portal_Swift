@@ -1034,10 +1034,10 @@
             </objects>
             <point key="canvasLocation" x="3316.5" y="1501.5"/>
         </scene>
-        <!--Broadcast Detail View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="JKz-g5-lI3">
             <objects>
-                <viewController storyboardIdentifier="BroadcastDetailViewController" id="nXc-CI-bbP" customClass="BroadcastDetailViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="nXc-CI-bbP" customClass="DetailViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tSZ-cN-YSh"/>
                         <viewControllerLayoutGuide type="bottom" id="n2m-Pl-N31"/>
@@ -1058,13 +1058,16 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-kW-1VM">
+                                    <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-kW-1VM">
                                         <rect key="frame" x="27" y="84" width="320" height="499"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="8Pc-uf-LlZ"/>
                                             <constraint firstAttribute="height" constant="499" id="Fir-iH-S98"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="v4n-e0-JmF" kind="embed" identifier="DetailCollection" id="nm2-oJ-lqV"/>
+                                        </connections>
                                     </containerView>
                                 </subviews>
                                 <constraints>
@@ -1088,13 +1091,38 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="container" destination="nx2-kW-1VM" id="gUc-PF-HUk"/>
+                        <outlet property="containerView" destination="nx2-kW-1VM" id="t8z-dR-EUQ"/>
                         <outlet property="scrollView" destination="bw2-mg-Z3R" id="xAg-CY-OXV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bg8-Mm-SQh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3749.5" y="-689.5"/>
+        </scene>
+        <!--Detail Collection View Controller-->
+        <scene sceneID="FYb-HD-Mxf">
+            <objects>
+                <collectionViewController id="v4n-e0-JmF" customClass="DetailCollectionViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Suy-fZ-MH9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="qVK-jZ-gC8" customClass="CSStickyHeaderFlowLayout">
+                            <size key="itemSize" width="320" height="60"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="v4n-e0-JmF" id="2kv-nr-rek"/>
+                            <outlet property="delegate" destination="v4n-e0-JmF" id="Qrm-As-l6t"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sW1-cT-IQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4174" y="-689.5"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="apV-Vl-gPV">

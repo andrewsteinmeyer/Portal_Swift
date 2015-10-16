@@ -8,6 +8,9 @@
 
 import UIKit
 
+/*!
+ * SubscribeViewController handles connecting to a session and subscribing to the broadcast
+ */
 class SubscribeViewController: UIViewController {
   
   private var _session: OTSession!
@@ -28,7 +31,7 @@ class SubscribeViewController: UIViewController {
     super.viewDidLoad()
 
     // create overlay
-    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SubscribeOverlayViewController") as! SubscribeOverlayViewController
+    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
     
     // set frame equal to current view's bounds
     _overlayViewController.view.frame = self.view.bounds

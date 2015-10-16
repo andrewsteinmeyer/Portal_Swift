@@ -1,5 +1,5 @@
 //
-//  DetailHeaderViewCell.swift
+//  DetailCollectionViewHeaderView.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 10/13/15.
@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class DetailCollectionHeaderView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailCollectionViewHeaderView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
   
   @IBOutlet weak var publisherThumbnailView: UIImageView!
   @IBOutlet weak var publisherNameLabel: UILabel!
@@ -26,8 +26,23 @@ class DetailCollectionHeaderView: UICollectionViewCell, UICollectionViewDelegate
     
     collectionView.delegate = self
     collectionView.dataSource = self
+    collectionView.pagingEnabled = true
+    
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+    collectionViewLayout.minimumLineSpacing = 0
+    collectionViewLayout.minimumInteritemSpacing = 0
+    
+    let image1 = UIImage(named: "penny")!
+    let image2 = UIImage(named: "hat-placeholder")!
+    images = [image1, image2]
     
     setupPageControl()
+  }
+  
+  var collectionViewLayout:UICollectionViewFlowLayout {
+    get {
+      return collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    }
   }
   
   var images:[UIImage]! {
@@ -81,5 +96,5 @@ class DetailCollectionHeaderView: UICollectionViewCell, UICollectionViewDelegate
     pageControl.currentPage = currentPage
     
   }
-  
 }
+

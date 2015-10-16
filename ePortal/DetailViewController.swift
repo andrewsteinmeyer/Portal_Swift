@@ -11,12 +11,14 @@ import UIKit
 class DetailViewController: UIViewController, UIScrollViewDelegate {
   
   @IBOutlet weak var scrollView: UIScrollView!
-  @IBOutlet weak var container: UIView!
+  @IBOutlet weak var containerView: UIView!
+  
+  var detailCollectionViewController: DetailCollectionViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.container.layer.cornerRadius = 5
+    self.containerView.layer.cornerRadius = 5
     
     // start scroll near bottom and limit how far up it can go
     self.scrollView.delegate = self
@@ -24,6 +26,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 200)
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if (segue.identifier == Constants.Segue.DetailCollection) {
+      detailCollectionViewController = segue.destinationViewController as! DetailCollectionViewController
+    }
+  }
   
   // stop scrolling when at top
   func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -31,6 +38,5 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
       scrollView.contentOffset = CGPointZero
     }
   }
-  
 
 }

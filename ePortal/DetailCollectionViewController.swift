@@ -1,5 +1,5 @@
 //
-//  ImageSliderCollectionViewController.swift
+//  DetailCollectionViewController.swift
 //  ePortal
 //
 //  Created by Andrew Steinmeyer on 10/14/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageSliderCollectionViewController: UICollectionViewController {
+class DetailCollectionViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -17,14 +17,11 @@ class ImageSliderCollectionViewController: UICollectionViewController {
     reloadLayout()
     
     // Register cell classes
-    let headerViewNib = UINib(nibName: Constants.DiscoverCollection.HeaderViewIdentifier, bundle: nil)
-    self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: Constants.DiscoverCollection.HeaderViewIdentifier)
+    let headerViewNib = UINib(nibName: Constants.DetailCollection.HeaderViewIdentifier, bundle: nil)
+    self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier)
     
-    let discoverViewNib = UINib(nibName: Constants.DiscoverCollection.CellIdentifier, bundle: nil)
-    self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: Constants.DiscoverCollection.CellIdentifier)
-    
-    self.collectionView?.delegate = self
-    self.collectionView?.dataSource = self
+    let detailViewNib = UINib(nibName: Constants.DetailCollection.CellIdentifier, bundle: nil)
+    self.collectionView?.registerNib(detailViewNib, forCellWithReuseIdentifier: Constants.DetailCollection.CellIdentifier)
     
   }
   
@@ -32,11 +29,48 @@ class ImageSliderCollectionViewController: UICollectionViewController {
     // set header size and item size
     // not using section header so disable sticky header for now
     if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
-      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DiscoverCollection.HeaderViewHeight)
-      layout.itemSize = CGSizeMake(self.view.frame.size.width, layout.itemSize.height)
+      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
+      layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
       layout.disableStickyHeaders = true
+      //layout.parallaxHeaderAlwaysOnTop = true
     }
   }
   
+  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.DetailCollection.CellIdentifier, forIndexPath: indexPath)
+    
+    return cell
+  }
+  
+  override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    switch kind {
+      /*
+      Decided not to use section headers, but kept this here just in case
+      
+      case UICollectionElementKindSectionHeader:
+      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: sectionHeaderIdentifier, forIndexPath: indexPath) as! DiscoverSectionHeaderView
+      
+      return cell
+      */
+    case CSStickyHeaderParallaxHeader:
+      // make sure the header cell uses the proper identifier
+      let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
+      
+      return cell
+    default:
+      assert(false, "Unexpected element kind")
+    }
+  }
+  
+  
+  
+  
 }
-

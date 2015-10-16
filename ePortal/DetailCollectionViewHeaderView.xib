@@ -11,30 +11,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DetailHeaderView" id="Ro1-By-Kbi" customClass="BroadcastDetailHeaderViewCell" customModule="ePortal" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="297"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="Ro1-By-Kbi" customClass="DetailCollectionViewHeaderView" customModule="ePortal" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="297"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrie-profile" translatesAutoresizingMaskIntoConstraints="NO" id="VGj-JX-FHV">
                         <rect key="frame" x="13" y="13" width="49" height="49"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="49" id="IL6-YS-AZC"/>
+                            <constraint firstAttribute="width" constant="49" id="SAg-Ba-FFv"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CARRIE STEINMEYER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbC-pd-klS">
                         <rect key="frame" x="69" y="27" width="173" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="173" id="jc3-cb-T7L"/>
-                            <constraint firstAttribute="height" constant="20" id="kK7-Bx-c1y"/>
+                            <constraint firstAttribute="height" constant="20" id="nNR-ia-zbe"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ss8-Vs-s3p">
-                        <rect key="frame" x="0.0" y="68" width="375" height="229"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ss8-Vs-s3p">
+                        <rect key="frame" x="0.0" y="71" width="320" height="229"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="229" id="Yqc-jB-zQL"/>
+                        </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tFL-29-L00">
                             <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -42,24 +45,26 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="pNk-l0-gBE">
-                        <rect key="frame" x="168" y="260" width="39" height="37"/>
+                    <pageControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="pNk-l0-gBE">
+                        <rect key="frame" x="141" y="260" width="39" height="37"/>
                     </pageControl>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="VGj-JX-FHV" firstAttribute="top" secondItem="Ro1-By-Kbi" secondAttribute="top" constant="13" id="2ti-YI-DAc"/>
-                <constraint firstItem="ss8-Vs-s3p" firstAttribute="bottom" secondItem="pNk-l0-gBE" secondAttribute="bottom" id="ItO-3i-oiY"/>
-                <constraint firstItem="VGj-JX-FHV" firstAttribute="leading" secondItem="Ro1-By-Kbi" secondAttribute="leading" constant="13" id="JsD-F8-R2A"/>
-                <constraint firstItem="ss8-Vs-s3p" firstAttribute="centerX" secondItem="pNk-l0-gBE" secondAttribute="centerX" id="UCU-HD-YMB"/>
-                <constraint firstAttribute="trailing" secondItem="ss8-Vs-s3p" secondAttribute="trailing" id="a5T-Fy-SH9"/>
-                <constraint firstItem="ss8-Vs-s3p" firstAttribute="leading" secondItem="Ro1-By-Kbi" secondAttribute="leading" id="bCW-Vb-kSn"/>
-                <constraint firstItem="gbC-pd-klS" firstAttribute="centerY" secondItem="VGj-JX-FHV" secondAttribute="centerY" id="ep0-Zp-RIH"/>
-                <constraint firstAttribute="bottom" secondItem="ss8-Vs-s3p" secondAttribute="bottom" id="hkx-F7-vR1"/>
-                <constraint firstItem="ss8-Vs-s3p" firstAttribute="top" secondItem="VGj-JX-FHV" secondAttribute="bottom" constant="6" id="rzp-2z-RI6"/>
-                <constraint firstItem="gbC-pd-klS" firstAttribute="leading" secondItem="VGj-JX-FHV" secondAttribute="trailing" constant="7" id="t2D-TR-61J"/>
-                <constraint firstItem="ss8-Vs-s3p" firstAttribute="top" secondItem="gbC-pd-klS" secondAttribute="bottom" constant="21" id="wtv-lx-4zB"/>
+                <constraint firstItem="gbC-pd-klS" firstAttribute="leading" secondItem="VGj-JX-FHV" secondAttribute="trailing" constant="7" id="2ye-v5-sak"/>
+                <constraint firstItem="ss8-Vs-s3p" firstAttribute="top" secondItem="gbC-pd-klS" secondAttribute="bottom" constant="24" id="7w5-jm-Ytm"/>
+                <constraint firstItem="VGj-JX-FHV" firstAttribute="leading" secondItem="Ro1-By-Kbi" secondAttribute="leading" constant="13" id="Bed-Mh-H0u"/>
+                <constraint firstItem="ss8-Vs-s3p" firstAttribute="leading" secondItem="Ro1-By-Kbi" secondAttribute="leading" id="Bmt-H0-cw0"/>
+                <constraint firstAttribute="trailing" secondItem="ss8-Vs-s3p" secondAttribute="trailing" id="JjW-gX-0gp"/>
+                <constraint firstItem="ss8-Vs-s3p" firstAttribute="top" secondItem="VGj-JX-FHV" secondAttribute="bottom" constant="9" id="YTj-sz-o2f"/>
+                <constraint firstAttribute="trailing" secondItem="gbC-pd-klS" secondAttribute="trailing" constant="78" id="b4z-gJ-2jV"/>
+                <constraint firstAttribute="bottom" secondItem="ss8-Vs-s3p" secondAttribute="bottom" id="ccD-Cm-pNO"/>
+                <constraint firstItem="gbC-pd-klS" firstAttribute="centerY" secondItem="VGj-JX-FHV" secondAttribute="centerY" id="kTn-Jz-cMK"/>
+                <constraint firstItem="VGj-JX-FHV" firstAttribute="top" secondItem="Ro1-By-Kbi" secondAttribute="top" constant="13" id="qBx-nl-jox"/>
+                <constraint firstAttribute="bottom" secondItem="pNk-l0-gBE" secondAttribute="bottom" constant="3" id="xBd-YA-4eF"/>
             </constraints>
             <size key="customSize" width="377" height="318"/>
             <connections>
@@ -68,15 +73,8 @@
                 <outlet property="publisherNameLabel" destination="gbC-pd-klS" id="vIw-WR-aSj"/>
                 <outlet property="publisherThumbnailView" destination="VGj-JX-FHV" id="tcd-g2-O42"/>
             </connections>
-            <point key="canvasLocation" x="165.5" y="278.5"/>
+            <point key="canvasLocation" x="-349" y="227"/>
         </collectionViewCell>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrie-profile" translatesAutoresizingMaskIntoConstraints="NO" id="otw-fP-pbz">
-            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
-            <constraints>
-                <constraint firstAttribute="width" constant="38" id="DfM-NB-2vp"/>
-                <constraint firstAttribute="height" constant="38" id="JeD-7L-Mnf"/>
-            </constraints>
-        </imageView>
     </objects>
     <resources>
         <image name="carrie-profile" width="100" height="100"/>
