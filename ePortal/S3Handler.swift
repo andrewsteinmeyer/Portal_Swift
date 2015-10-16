@@ -34,7 +34,7 @@ final class S3Handler {
     }
   }
   
-  func downloadImageForCell(cell: DiscoverViewCell, withBucketKey key: String) {
+  func downloadImageForCell(cell: DiscoverCollectionViewCell, withBucketKey key: String) {
     // setup completionHandler for when the image has finished downloading from AWS S3
     let completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock = {
       (task: AWSS3TransferUtilityDownloadTask, location: NSURL?, data: NSData?, error: NSError?) in

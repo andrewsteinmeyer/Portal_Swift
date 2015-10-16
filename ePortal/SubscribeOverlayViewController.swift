@@ -12,21 +12,23 @@ class SubscribeOverlayViewController: UIViewController, UIPageViewControllerData
   
   var pageViewController: UIPageViewController!
   var chatViewController: ChatViewController!
-  var broadcastViewController: BroadcastDetailViewController!
+  var detailViewController: DetailViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
+    pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
     self.pageViewController.dataSource = self
     
-    self.chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-    self.broadcastViewController = self.storyboard?.instantiateViewControllerWithIdentifier("BroadcastDetailViewController") as! BroadcastDetailViewController
+    // set up pages
+    chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+    detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
     
-    self.pageViewController.setViewControllers([self.broadcastViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+    // set initial page
+    pageViewController.setViewControllers([self.detailViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     
     // set size equal to entire view
-    self.pageViewController.view.frame = self.view.bounds
+    pageViewController.view.frame = self.view.bounds
     
     // add pageViewController
     self.view.addSubview(pageViewController.view)
@@ -34,21 +36,21 @@ class SubscribeOverlayViewController: UIViewController, UIPageViewControllerData
     self.pageViewController.didMoveToParentViewController(self)
   }
   
-  
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    if viewController is BroadcastDetailViewController {
+    if viewController is DetailViewController {
       return nil
     } else {
-      return self.broadcastViewController
+      return self.detailViewController
     }
   }
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    if viewController is BroadcastDetailViewController {
+    if viewController is DetailViewController {
       return self.chatViewController
     } else {
       return nil
     }
   }
-
+  
 }
+

@@ -1,6 +1,6 @@
 //
-//  BroadcastDetailViewController.swift
-//  test
+//  DetailViewController.swift
+//  ePortal
 //
 //  Created by Andrew Steinmeyer on 10/5/15.
 //  Copyright © 2015 Andrew Steinmeyer. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BroadcastDetailViewController: UIViewController, UIScrollViewDelegate {
+class DetailViewController: UIViewController, UIScrollViewDelegate {
   
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var container: UIView!

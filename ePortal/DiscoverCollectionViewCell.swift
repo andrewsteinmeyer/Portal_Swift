@@ -20,6 +20,8 @@ class DiscoverViewCell: UICollectionViewCell {
   @IBOutlet weak var itemsRemainingButton: DesignableButton!
   
   override func awakeFromNib() {
+    super.awakeFromNib()
+    
     // setup cell
     setupAppearance()
   }
