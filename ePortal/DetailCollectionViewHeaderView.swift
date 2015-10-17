@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class DetailCollectionViewHeaderView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailCollectionViewHeaderView: UICollectionReusableView, UICollectionViewDelegate, UICollectionViewDataSource {
   
   @IBOutlet weak var publisherThumbnailView: UIImageView!
   @IBOutlet weak var publisherNameLabel: UILabel!
@@ -20,6 +20,8 @@ class DetailCollectionViewHeaderView: UICollectionViewCell, UICollectionViewDele
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    // register observer to listen to broadcast
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshImages:", name: "DownloadImageNotification", object: nil)
     
     let imageViewNib = UINib(nibName: "ImageSliderCell", bundle: nil)
     self.collectionView?.registerNib(imageViewNib, forCellWithReuseIdentifier: "ImageSliderCell")
@@ -32,11 +34,23 @@ class DetailCollectionViewHeaderView: UICollectionViewCell, UICollectionViewDele
     collectionViewLayout.minimumLineSpacing = 0
     collectionViewLayout.minimumInteritemSpacing = 0
     
-    let image1 = UIImage(named: "penny")!
-    let image2 = UIImage(named: "hat-placeholder")!
-    images = [image1, image2]
-    
     setupPageControl()
+  }
+  
+  //make sure to remove this as an observer when cleaning up
+  //otherwise, a notification might be sent to a deallocated instance (app could crash)
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  func refreshImages(notification: NSNotification) {
+    //extract images
+    let userInfo = notification.userInfo as! [String: AnyObject]
+    let downloadedImages = userInfo["images"] as! [UIImage]?
+    
+    if let unwrappedImages = downloadedImages {
+      images = unwrappedImages
+    }
   }
   
   var collectionViewLayout:UICollectionViewFlowLayout {

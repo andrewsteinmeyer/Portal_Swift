@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L7y-9r-lAK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfz-EB-Nhj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -866,7 +866,7 @@
                     <view key="view" contentMode="scaleToFill" id="ukz-cv-R1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZqU-Ze-umJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -884,7 +884,7 @@
                     <view key="view" contentMode="scaleToFill" id="sV9-zP-vQG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -1049,38 +1049,39 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-mg-Z3R">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-Nu-eGi">
-                                        <rect key="frame" x="17" y="7" width="95" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="95" id="e2K-7d-sEf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-kW-1VM">
-                                        <rect key="frame" x="27" y="84" width="320" height="499"/>
+                                        <rect key="frame" x="17" y="84" width="341" height="499"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="320" id="8Pc-uf-LlZ"/>
+                                            <constraint firstAttribute="width" constant="341" id="8Pc-uf-LlZ"/>
                                             <constraint firstAttribute="height" constant="499" id="Fir-iH-S98"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="v4n-e0-JmF" kind="embed" identifier="DetailCollection" id="nm2-oJ-lqV"/>
                                         </connections>
                                     </containerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-Nu-eGi">
+                                        <rect key="frame" x="17" y="21" width="341" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="341" id="e2K-7d-sEf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="nx2-kW-1VM" secondAttribute="trailing" constant="28" id="M2h-20-lp5"/>
+                                    <constraint firstAttribute="trailing" secondItem="nx2-kW-1VM" secondAttribute="trailing" constant="17" id="M2h-20-lp5"/>
                                     <constraint firstItem="w1U-Nu-eGi" firstAttribute="leading" secondItem="bw2-mg-Z3R" secondAttribute="leading" constant="17" id="PEq-T3-Oq0"/>
-                                    <constraint firstItem="w1U-Nu-eGi" firstAttribute="top" secondItem="bw2-mg-Z3R" secondAttribute="top" constant="7" id="Z00-DS-j6K"/>
-                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="top" secondItem="w1U-Nu-eGi" secondAttribute="bottom" constant="56" id="dZG-fx-zIb"/>
-                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="leading" secondItem="bw2-mg-Z3R" secondAttribute="leading" constant="27" id="h29-oM-lrR"/>
+                                    <constraint firstItem="w1U-Nu-eGi" firstAttribute="top" secondItem="bw2-mg-Z3R" secondAttribute="top" constant="21" id="Z00-DS-j6K"/>
+                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="top" secondItem="w1U-Nu-eGi" secondAttribute="bottom" constant="42" id="dZG-fx-zIb"/>
+                                    <constraint firstItem="nx2-kW-1VM" firstAttribute="leading" secondItem="bw2-mg-Z3R" secondAttribute="leading" constant="17" id="h29-oM-lrR"/>
                                     <constraint firstAttribute="bottom" secondItem="nx2-kW-1VM" secondAttribute="bottom" id="m5f-fP-ZPN"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.066666666669999999" green="0.066666666669999999" blue="0.066666666669999999" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bw2-mg-Z3R" firstAttribute="leading" secondItem="GGL-Oy-9Jo" secondAttribute="leading" id="3PL-qx-PcM"/>
@@ -1092,6 +1093,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="containerView" destination="nx2-kW-1VM" id="t8z-dR-EUQ"/>
+                        <outlet property="descriptionLabel" destination="w1U-Nu-eGi" id="2mW-9i-unA"/>
                         <outlet property="scrollView" destination="bw2-mg-Z3R" id="xAg-CY-OXV"/>
                     </connections>
                 </viewController>
@@ -1104,7 +1106,7 @@
             <objects>
                 <collectionViewController id="v4n-e0-JmF" customClass="DetailCollectionViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Suy-fZ-MH9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="341" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="qVK-jZ-gC8" customClass="CSStickyHeaderFlowLayout">
@@ -1141,7 +1143,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.43553724150000001" green="0.49713322570000001" blue="0.97785115980000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JWl-9Z-Cub" firstAttribute="bottom" secondItem="Tk0-Cb-2SN" secondAttribute="top" id="7D6-3r-G6R"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JWl-9Z-Cub" secondAttribute="trailing" constant="-6" id="AKX-CN-fpz"/>

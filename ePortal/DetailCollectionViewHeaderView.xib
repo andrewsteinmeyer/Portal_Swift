@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="Ro1-By-Kbi" customClass="DetailCollectionViewHeaderView" customModule="ePortal" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="341" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="341" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrie-profile" translatesAutoresizingMaskIntoConstraints="NO" id="VGj-JX-FHV">
@@ -24,7 +24,7 @@
                             <constraint firstAttribute="width" constant="49" id="SAg-Ba-FFv"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CARRIE STEINMEYER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbC-pd-klS">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CARRIE STEINMEYER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbC-pd-klS">
                         <rect key="frame" x="69" y="27" width="173" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="nNR-ia-zbe"/>
@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ss8-Vs-s3p">
-                        <rect key="frame" x="0.0" y="71" width="320" height="229"/>
+                        <rect key="frame" x="0.0" y="71" width="341" height="229"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="229" id="Yqc-jB-zQL"/>
@@ -73,7 +73,7 @@
                 <outlet property="publisherNameLabel" destination="gbC-pd-klS" id="vIw-WR-aSj"/>
                 <outlet property="publisherThumbnailView" destination="VGj-JX-FHV" id="tcd-g2-O42"/>
             </connections>
-            <point key="canvasLocation" x="-349" y="227"/>
+            <point key="canvasLocation" x="-349.5" y="227"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Andrew Steinmeyer. All rights reserved.
 //
 
+import WebImage
+
 typealias FSaveCompletionBlock = (error: NSError?) -> Void
 
 // information for broadcast
@@ -25,6 +27,7 @@ class Broadcast {
   private var _allottedTime: String!
   private var _quantity: Int!
   private var _imageUrls: [String]!
+  private var _downloadedImages: [UIImage]!
   
   private var _subscriberIds: [String]!
   
@@ -64,6 +67,18 @@ class Broadcast {
     }
   }
   
+  var downloadedImages: [UIImage] {
+    get {
+      return _downloadedImages
+    }
+  }
+  
+  var description: String {
+    get {
+      return _description
+    }
+  }
+  
   init(root: Firebase, publisherId: String!) {
     // set broadcast url path
     // TODO: Bug - app crashes if we don't have userId by the time the user clicks the "Broadcast" tab item
@@ -78,6 +93,7 @@ class Broadcast {
     _broadcastId = broadcastId
     _isPublishing = false
     _imageUrls = []
+    _downloadedImages = []
     
     // list of people watching
     _subscriberIds = []
@@ -104,8 +120,8 @@ class Broadcast {
   }
   
   /*!
-  * Remove the observer and clear the observer handle
-  */
+   * Remove the observer and clear the observer handle
+   */
   func stopObserving() {
     if (_valueHandle != nil) {
       _ref.removeObserverWithHandle(_valueHandle!)
@@ -183,6 +199,39 @@ class Broadcast {
     _price = data["price"].double ?? 0.0
     _quantity = data["quantity"].int ?? 0
     _allottedTime = data["time"].string ?? ""
+    
+    print("extracting")
+    
+    for (key, url):(String, JSON) in data["photos"] {
+      // if we have an image url, save it
+      if let imageUrl = url.string {
+        _imageUrls.append(imageUrl)
+        print("key: \(key)")
+        print("subj: \(String(url))")
+        
+        // construct url and request cached image from Fastly
+        let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(imageUrl)
+        print(cacheUrl)
+        
+        let url = NSURL(string: cacheUrl)
+        
+        SDWebImageManager.sharedManager().downloadImageWithURL(url!, options: SDWebImageOptions(rawValue: 0), progress: nil, completed: {
+          (image: UIImage!, error: NSError!, type: SDImageCacheType, finished: Bool, url: NSURL!) in
+          
+          if error != nil {
+            print(error)
+          }
+          else {
+            print("cached image successfully fetched and storing on broadcast")
+            self._downloadedImages.append(image)
+            
+            //send notification 
+            NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: self, userInfo: ["images": self._downloadedImages])
+          }
+        })
+      }
+    }
+    
     
   }
 }

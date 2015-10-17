@@ -30,8 +30,9 @@ class SubscribeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // create overlay
+    // create overlay and pass broadcast
     _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
+    _overlayViewController.broadcast = broadcast
     
     // set frame equal to current view's bounds
     _overlayViewController.view.frame = self.view.bounds
@@ -48,18 +49,18 @@ class SubscribeViewController: UIViewController {
   }
   
   /**
-  * The broadcast is loaded when the subscriber picks a broadcast
+  * The broadcast is loaded when the subscriber taps on a broadcast
   * After the broadcast is loaded, we subscribe the user to the broadcast
   */
   func loadBroadcastFromSnapshot(snapshot: FDataSnapshot) {
     let val: AnyObject! = snapshot.value
     
-    // initialize broadcast object for the subscriber
-    // extract broadcast data from snapshot
     if (val != nil) {
       let data = JSON(val)
       let publisherId = data["publisherId"].string ?? ""
       
+      // initialize broadcast object for the subscriber
+      // extract broadcast data from snapshot
       _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: publisherId)
       _broadcast.extractData(data)
       
@@ -115,6 +116,12 @@ class SubscribeViewController: UIViewController {
     if (_subscriber != nil) {
       var error: OTError?
       _session?.subscribe(_subscriber, error: &error)
+      
+      // expand the subscriber's view to entire screen
+      // insert the view under the overlay view
+      _subscriber?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+      self.view.insertSubview(_subscriber!.view, belowSubview: _overlayViewController!.view)
+      
       if error != nil {
         print("Unable to subscribe \(error?.localizedDescription)")
       }
@@ -186,9 +193,6 @@ extension SubscribeViewController: OTSessionDelegate, OTSubscriberDelegate {
   func subscriberDidConnectToStream(subscriber: OTSubscriberKit!) {
     print("subscriberDidConnectToStream \(subscriber.stream.connection.connectionId)")
     
-    // expand view to entire screen
-    _subscriber?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
-    self.view.addSubview(_subscriber!.view)
   }
   
   func subscriber(subscriber: OTSubscriberKit!, didFailWithError error: OTError!) {

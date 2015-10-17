@@ -14,6 +14,8 @@ class SubscribeOverlayViewController: UIViewController, UIPageViewControllerData
   var chatViewController: ChatViewController!
   var detailViewController: DetailViewController!
   
+  var broadcast: Broadcast!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -23,6 +25,7 @@ class SubscribeOverlayViewController: UIViewController, UIPageViewControllerData
     // set up pages
     chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
     detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+    detailViewController.broadcast = broadcast
     
     // set initial page
     pageViewController.setViewControllers([self.detailViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)

@@ -10,6 +10,8 @@ import UIKit
 
 class DetailCollectionViewController: UICollectionViewController {
   
+  var broadcast: Broadcast!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -62,7 +64,9 @@ class DetailCollectionViewController: UICollectionViewController {
       */
     case CSStickyHeaderParallaxHeader:
       // make sure the header cell uses the proper identifier
-      let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView!
+      let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as! DetailCollectionViewHeaderView
+      
+      cell.images = broadcast.downloadedImages
       
       return cell
     default:

@@ -39,14 +39,14 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
       let title = data["title"].string ?? ""
       let price = data["price"].double ?? 0
       let quantity = data["quantity"].int ?? 0
-      let photokey = data["photos"]["image1"].string ?? ""
+      let photoUrl = data["photos"]["image1"].string ?? ""
       
       self.titleLabel.text = title
       self.priceLabel.text = "$\(String(price))"
       self.itemsRemainingButton.setTitle(String(quantity), forState: .Normal)
       
       // construct url and request cached image from Fastly
-      let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(photokey)
+      let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(photoUrl)
       print(cacheUrl)
       
       let url = NSURL(string: cacheUrl)
