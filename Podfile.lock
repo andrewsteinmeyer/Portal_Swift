@@ -26,7 +26,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase (= 2.3.3)
   - FirebaseUI
-  - OpenTok (= 2.6)
+  - OpenTok
   - TwitterCore (= 1.8.1)
   - TwitterKit (= 1.8.1)
 
@@ -43,4 +43,4 @@ SPEC CHECKSUMS:
   TwitterCore: 0a26fb8054bc23d8986344d3dcb6602255b6aec5
   TwitterKit: 88daaebdb8bfb5847d76d8ae159841248427931d
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
