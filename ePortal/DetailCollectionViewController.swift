@@ -31,6 +31,10 @@ class DetailCollectionViewController: UICollectionViewController {
     // set header size and item size
     // not using section header so disable sticky header for now
     if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
+      
+      layout.enableDecorationView = true
+      layout.minimumLineSpacing = 0.50
+      
       layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
       layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
       layout.disableStickyHeaders = true
@@ -66,6 +70,7 @@ class DetailCollectionViewController: UICollectionViewController {
       // make sure the header cell uses the proper identifier
       let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as! DetailCollectionViewHeaderView
       
+      // set initial images that have downloaded
       cell.images = broadcast.downloadedImages
       
       return cell
@@ -73,8 +78,5 @@ class DetailCollectionViewController: UICollectionViewController {
       assert(false, "Unexpected element kind")
     }
   }
-  
-  
-  
   
 }

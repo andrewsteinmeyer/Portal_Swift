@@ -20,9 +20,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    descriptionLabel.text = broadcast.description
-    
     self.containerView.layer.cornerRadius = 5
+    
+    // get description from broadcast
+    descriptionLabel.text = broadcast.description
     
     // start scroll near bottom and limit how far up it can go
     self.scrollView.delegate = self
@@ -31,6 +32,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // pass broadcast to DetailCollectionViewController
     if (segue.identifier == Constants.Segue.DetailCollection) {
       detailCollectionViewController = segue.destinationViewController as! DetailCollectionViewController
       detailCollectionViewController.broadcast = broadcast

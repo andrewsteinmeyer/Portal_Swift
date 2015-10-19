@@ -18,8 +18,9 @@
 #import <FirebaseUI/FirebaseUI.h>
 #import <OpenTok/OpenTok.h>
 
-#import <CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.h>
-#import <CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayoutAttributes.h>
+#import "CSSCollectionSeparator.h"
+#import "CSStickyHeaderFlowLayout.h"
+#import "CSStickyHeaderFlowLayoutAttributes.h"
 
 #endif
 

@@ -11,6 +11,5 @@ pod 'TwitterCore', '1.8.1'
 pod 'Firebase', '2.3.3'
 pod 'FirebaseUI'
 pod 'OpenTok'
-pod 'CSStickyHeaderFlowLayout', '0.2.8'
 
 

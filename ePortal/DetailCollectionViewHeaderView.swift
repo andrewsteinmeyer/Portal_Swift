@@ -26,6 +26,8 @@ class DetailCollectionViewHeaderView: UICollectionReusableView, UICollectionView
     let imageViewNib = UINib(nibName: "ImageSliderCell", bundle: nil)
     self.collectionView?.registerNib(imageViewNib, forCellWithReuseIdentifier: "ImageSliderCell")
     
+
+
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.pagingEnabled = true

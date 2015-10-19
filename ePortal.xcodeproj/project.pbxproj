@@ -61,6 +61,9 @@
 		4E643FD31BCF1A2C000D6879 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FD21BCF1A2C000D6879 /* DetailCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4E643FD51BCF21FD000D6879 /* DetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E643FD41BCF21FD000D6879 /* DetailCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		4E643FE51BCF2A05000D6879 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		4E64403E1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E64403B1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m */; settings = {ASSET_TAGS = (); }; };
+		4E64403F1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E64403D1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m */; settings = {ASSET_TAGS = (); }; };
+		4E6440561BD29BB9000D6879 /* CSSCollectionSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6440551BD29BB9000D6879 /* CSSCollectionSeparator.m */; settings = {ASSET_TAGS = (); }; };
 		4E69767F1B82CB5C00FF4A32 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E69767E1B82CB5C00FF4A32 /* libc++.dylib */; };
 		4E6976811B82CB6500FF4A32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */; };
 		4E6976831B82CB7300FF4A32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6976821B82CB7300FF4A32 /* AVFoundation.framework */; };
@@ -282,6 +285,12 @@
 		4E643FD21BCF1A2C000D6879 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		4E643FD41BCF21FD000D6879 /* DetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E64403A1BD296F4000D6879 /* CSStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
+		4E64403B1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
+		4E64403C1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
+		4E64403D1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayoutAttributes.m; sourceTree = "<group>"; };
+		4E6440551BD29BB9000D6879 /* CSSCollectionSeparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSCollectionSeparator.m; sourceTree = "<group>"; };
+		4E6440571BD29C0C000D6879 /* CSSCollectionSeparator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSCollectionSeparator.h; sourceTree = "<group>"; };
 		4E69767E1B82CB5C00FF4A32 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		4E6976801B82CB6500FF4A32 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4E6976821B82CB7300FF4A32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -581,6 +590,19 @@
 			name = Subscribe;
 			sourceTree = "<group>";
 		};
+		4E6440491BD296FA000D6879 /* CSStickyHeaderFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				4E6440571BD29C0C000D6879 /* CSSCollectionSeparator.h */,
+				4E6440551BD29BB9000D6879 /* CSSCollectionSeparator.m */,
+				4E64403A1BD296F4000D6879 /* CSStickyHeaderFlowLayout.h */,
+				4E64403B1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m */,
+				4E64403C1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.h */,
+				4E64403D1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m */,
+			);
+			name = CSStickyHeaderFlowLayout;
+			sourceTree = "<group>";
+		};
 		4E6C42061B5DB4DD009B22AF = {
 			isa = PBXGroup;
 			children = (
@@ -607,12 +629,12 @@
 			isa = PBXGroup;
 			children = (
 				4E6C42141B5DB4DD009B22AF /* AppDelegate.swift */,
+				4EA65E921B5DC16600B18107 /* Storyboard */,
 				4E94603F1B7042B20084C9C6 /* API */,
 				4E94604D1B704F280084C9C6 /* View */,
 				4E9460401B7042C20084C9C6 /* Controller */,
-				4E6C421B1B5DB4DD009B22AF /* Images.xcassets */,
 				4ED5A5851B82B2DC0003C19D /* Nib */,
-				4EA65E921B5DC16600B18107 /* Storyboard */,
+				4E6C421B1B5DB4DD009B22AF /* Images.xcassets */,
 				4E6C42121B5DB4DD009B22AF /* Supporting Files */,
 			);
 			path = ePortal;
@@ -630,6 +652,7 @@
 				4EA65E931B5DC62100B18107 /* Utils.swift */,
 				4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */,
 				4E6C42341B5DB7FE009B22AF /* ePortal-Bridging-Header.h */,
+				4E6440491BD296FA000D6879 /* CSStickyHeaderFlowLayout */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1053,6 +1076,7 @@
 			files = (
 				4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */,
 				4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */,
+				4E64403F1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				4E30A4EC1BACDF5D00C28F59 /* SpringImageView.swift in Sources */,
 				4E2BAD801BADA9AE003EA49A /* SwiftyJSON.swift in Sources */,
 				4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */,
@@ -1107,10 +1131,12 @@
 				4EA65E941B5DC62100B18107 /* Utils.swift in Sources */,
 				4E643FB31BCDDCDF000D6879 /* PeriscommentMark.swift in Sources */,
 				4E643FCE1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift in Sources */,
+				4E6440561BD29BB9000D6879 /* CSSCollectionSeparator.m in Sources */,
 				4EFF31DC1B9A36F300147B38 /* AssetsViewController.swift in Sources */,
 				4E30A4E01BACDF5D00C28F59 /* DesignableTextView.swift in Sources */,
 				4E30A4E11BACDF5D00C28F59 /* DesignableView.swift in Sources */,
 				4E30A4EB1BACDF5D00C28F59 /* SpringButton.swift in Sources */,
+				4E64403E1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m in Sources */,
 				4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */,
 				4E643FAA1BCDDCAC000D6879 /* DetailViewController.swift in Sources */,
 				4E643FB81BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift in Sources */,

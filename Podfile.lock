@@ -6,7 +6,6 @@ PODS:
     - AWSCore (= 2.2.6)
   - AWSS3 (2.2.6):
     - AWSCore (= 2.2.6)
-  - CSStickyHeaderFlowLayout (0.2.8)
   - Fabric (1.2.8):
     - Fabric/Base (= 1.2.8)
   - Fabric/Base (1.2.8)
@@ -22,7 +21,6 @@ DEPENDENCIES:
   - AWSCore (= 2.2.6)
   - AWSLambda (= 2.2.6)
   - AWSS3 (= 2.2.6)
-  - CSStickyHeaderFlowLayout (= 0.2.8)
   - Fabric
   - Firebase (= 2.3.3)
   - FirebaseUI
@@ -35,7 +33,6 @@ SPEC CHECKSUMS:
   AWSCore: dd05203bf44d45b58b7667754ce4fa6f1bdb1c3e
   AWSLambda: e8559b162b6dc3ae02dc7234d7143b23c80cd164
   AWSS3: a8aeb5f8224236c2b1b46fdab14add3eff971fc4
-  CSStickyHeaderFlowLayout: e919dd425fa12bba1155f66d87edfe540eb8f89a
   Fabric: a9eabe53915e9f1db55a84dd2838737928675878
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
   FirebaseUI: 2d5bd711824687491a55515af370e8d58f978485
