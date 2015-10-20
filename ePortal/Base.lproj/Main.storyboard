@@ -20,6 +20,7 @@
             <string>Lato-Medium</string>
             <string>Lato-Medium</string>
             <string>Lato-Medium</string>
+            <string>Lato-Medium</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
@@ -1111,11 +1112,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="qVK-jZ-gC8" customClass="CSStickyHeaderFlowLayout">
                             <size key="itemSize" width="320" height="60"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="320" height="44"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells/>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DetailCollectionViewSectionHeader" id="FJd-19-tSe" customClass="DetailCollectionViewSectionHeader" customModule="ePortal" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="341" height="44"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIVE VIEWERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sef-P2-1HP">
+                                    <rect key="frame" x="35" y="12" width="225" height="20"/>
+                                    <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="12"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="sef-P2-1HP" firstAttribute="leading" secondItem="FJd-19-tSe" secondAttribute="leadingMargin" constant="27" id="0gB-YU-iQr"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="sef-P2-1HP" secondAttribute="trailing" constant="73" id="8Pe-zW-HHO"/>
+                                <constraint firstItem="sef-P2-1HP" firstAttribute="centerY" secondItem="FJd-19-tSe" secondAttribute="centerY" id="OeD-lJ-rLF"/>
+                                <constraint firstItem="sef-P2-1HP" firstAttribute="top" secondItem="FJd-19-tSe" secondAttribute="topMargin" constant="4" id="pcW-00-cNx"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="titleLabel" destination="sef-P2-1HP" id="y1F-ef-TjP"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="v4n-e0-JmF" id="2kv-nr-rek"/>
                             <outlet property="delegate" destination="v4n-e0-JmF" id="Qrm-As-l6t"/>

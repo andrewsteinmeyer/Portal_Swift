@@ -83,6 +83,7 @@ struct Constants {
   struct DetailCollection {
     static let CellIdentifier = "DetailCollectionViewCell"
     static let HeaderViewIdentifier = "DetailCollectionViewHeaderView"
+    static let SectionHeaderIdentifier = "DetailCollectionViewSectionHeader"
     static let HeaderViewHeight: CGFloat = 300
   }
   

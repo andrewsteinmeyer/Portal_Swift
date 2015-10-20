@@ -13,6 +13,7 @@
 
 NSString *const CSStickyHeaderParallaxHeader = @"CSStickyHeaderParallexHeader";
 NSString *const CSSDecorationKind = @"Separator";
+
 static const NSInteger kHeaderZIndex = 1024;
 
 @interface CSStickyHeaderFlowLayout (Debug)
@@ -189,7 +190,10 @@ static const NSInteger kHeaderZIndex = 1024;
   NSInteger countOfItems = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0];
   
   NSMutableArray* indexPaths = [NSMutableArray new];
-  for (int i = MAX(firstCellIndexToShow, 0); i <= lastCellIndexToShow; i++) {
+  // TODO:
+  // do not add a decoration for the first indexPath item in the section
+  // this needs to be implemented better, but for now it eliminates the decoration on the section header
+  for (int i = MAX(firstCellIndexToShow, 1); i <= lastCellIndexToShow; i++) {
     if (i < countOfItems) {
       [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
@@ -199,7 +203,12 @@ static const NSInteger kHeaderZIndex = 1024;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath {
   UICollectionViewLayoutAttributes *layoutAttributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:decorationViewKind withIndexPath:indexPath];
-  CGFloat decorationOffset = (indexPath.row + 1) * self.itemSize.height + indexPath.row * self.minimumLineSpacing + self.parallaxHeaderReferenceSize.height;
+  CGFloat decorationOffset = (indexPath.row + 1) * (self.itemSize.height) + indexPath.row * self.minimumLineSpacing + self.parallaxHeaderReferenceSize.height;
+  // TODO:
+  // again, this is not the best way, but works for now
+  // section header has a height of 44, all other cells are 60
+  // need to move each decoration view up 16 to account for the smaller section header
+  decorationOffset -= 16;
   CGFloat xOffset = self.collectionViewContentSize.width * 0.25;
   CGFloat lineWidth = self.collectionViewContentSize.width * 0.75;
   layoutAttributes.frame = CGRectMake(xOffset, decorationOffset, lineWidth, self.minimumLineSpacing);

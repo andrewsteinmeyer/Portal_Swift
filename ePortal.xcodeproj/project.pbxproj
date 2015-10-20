@@ -41,6 +41,8 @@
 		4E30A4F31BACDF5D00C28F59 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30A4D61BACDF5D00C28F59 /* UnwindSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */; };
 		4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */; };
+		4E3769BC1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3769BB1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib */; settings = {ASSET_TAGS = (); }; };
+		4E3769C71BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */; settings = {ASSET_TAGS = (); }; };
 		4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; };
 		4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
@@ -266,6 +268,8 @@
 		4E30A4D61BACDF5D00C28F59 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		4E358A671B8E9AB60071A635 /* SaleOptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionLabel.swift; sourceTree = "<group>"; };
 		4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionTextField.swift; sourceTree = "<group>"; };
+		4E3769BB1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCollectionViewSectionHeader.xib; sourceTree = "<group>"; };
+		4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 		4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
@@ -574,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				4E643FCB1BCDEE03000D6879 /* DetailCollectionViewHeaderView.xib */,
+				4E3769BB1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib */,
 				4E643FD41BCF21FD000D6879 /* DetailCollectionViewCell.xib */,
 				4E643FBA1BCDE9F1000D6879 /* ImageSliderCell.xib */,
 			);
@@ -584,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				4E643FCD1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift */,
+				4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */,
 				4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */,
 				4E643FB61BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift */,
 			);
@@ -986,6 +992,7 @@
 				4EA65E881B5DBEAC00B18107 /* Lato-LightItalic.ttf in Resources */,
 				4E643FCC1BCDEE03000D6879 /* DetailCollectionViewHeaderView.xib in Resources */,
 				4EA65E8E1B5DBEAC00B18107 /* Lato-Thin.ttf in Resources */,
+				4E3769BC1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib in Resources */,
 				4EA65E891B5DBEAC00B18107 /* Lato-Medium.ttf in Resources */,
 				4EA65E8F1B5DBEAC00B18107 /* Lato-ThinItalic.ttf in Resources */,
 				4E94604A1B704F080084C9C6 /* DiscoverCollectionViewCell.xib in Resources */,
@@ -1150,6 +1157,7 @@
 				4E30A4F01BACDF5D00C28F59 /* SpringView.swift in Sources */,
 				4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */,
 				4E30A4DB1BACDF5D00C28F59 /* DesignableButton.swift in Sources */,
+				4E3769C71BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift in Sources */,
 				4E30A4DC1BACDF5D00C28F59 /* DesignableImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

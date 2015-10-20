@@ -22,6 +22,8 @@ class DetailCollectionViewController: UICollectionViewController {
     let headerViewNib = UINib(nibName: Constants.DetailCollection.HeaderViewIdentifier, bundle: nil)
     self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier)
     
+    //self.collectionView?.registerClass(DetailCollectionViewSectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.DetailCollection.SectionHeaderIdentifier)
+    
     let detailViewNib = UINib(nibName: Constants.DetailCollection.CellIdentifier, bundle: nil)
     self.collectionView?.registerNib(detailViewNib, forCellWithReuseIdentifier: Constants.DetailCollection.CellIdentifier)
     
@@ -37,7 +39,7 @@ class DetailCollectionViewController: UICollectionViewController {
       
       layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
       layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(self.view.frame.width, Constants.DetailCollection.HeaderViewHeight)
-      layout.disableStickyHeaders = true
+      layout.disableStickyHeaders = false
       //layout.parallaxHeaderAlwaysOnTop = true
     }
   }
@@ -47,7 +49,7 @@ class DetailCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return 10
   }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -58,14 +60,12 @@ class DetailCollectionViewController: UICollectionViewController {
   
   override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
     switch kind {
-      /*
-      Decided not to use section headers, but kept this here just in case
-      
       case UICollectionElementKindSectionHeader:
-      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: sectionHeaderIdentifier, forIndexPath: indexPath) as! DiscoverSectionHeaderView
+      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.SectionHeaderIdentifier, forIndexPath: indexPath) as! DetailCollectionViewSectionHeader
+      
+      cell.titleLabel.text = "LIVE VIEWERS"
       
       return cell
-      */
     case CSStickyHeaderParallaxHeader:
       // make sure the header cell uses the proper identifier
       let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as! DetailCollectionViewHeaderView
