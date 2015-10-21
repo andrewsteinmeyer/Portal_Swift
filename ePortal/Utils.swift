@@ -31,12 +31,18 @@ var GlobalBackgroundQueue: dispatch_queue_t {
   return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
 }
 
-func afterDelay(seconds: Double, closure: () -> ()) {
-  let when = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC)))
+func afterDelay(delay: Double = 0, block: () -> ()) {
+  if delay == 0 {
+    dispatch_async(dispatch_get_main_queue()) {
+      block()
+    }
+    return
+  }
   
-  //schedule closure to call after time has expired
-  //add closure to dispatch main queue
-  dispatch_after(when, dispatch_get_main_queue(), closure)
+  let d = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+  dispatch_after(d, dispatch_get_main_queue()) {
+    block()
+  }
 }
 
 func timeStamp() -> String {

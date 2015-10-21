@@ -43,6 +43,11 @@
 		4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */; };
 		4E3769BC1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3769BB1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib */; settings = {ASSET_TAGS = (); }; };
 		4E3769C71BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */; settings = {ASSET_TAGS = (); }; };
+		4E3769D71BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D01BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m */; settings = {ASSET_TAGS = (); }; };
+		4E3769D81BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D21BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		4E3769D91BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D41BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m */; settings = {ASSET_TAGS = (); }; };
+		4E3769DA1BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		4E3769E71BD7171700BEFE7A /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769E61BD7171700BEFE7A /* ChatTextView.swift */; settings = {ASSET_TAGS = (); }; };
 		4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; };
 		4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
@@ -270,6 +275,15 @@
 		4E358A6D1B8FC1000071A635 /* SaleOptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionTextField.swift; sourceTree = "<group>"; };
 		4E3769BB1BD5A66600BEFE7A /* DetailCollectionViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCollectionViewSectionHeader.xib; sourceTree = "<group>"; };
 		4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
+		4E3769CF1BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		4E3769D01BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		4E3769D11BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		4E3769D21BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		4E3769D31BD7097700BEFE7A /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		4E3769D41BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		4E3769D51BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		4E3769E61BD7171700BEFE7A /* ChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
@@ -523,6 +537,21 @@
 			name = Discover;
 			sourceTree = "<group>";
 		};
+		4E3769CE1BD7097700BEFE7A /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				4E3769CF1BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.h */,
+				4E3769D01BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m */,
+				4E3769D11BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.h */,
+				4E3769D21BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.m */,
+				4E3769D31BD7097700BEFE7A /* TPKeyboardAvoidingTableView.h */,
+				4E3769D41BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m */,
+				4E3769D51BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		4E43A0E81BAF726F009444D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +619,7 @@
 			children = (
 				4E643FCD1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift */,
 				4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */,
+				4E3769E61BD7171700BEFE7A /* ChatTextView.swift */,
 				4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */,
 				4E643FB61BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift */,
 			);
@@ -658,6 +688,7 @@
 				4EA65E931B5DC62100B18107 /* Utils.swift */,
 				4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */,
 				4E6C42341B5DB7FE009B22AF /* ePortal-Bridging-Header.h */,
+				4E3769CE1BD7097700BEFE7A /* TPKeyboardAvoiding */,
 				4E6440491BD296FA000D6879 /* CSStickyHeaderFlowLayout */,
 			);
 			name = "Supporting Files";
@@ -1082,6 +1113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */,
+				4E3769D71BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */,
 				4E64403F1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				4E30A4EC1BACDF5D00C28F59 /* SpringImageView.swift in Sources */,
@@ -1108,6 +1140,7 @@
 				4EFF31E41B9C5D8D00147B38 /* ProductImageCollectionViewController.swift in Sources */,
 				4E643FD31BCF1A2C000D6879 /* DetailCollectionViewController.swift in Sources */,
 				4E643FB51BCDDCDF000D6879 /* PeriscommentView.swift in Sources */,
+				4E3769E71BD7171700BEFE7A /* ChatTextView.swift in Sources */,
 				4E30A4E41BACDF5D00C28F59 /* KeyboardLayoutConstraint.swift in Sources */,
 				4EFF31DD1B9A36F300147B38 /* CheckMark.swift in Sources */,
 				4EA65E961B5DC7F300B18107 /* Constants.swift in Sources */,
@@ -1121,6 +1154,7 @@
 				4E30A4EE1BACDF5D00C28F59 /* SpringTextField.swift in Sources */,
 				4EFF31DE1B9A36F300147B38 /* SelectedAssets.swift in Sources */,
 				4E30A4DE1BACDF5D00C28F59 /* DesignableTabBarController.swift in Sources */,
+				4E3769D81BD7097700BEFE7A /* TPKeyboardAvoidingScrollView.m in Sources */,
 				4E30A4E91BACDF5D00C28F59 /* Spring.swift in Sources */,
 				4E30A4EF1BACDF5D00C28F59 /* SpringTextView.swift in Sources */,
 				4E643FE51BCF2A05000D6879 /* DetailCollectionViewCell.swift in Sources */,
@@ -1144,6 +1178,7 @@
 				4E30A4E11BACDF5D00C28F59 /* DesignableView.swift in Sources */,
 				4E30A4EB1BACDF5D00C28F59 /* SpringButton.swift in Sources */,
 				4E64403E1BD296F4000D6879 /* CSStickyHeaderFlowLayout.m in Sources */,
+				4E3769DA1BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				4E358A681B8E9AB60071A635 /* SaleOptionLabel.swift in Sources */,
 				4E643FAA1BCDDCAC000D6879 /* DetailViewController.swift in Sources */,
 				4E643FB81BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift in Sources */,
@@ -1154,6 +1189,7 @@
 				4EDEF5DD1B7FB9F900F80FD0 /* TabBarController.swift in Sources */,
 				4E2BAD7E1BADA5F1003EA49A /* SaleDescriptionTextView.swift in Sources */,
 				4E358A6E1B8FC1000071A635 /* SaleOptionTextField.swift in Sources */,
+				4E3769D91BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m in Sources */,
 				4E30A4F01BACDF5D00C28F59 /* SpringView.swift in Sources */,
 				4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */,
 				4E30A4DB1BACDF5D00C28F59 /* DesignableButton.swift in Sources */,

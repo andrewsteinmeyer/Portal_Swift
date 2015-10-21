@@ -10,6 +10,7 @@
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
+            <string>Lato-Bold</string>
         </mutableArray>
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
@@ -23,6 +24,7 @@
             <string>Lato-Medium</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -555,7 +557,7 @@
                                                                         <outlet property="delegate" destination="NNj-EX-AzV" id="8Cs-Y5-3zH"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -1160,21 +1162,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWl-9Z-Cub" customClass="PeriscommentView" customModule="ePortal" customModuleProvider="target">
-                                <rect key="frame" x="12" y="0.0" width="353" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89y-rV-V71" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWl-9Z-Cub" customClass="PeriscommentView" customModule="ePortal" customModuleProvider="target">
+                                        <rect key="frame" x="11" y="0.0" width="353" height="607"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="607" id="c1Q-6f-GJ8"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K9-Jb-HQs">
+                                        <rect key="frame" x="11" y="606" width="353" height="61"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-zN-QtM" customClass="ChatTextView" customModule="ePortal" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="11" width="289" height="40"/>
+                                                <color key="backgroundColor" red="0.8980392157" green="0.8862745098" blue="0.89019607840000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-icon-grey" translatesAutoresizingMaskIntoConstraints="NO" id="ucK-ee-2xN">
+                                                <rect key="frame" x="298" y="23" width="14" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="14" id="4pY-FU-7TG"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="124" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WN-bz-hMr">
+                                                <rect key="frame" x="315" y="19" width="34" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="34" id="hMi-9I-z4n"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                                                <color key="textColor" red="0.8980392157" green="0.8862745098" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="ucK-ee-2xN" firstAttribute="leading" secondItem="cFH-zN-QtM" secondAttribute="trailing" constant="9" id="2qL-o7-1Zu"/>
+                                            <constraint firstAttribute="trailing" secondItem="9WN-bz-hMr" secondAttribute="trailing" constant="4" id="GGz-IL-kad"/>
+                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="centerY" secondItem="ucK-ee-2xN" secondAttribute="centerY" id="M2U-q3-Qba"/>
+                                            <constraint firstItem="ucK-ee-2xN" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="23" id="Mg4-AH-sL2"/>
+                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="leading" secondItem="3K9-Jb-HQs" secondAttribute="leading" id="Qcg-eW-11Z"/>
+                                            <constraint firstAttribute="height" constant="61" id="S08-H3-dRw"/>
+                                            <constraint firstAttribute="bottom" secondItem="9WN-bz-hMr" secondAttribute="bottom" constant="21" id="SO2-Jb-4NP"/>
+                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="centerY" secondItem="3K9-Jb-HQs" secondAttribute="centerY" id="SrR-kU-tag"/>
+                                            <constraint firstItem="9WN-bz-hMr" firstAttribute="leading" secondItem="ucK-ee-2xN" secondAttribute="trailing" constant="3" id="Tsc-nh-oyW"/>
+                                            <constraint firstItem="9WN-bz-hMr" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="19" id="Zd4-30-xs0"/>
+                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="11" id="cCO-IT-tvJ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3K9-Jb-HQs" firstAttribute="top" secondItem="JWl-9Z-Cub" secondAttribute="bottom" constant="-1" id="DYa-Ak-jJK"/>
+                                    <constraint firstItem="3K9-Jb-HQs" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" id="Geu-Yv-DRr"/>
+                                    <constraint firstItem="3K9-Jb-HQs" firstAttribute="trailing" secondItem="JWl-9Z-Cub" secondAttribute="trailing" id="MpA-jj-i8Q"/>
+                                    <constraint firstAttribute="bottom" secondItem="3K9-Jb-HQs" secondAttribute="bottom" id="Q4J-se-Nsa"/>
+                                    <constraint firstItem="JWl-9Z-Cub" firstAttribute="top" secondItem="89y-rV-V71" secondAttribute="top" id="Qjl-9Q-Txb"/>
+                                    <constraint firstItem="JWl-9Z-Cub" firstAttribute="leading" secondItem="89y-rV-V71" secondAttribute="leading" constant="11" id="RBP-eI-7Mv"/>
+                                    <constraint firstAttribute="trailing" secondItem="JWl-9Z-Cub" secondAttribute="trailing" constant="11" id="bu2-CK-V9o"/>
+                                    <constraint firstItem="3K9-Jb-HQs" firstAttribute="centerX" secondItem="89y-rV-V71" secondAttribute="centerX" id="hBd-bL-Mt2"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="bottom" secondItem="Tk0-Cb-2SN" secondAttribute="top" id="7D6-3r-G6R"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JWl-9Z-Cub" secondAttribute="trailing" constant="-6" id="AKX-CN-fpz"/>
-                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="top" secondItem="wVl-Gf-A6S" secondAttribute="top" id="VDA-Zg-rdG"/>
-                            <constraint firstItem="JWl-9Z-Cub" firstAttribute="leading" secondItem="wVl-Gf-A6S" secondAttribute="leadingMargin" constant="-4" id="mQm-jc-ohw"/>
+                            <constraint firstItem="89y-rV-V71" firstAttribute="top" secondItem="wVl-Gf-A6S" secondAttribute="top" id="2Af-BY-DFn"/>
+                            <constraint firstAttribute="trailing" secondItem="89y-rV-V71" secondAttribute="trailing" id="BNS-Hm-3Ec"/>
+                            <constraint firstItem="89y-rV-V71" firstAttribute="bottom" secondItem="Tk0-Cb-2SN" secondAttribute="top" id="kJ5-IZ-Vfd"/>
+                            <constraint firstItem="89y-rV-V71" firstAttribute="leading" secondItem="wVl-Gf-A6S" secondAttribute="leading" id="std-vj-KPy"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="chatBarView" destination="3K9-Jb-HQs" id="ysp-cb-PM9"/>
                         <outlet property="periscommentView" destination="JWl-9Z-Cub" id="nXS-D2-4QL"/>
                     </connections>
                 </viewController>
@@ -1191,5 +1259,6 @@
         <image name="menu-burger" width="18" height="13"/>
         <image name="portal-oval" width="410" height="410"/>
         <image name="road-path" width="750" height="1333"/>
+        <image name="user-icon-grey" width="16" height="18"/>
     </resources>
 </document>
