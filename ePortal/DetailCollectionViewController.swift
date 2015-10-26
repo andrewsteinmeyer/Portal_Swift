@@ -22,8 +22,6 @@ class DetailCollectionViewController: UICollectionViewController {
     let headerViewNib = UINib(nibName: Constants.DetailCollection.HeaderViewIdentifier, bundle: nil)
     self.collectionView?.registerNib(headerViewNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier)
     
-    //self.collectionView?.registerClass(DetailCollectionViewSectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.DetailCollection.SectionHeaderIdentifier)
-    
     let detailViewNib = UINib(nibName: Constants.DetailCollection.CellIdentifier, bundle: nil)
     self.collectionView?.registerNib(detailViewNib, forCellWithReuseIdentifier: Constants.DetailCollection.CellIdentifier)
     
