@@ -557,7 +557,7 @@
                                                                         <outlet property="delegate" destination="NNj-EX-AzV" id="8Cs-Y5-3zH"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hk-XhT">
                                                                     <rect key="frame" x="70" y="4" width="9" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="9" id="FN2-ou-ja1"/>
@@ -1175,13 +1175,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K9-Jb-HQs">
                                         <rect key="frame" x="11" y="606" width="353" height="61"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-zN-QtM" customClass="ChatTextView" customModule="ePortal" customModuleProvider="target">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-zN-QtM" customClass="ChatTextView" customModule="ePortal" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="11" width="289" height="40"/>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.8862745098" blue="0.89019607840000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="289" id="8qU-bz-Dcx"/>
+                                                </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="5"/>
@@ -1192,12 +1195,14 @@
                                                 <rect key="frame" x="298" y="23" width="14" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="14" id="4pY-FU-7TG"/>
+                                                    <constraint firstAttribute="height" constant="15" id="gA2-cb-Xar"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="124" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WN-bz-hMr">
                                                 <rect key="frame" x="315" y="19" width="34" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="hMi-9I-z4n"/>
+                                                    <constraint firstAttribute="height" constant="21" id="m7O-2f-lAK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                 <color key="textColor" red="0.8980392157" green="0.8862745098" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -1206,17 +1211,14 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ucK-ee-2xN" firstAttribute="leading" secondItem="cFH-zN-QtM" secondAttribute="trailing" constant="9" id="2qL-o7-1Zu"/>
                                             <constraint firstAttribute="trailing" secondItem="9WN-bz-hMr" secondAttribute="trailing" constant="4" id="GGz-IL-kad"/>
-                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="centerY" secondItem="ucK-ee-2xN" secondAttribute="centerY" id="M2U-q3-Qba"/>
-                                            <constraint firstItem="ucK-ee-2xN" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="23" id="Mg4-AH-sL2"/>
+                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="11" placeholder="YES" id="I41-ks-Tbo"/>
                                             <constraint firstItem="cFH-zN-QtM" firstAttribute="leading" secondItem="3K9-Jb-HQs" secondAttribute="leading" id="Qcg-eW-11Z"/>
                                             <constraint firstAttribute="height" constant="61" id="S08-H3-dRw"/>
                                             <constraint firstAttribute="bottom" secondItem="9WN-bz-hMr" secondAttribute="bottom" constant="21" id="SO2-Jb-4NP"/>
-                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="centerY" secondItem="3K9-Jb-HQs" secondAttribute="centerY" id="SrR-kU-tag"/>
                                             <constraint firstItem="9WN-bz-hMr" firstAttribute="leading" secondItem="ucK-ee-2xN" secondAttribute="trailing" constant="3" id="Tsc-nh-oyW"/>
-                                            <constraint firstItem="9WN-bz-hMr" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="19" id="Zd4-30-xs0"/>
-                                            <constraint firstItem="cFH-zN-QtM" firstAttribute="top" secondItem="3K9-Jb-HQs" secondAttribute="top" constant="11" id="cCO-IT-tvJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="ucK-ee-2xN" secondAttribute="bottom" constant="23" id="Udu-fT-5BH"/>
+                                            <constraint firstAttribute="bottom" secondItem="cFH-zN-QtM" secondAttribute="bottom" constant="10" id="uEa-nC-Ygq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1243,7 +1245,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="chatBarView" destination="3K9-Jb-HQs" id="ysp-cb-PM9"/>
+                        <outlet property="chatTextView" destination="cFH-zN-QtM" id="My6-J5-tDh"/>
                         <outlet property="periscommentView" destination="JWl-9Z-Cub" id="nXS-D2-4QL"/>
+                        <outlet property="subscriberCount" destination="9WN-bz-hMr" id="Rzq-EP-Ogo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0U-Ke-sze" userLabel="First Responder" sceneMemberID="firstResponder"/>
