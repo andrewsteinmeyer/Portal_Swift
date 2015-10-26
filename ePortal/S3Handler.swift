@@ -28,7 +28,7 @@ final class S3Handler {
       .continueWithBlock() {
         task in
         
-        print("done uploading")
+        print("done uploading image to S3")
         
         return nil
     }
