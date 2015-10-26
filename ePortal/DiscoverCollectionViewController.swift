@@ -66,6 +66,16 @@ class DiscoverCollectionViewController: UICollectionViewController {
     
   }
   
+  func reloadLayout() {
+    // set header size and item size
+    // not using section header so disable sticky header for now
+    if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
+      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DiscoverCollection.HeaderViewHeight)
+      layout.itemSize = CGSizeMake(self.view.frame.size.width, layout.itemSize.height)
+      layout.disableStickyHeaders = true
+    }
+  }
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // prepare to subscribe to the broadcast that the user selected
     if (segue.identifier == Constants.Segue.Subscribe) {
@@ -74,16 +84,6 @@ class DiscoverCollectionViewController: UICollectionViewController {
         let destination = segue.destinationViewController as! SubscribeViewController
         destination.loadBroadcastFromSnapshot(snapshot)
       }
-    }
-  }
-  
-  func reloadLayout() {
-    // set header size and item size
-    // not using section header so disable sticky header for now
-    if let layout = self.collectionViewLayout as? CSStickyHeaderFlowLayout {
-      layout.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.width, Constants.DiscoverCollection.HeaderViewHeight)
-      layout.itemSize = CGSizeMake(self.view.frame.size.width, layout.itemSize.height)
-      layout.disableStickyHeaders = true
     }
   }
   

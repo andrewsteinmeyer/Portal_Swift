@@ -190,9 +190,12 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     NSLog("Now publishing on stream...")
     print("StreamId: \(stream.streamId)")
     
-    // save broadcast to firebase once we are publishing
-    // broadcast will immediately show up in subscriber's broadcast collection view
-    // NOTE: Need delay so that images are saved to AWS before broadcast appears in firebase
+    // save broadcast to firebase once the user is publishing
+    // broadcast will immediately show up in subscriber's DiscoverCollectionViewController
+    // once it is save to firebase.
+    // NOTE: Need delay so that images have time to be uploaded to AWS and cached by Fastly
+    //       Otherwise, the DiscoverCollectionViewController sees the new broadcast too quickly
+    //       and attempts to download the pictures from Fastly before they have had time to get there.
     afterDelay(2) {
       self._broadcast.saveWithCompletionBlock() {
         error in

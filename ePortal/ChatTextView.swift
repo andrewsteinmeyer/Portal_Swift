@@ -15,13 +15,14 @@ class ChatTextView: DesignableTextView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    self.scrollEnabled = false
     configureView()
   }
   
   func configureView() {
     // set description text appearance
     self.layer.cornerRadius = 5
-    self.tintColor = UIColor.themeColor()
+    self.tintColor = UIColor.lightGrayColor()
     
     // set placeholder appearance
     // placeholder is visible inside description text until user enters a description
@@ -42,4 +43,13 @@ class ChatTextView: DesignableTextView {
     _placeholderLabel.hidden = self.text.characters.count != 0
   }
   
+  func adjustHeight() {
+    // resize view based on content
+    let fixedWidth = self.frame.size.width
+    self.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+    let newSize = self.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+    var newFrame = self.frame
+    newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+    self.frame = newFrame
+  }
 }

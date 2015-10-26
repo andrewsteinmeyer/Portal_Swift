@@ -18,7 +18,6 @@ final class DatabaseManager {
   private var _loggedInUser: FBUser?
   private var _feeds: [String: String]
   private var _users: [String: String]
-  private var _broadcasts: [String: String]
   private var _providerData: [String: String]?
   
   var root: Firebase {
@@ -39,7 +38,6 @@ final class DatabaseManager {
     
     _feeds = [:]
     _users = [:]
-    _broadcasts = [:]
     
     // Auth handled via a global singleton. Prevents modules squashing each other
     FBAuth.watchAuthForRef(_root, withBlock: { [weak self]
@@ -58,9 +56,9 @@ final class DatabaseManager {
   }
   
   func cleanup() {
-    for url in _feeds {
+    for handle in _feeds {
       //TODO
-      //print(url)
+      //print(handle)
     }
   }
   
@@ -120,6 +118,7 @@ final class DatabaseManager {
       }
       
       // set firebase root path for user (root/users/uid)
+      // TODO: not using userRef yet
       _userRef = _root.childByAppendingPath("users").childByAppendingPath(userData.uid)
       
       // populate user with updated information from Firebase and set up observers

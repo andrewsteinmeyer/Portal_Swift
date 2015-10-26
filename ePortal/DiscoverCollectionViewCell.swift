@@ -33,7 +33,10 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
   func configureCellWithSnapshotData(snapshot: FDataSnapshot) {
     let val: AnyObject! = snapshot.value
     
-    if (val != nil) {
+    if (val is NSNull) {
+      // no value found
+    }
+    else {
       // update data for user from firebase snapshot
       let data = JSON(val)
       let title = data["title"].string ?? ""
@@ -49,6 +52,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
       let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(photoUrl)
       print(cacheUrl)
       
+      // download cached image and set image view
       let url = NSURL(string: cacheUrl)
       self.productImageView.sd_setImageWithURL(url!, completed: {
         (image: UIImage!, error: NSError!, type: SDImageCacheType, url: NSURL!) in

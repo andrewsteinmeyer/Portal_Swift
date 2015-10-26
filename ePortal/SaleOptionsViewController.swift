@@ -310,8 +310,8 @@ class SaleOptionsViewController: UITableViewController {
   }
   
   /*!
-  * Review input fields and validate data
-  */
+   * Review input fields and validate data
+   */
   func broadcastIsReady() -> Bool {
     // validate quantity
     if (quantityTextField.text!.length == 0 ||

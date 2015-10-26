@@ -510,8 +510,9 @@
 			isa = PBXGroup;
 			children = (
 				4EF4AB331BBC88A800BDADF7 /* SubscribeViewController.swift */,
-				4E643FBE1BCDEAB8000D6879 /* Chat */,
+				4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */,
 				4E643FBF1BCDEAEF000D6879 /* Detail */,
+				4E643FBE1BCDEAB8000D6879 /* Chat */,
 			);
 			name = Subscribe;
 			sourceTree = "<group>";
@@ -579,7 +580,6 @@
 			isa = PBXGroup;
 			children = (
 				4E643FAB1BCDDCC0000D6879 /* ChatViewController.swift */,
-				4E643FAD1BCDDCDF000D6879 /* PeriscommentView */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -587,7 +587,6 @@
 		4E643FBF1BCDEAEF000D6879 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */,
 				4E643FA91BCDDCAC000D6879 /* DetailViewController.swift */,
 				4E643FD21BCF1A2C000D6879 /* DetailCollectionViewController.swift */,
 			);
@@ -617,11 +616,8 @@
 		4E643FE31BCF299C000D6879 /* Subscribe */ = {
 			isa = PBXGroup;
 			children = (
-				4E643FCD1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift */,
-				4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */,
-				4E3769E61BD7171700BEFE7A /* ChatTextView.swift */,
-				4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */,
-				4E643FB61BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift */,
+				4E6ACA181BD881D300E91E89 /* Detail */,
+				4E6ACA191BD881E600E91E89 /* Chat */,
 			);
 			name = Subscribe;
 			sourceTree = "<group>";
@@ -637,6 +633,26 @@
 				4E64403D1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m */,
 			);
 			name = CSStickyHeaderFlowLayout;
+			sourceTree = "<group>";
+		};
+		4E6ACA181BD881D300E91E89 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				4E643FCD1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift */,
+				4E3769C61BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift */,
+				4E643FE41BCF2A05000D6879 /* DetailCollectionViewCell.swift */,
+				4E643FB61BCDE98D000D6879 /* ImageSliderCollectionViewCell.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		4E6ACA191BD881E600E91E89 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				4E3769E61BD7171700BEFE7A /* ChatTextView.swift */,
+				4E643FAD1BCDDCDF000D6879 /* PeriscommentView */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		4E6C42061B5DB4DD009B22AF = {

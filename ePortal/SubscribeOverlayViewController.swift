@@ -22,10 +22,13 @@ class SubscribeOverlayViewController: UIViewController, UIPageViewControllerData
     pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
     self.pageViewController.dataSource = self
     
-    // set up pages
-    chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+    // page 1 setup
     detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
     detailViewController.broadcast = broadcast
+    
+    // page 2 setup
+    chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+    chatViewController.broadcast = broadcast
     
     // set initial page
     pageViewController.setViewControllers([self.detailViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)

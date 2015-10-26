@@ -53,19 +53,11 @@ class SubscribeViewController: UIViewController {
   * After the broadcast is loaded, we subscribe the user to the broadcast
   */
   func loadBroadcastFromSnapshot(snapshot: FDataSnapshot) {
-    let val: AnyObject! = snapshot.value
+    // initialize broadcast object for the subscriber
+    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, snapshot: snapshot, subscriberId: DatabaseManager.sharedInstance.userId)
     
-    if (val != nil) {
-      let data = JSON(val)
-      let publisherId = data["publisherId"].string ?? ""
-      
-      // initialize broadcast object for the subscriber
-      // extract broadcast data from snapshot
-      _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: publisherId)
-      _broadcast.extractData(data)
-      
-      generateOpentokToken()
-    }
+    // get a token for the session
+    generateOpentokToken()
   }
   
   func generateOpentokToken() {
