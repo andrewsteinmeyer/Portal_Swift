@@ -170,7 +170,7 @@ final class ClientManager {
   func loginWithTwitter() {
     Twitter.sharedInstance().logInWithCompletion { session, error in
       if (session != nil) {
-        if let sessionId = session.userID {
+        if let sessionId = session?.userID {
           Twitter.sharedInstance().APIClient.loadUserWithID(sessionId) { user, error in
             if let user = user {
               print("Twitter user: \(user.name)")
@@ -184,14 +184,14 @@ final class ClientManager {
         }
       }
       else {
-        print("error logging in with Twitter: \(error.localizedDescription)")
+        print("error logging in with Twitter: \(error?.localizedDescription)")
       }
     }
   }
   
   func completeTwitterLogin() {
     self._keychain[Constants.AWS.Cognito.Provider.Twitter] = "YES"
-    self.completeLogin( ["api.twitter.com": self.loginForTwitterSession( Twitter.sharedInstance().session() )])
+    self.completeLogin( ["api.twitter.com": self.loginForTwitterSession( Twitter.sharedInstance().session()! )])
     
   }
   

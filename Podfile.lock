@@ -6,15 +6,15 @@ PODS:
     - AWSCore (= 2.2.6)
   - AWSS3 (2.2.6):
     - AWSCore (= 2.2.6)
-  - Fabric (1.2.8):
-    - Fabric/Base (= 1.2.8)
-  - Fabric/Base (1.2.8)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
   - Firebase (2.3.3)
   - FirebaseUI (0.2.5):
     - Firebase (~> 2.2)
-  - OpenTok (2.6.0)
-  - TwitterCore (1.8.1)
-  - TwitterKit (1.8.1)
+  - OpenTok (2.6.1)
+  - TwitterCore (1.12.0)
+  - TwitterKit (1.12.0)
 
 DEPENDENCIES:
   - AWSCognito (= 2.2.6)
@@ -25,19 +25,19 @@ DEPENDENCIES:
   - Firebase (= 2.3.3)
   - FirebaseUI
   - OpenTok
-  - TwitterCore (= 1.8.1)
-  - TwitterKit (= 1.8.1)
+  - TwitterCore
+  - TwitterKit
 
 SPEC CHECKSUMS:
   AWSCognito: 4cb0bd389dedf6673048609408577bb6c871422b
   AWSCore: dd05203bf44d45b58b7667754ce4fa6f1bdb1c3e
   AWSLambda: e8559b162b6dc3ae02dc7234d7143b23c80cd164
   AWSS3: a8aeb5f8224236c2b1b46fdab14add3eff971fc4
-  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
   FirebaseUI: 2d5bd711824687491a55515af370e8d58f978485
-  OpenTok: 2b99bd75055554f4028735fa84e4242e4932d245
-  TwitterCore: 0a26fb8054bc23d8986344d3dcb6602255b6aec5
-  TwitterKit: 88daaebdb8bfb5847d76d8ae159841248427931d
+  OpenTok: 6c094ee06dc954a4327c0a736f494f0eaf35c48c
+  TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
+  TwitterKit: c27e7b997cd82d5c626fcfd8b1dead1e15dac7ca
 
 COCOAPODS: 0.39.0
