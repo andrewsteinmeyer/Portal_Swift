@@ -8,6 +8,7 @@
 
 import KeychainAccess
 import TwitterKit
+import Crashlytics
 import Fabric
 
 /*!
@@ -235,7 +236,7 @@ final class ClientManager {
   //MARK: Initialization
   
   func initializeDependencies() {
-    Fabric.with([Twitter()])
+    Fabric.with([Twitter(), Crashlytics()])
   }
   
 }

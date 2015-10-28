@@ -6,6 +6,7 @@ PODS:
     - AWSCore (= 2.2.6)
   - AWSS3 (2.2.6):
     - AWSCore (= 2.2.6)
+  - Crashlytics (3.3.4)
   - Fabric (1.5.5):
     - Fabric/Base (= 1.5.5)
   - Fabric/Base (1.5.5)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - AWSCore (= 2.2.6)
   - AWSLambda (= 2.2.6)
   - AWSS3 (= 2.2.6)
+  - Crashlytics
   - Fabric
   - Firebase (= 2.3.3)
   - FirebaseUI
@@ -33,6 +35,7 @@ SPEC CHECKSUMS:
   AWSCore: dd05203bf44d45b58b7667754ce4fa6f1bdb1c3e
   AWSLambda: e8559b162b6dc3ae02dc7234d7143b23c80cd164
   AWSS3: a8aeb5f8224236c2b1b46fdab14add3eff971fc4
+  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
   FirebaseUI: 2d5bd711824687491a55515af370e8d58f978485
