@@ -72,7 +72,7 @@ class SubscribeViewController: UIViewController {
           var data = JSON(task.result)
           let token = data["token"].string
           let apiKey = data["apiKey"].string
-          print("Subscribing! token: \(token),\n apiKey: \(apiKey),\n sessionId: \(sessionId)")
+          //print("Subscribing! token: \(token),\n apiKey: \(apiKey),\n sessionId: \(sessionId)")
           
           if (apiKey == nil || token == nil) {
             print("Error invalid response from aws lambda generateOpentokTokenForSessionId()")

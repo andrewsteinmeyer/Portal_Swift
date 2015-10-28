@@ -14,6 +14,9 @@ class ChatViewController: UIViewController {
   @IBOutlet weak var periscommentView: PeriscommentView!
   @IBOutlet weak var chatTextView: ChatTextView!
   @IBOutlet weak var subscriberCount: UILabel!
+  @IBOutlet weak var quantityButton: DesignableButton!
+  @IBOutlet weak var quantityLabel: UILabel!
+  @IBOutlet weak var buyButton: DesignableButton!
   
   var broadcast: Broadcast!
   var firstMessageReceived = false
@@ -36,11 +39,33 @@ class ChatViewController: UIViewController {
   func setupAppearance() {
     chatBarView.backgroundColor = UIColor.clearColor()
     periscommentView.backgroundColor = UIColor.clearColor()
+    
+    subscriberCount.text! = String(broadcast.subscriberCount)
+    quantityLabel.text! = String(broadcast.quantity)
+    
+    buyButton.animation = "fadeInLeft"
+    buyButton.curve = "easeIn"
+    buyButton.delay = 0.5
+    buyButton.duration = 1.0
+    buyButton.animate()
+    
   }
 
 }
 
 extension ChatViewController: BroadcastDelegate {
+  
+  func broadcastQuantityDidUpdate(quantity: Int) {
+    quantityLabel.text! = String(quantity)
+    quantityButton.animation = "flash"
+    quantityButton.curve = "easeOutQuad"
+    quantityButton.duration = 0.5
+    quantityButton.animate()
+  }
+  
+  func broadcastSubscriberCountDidUpdate(count: Int) {
+    subscriberCount.text! = String(count)
+  }
   
   func broadcastDidReceiveMessage(data: JSON) {
     // don't broadcast first message

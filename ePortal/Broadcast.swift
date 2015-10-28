@@ -11,6 +11,8 @@ import WebImage
 typealias FSaveCompletionBlock = (error: NSError?) -> Void
 
 protocol BroadcastDelegate: class {
+  func broadcastSubscriberCountDidUpdate(count: Int) -> Void
+  func broadcastQuantityDidUpdate(quantity: Int) -> Void
   func broadcastDidReceiveMessage(data: JSON) -> Void
 }
 
@@ -41,6 +43,7 @@ class Broadcast {
   
   //TODO: list of people watching
   private var _subscriberIds: [String]!
+  private var _subscriberCount: Int!
   
   var publisherId: String {
     get {
@@ -60,6 +63,15 @@ class Broadcast {
     }
     set(newValue) {
       _isPublishing = newValue
+    }
+  }
+  
+  var subscriberCount: Int! {
+    get {
+      return _subscriberCount
+    }
+    set(newValue) {
+      _subscriberCount = newValue
     }
   }
   
@@ -90,6 +102,12 @@ class Broadcast {
     }
   }
   
+  var quantity: Int {
+    get {
+      return _quantity
+    }
+  }
+  
   init(root: Firebase, broadcastId: String) {
     
     // url to the publisher's broadcast
@@ -101,8 +119,11 @@ class Broadcast {
     _imageUrls = []
     _downloadedImages = []
     
+    _quantity = 0
+    
     //TODO: list of people watching
     _subscriberIds = []
+    _subscriberCount = 0
     
   }
   
@@ -132,8 +153,8 @@ class Broadcast {
     let data = JSON(val)
     let broadcastId = snapshot.key
     
-    print("broadcastId: \(broadcastId)")
-    print("subscriberId: \(subscriberId)")
+    //print("broadcastId: \(broadcastId)")
+    //print("subscriberId: \(subscriberId)")
     
     // init
     self.init(root: root, broadcastId: broadcastId)
@@ -168,8 +189,18 @@ class Broadcast {
           strongSelf._streamId = data["streamId"].string
           strongSelf._quantity = data["quantity"].int
           
-          print("update isPublishing: \(strongSelf._isPublishing)")
-          print("update streamId: \(strongSelf._streamId)")
+          if let quantity = data["quantity"].int {
+            strongSelf._quantity = quantity
+            strongSelf.delegate?.broadcastQuantityDidUpdate(quantity)
+          }
+          
+          if let count = data["subscriberCount"].int {
+            strongSelf._subscriberCount = count
+            strongSelf.delegate?.broadcastSubscriberCountDidUpdate(count)
+          }
+          
+          //print("update isPublishing: \(strongSelf._isPublishing)")
+          //print("update streamId: \(strongSelf._streamId)")
         }
       }
     })
@@ -225,7 +256,6 @@ class Broadcast {
         //block(error: nil)
       }
     }
-    
     
   }
   
@@ -291,7 +321,8 @@ class Broadcast {
                         "description": _description,
                         "price": _price,
                         "time": _allottedTime,
-                        "quantity": _quantity
+                        "quantity": _quantity,
+                        "subscriberCount": _subscriberCount
                         ]
     // add images
     // image1: url
@@ -337,7 +368,9 @@ class Broadcast {
     _quantity = data["quantity"].int ?? 0
     _allottedTime = data["time"].string ?? ""
     
-    for (key, url):(String, JSON) in data["photos"] {
+    _subscriberCount = data["subscriberCount"].int ?? 0
+    
+    for (_, url):(String, JSON) in data["photos"] {
       // if we have an image url, save it
       if let imageUrl = url.string {
         _imageUrls.append(imageUrl)

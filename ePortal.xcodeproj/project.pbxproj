@@ -1088,7 +1088,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 5b89f5f37dc54b90c30689af907be751e51d94c9 485b44e84f58fb7e08c1302783a9ccdb67bd2a0510723c15682c3abd511ddaab";
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 5b89f5f37dc54b90c30689af907be751e51d94c9 485b44e84f58fb7e08c1302783a9ccdb67bd2a0510723c15682c3abd511ddaab\n";
 			showEnvVarsInLog = 0;
 		};
 		7BEA071A65321AE9A0026196 /* Check Pods Manifest.lock */ = {

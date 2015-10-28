@@ -22,8 +22,12 @@
             <string>Lato-Medium</string>
             <string>Lato-Medium</string>
             <string>Lato-Medium</string>
+            <string>Lato-Medium</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -1167,9 +1171,79 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWl-9Z-Cub" customClass="PeriscommentView" customModule="ePortal" customModuleProvider="target">
                                         <rect key="frame" x="11" y="0.0" width="353" height="607"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSg-SS-Yl2" customClass="DesignableButton" customModule="ePortal" customModuleProvider="target">
+                                                <rect key="frame" x="285" y="39" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="JDd-Q9-CGk"/>
+                                                    <constraint firstAttribute="width" constant="60" id="exk-ng-FFe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="30"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="21"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.75"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="30"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMt-8q-bfF">
+                                                <rect key="frame" x="298" y="70" width="35" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="DvU-Ru-Ua8"/>
+                                                    <constraint firstAttribute="width" constant="35" id="OfF-zZ-NJV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uM0-nF-enm">
+                                                <rect key="frame" x="294" y="40" width="42" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="MhP-y2-V3Z"/>
+                                                    <constraint firstAttribute="width" constant="42" id="adQ-oL-kpl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="30"/>
+                                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9A-ES-pYg" customClass="DesignableButton" customModule="ePortal" customModuleProvider="target">
+                                                <rect key="frame" x="285" y="544" width="60" height="60"/>
+                                                <color key="backgroundColor" red="0.97647058819999999" green="0.55294117649999996" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="HeM-ob-KXS"/>
+                                                    <constraint firstAttribute="height" constant="60" id="Qbc-JY-TyQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                                                <state key="normal" title="Buy it"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="30"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="uM0-nF-enm" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="294" id="JDH-iO-uAi"/>
+                                            <constraint firstItem="g9A-ES-pYg" firstAttribute="top" secondItem="kSg-SS-Yl2" secondAttribute="bottom" constant="445" id="ZGC-iz-g3s"/>
+                                            <constraint firstItem="gMt-8q-bfF" firstAttribute="top" secondItem="JWl-9Z-Cub" secondAttribute="top" constant="70" id="ZZv-bb-dI2"/>
+                                            <constraint firstItem="kSg-SS-Yl2" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="285" id="Zeg-PR-xmj"/>
                                             <constraint firstAttribute="height" constant="607" id="c1Q-6f-GJ8"/>
+                                            <constraint firstItem="uM0-nF-enm" firstAttribute="top" secondItem="JWl-9Z-Cub" secondAttribute="top" constant="40" id="iuR-L2-mYd"/>
+                                            <constraint firstItem="gMt-8q-bfF" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="298" id="pwM-IO-IOe"/>
+                                            <constraint firstItem="kSg-SS-Yl2" firstAttribute="top" secondItem="JWl-9Z-Cub" secondAttribute="top" constant="39" id="zPJ-i9-1OE"/>
+                                            <constraint firstItem="g9A-ES-pYg" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="285" id="zXq-sw-blm"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K9-Jb-HQs">
@@ -1244,9 +1318,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="buyButton" destination="g9A-ES-pYg" id="MlY-aX-AVN"/>
                         <outlet property="chatBarView" destination="3K9-Jb-HQs" id="ysp-cb-PM9"/>
                         <outlet property="chatTextView" destination="cFH-zN-QtM" id="My6-J5-tDh"/>
                         <outlet property="periscommentView" destination="JWl-9Z-Cub" id="nXS-D2-4QL"/>
+                        <outlet property="quantityButton" destination="kSg-SS-Yl2" id="ItE-mo-cq7"/>
+                        <outlet property="quantityLabel" destination="uM0-nF-enm" id="9f8-xx-a8k"/>
                         <outlet property="subscriberCount" destination="9WN-bz-hMr" id="Rzq-EP-Ogo"/>
                     </connections>
                 </viewController>
