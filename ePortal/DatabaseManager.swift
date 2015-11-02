@@ -20,6 +20,9 @@ final class DatabaseManager {
   private var _users: [String: String]
   private var _providerData: [String: String]?
   
+  private var _timeOffsetHandle: UInt?
+  private var _serverTimeOffset: Int!
+  
   var root: Firebase {
     get {
       return _root
@@ -36,8 +39,28 @@ final class DatabaseManager {
     // firebase root for database calls
     _root = Firebase(url: Constants.Firebase.RootUrl)
     
+    //TODO: implement these
     _feeds = [:]
     _users = [:]
+    
+    _serverTimeOffset = 0
+    
+    self._timeOffsetHandle = _root.childByAppendingPath(".info/serverTimeOffset").observeEventType(.Value, withBlock: { [weak self]
+      (snapshot: FDataSnapshot!) in
+      
+      if let strongSelf = self {
+        let val: AnyObject! = snapshot.value
+        
+        if (val is NSNull) {
+          // no value found
+        }
+        else {
+          strongSelf._serverTimeOffset = (val as! Int)
+          print("offset: \(strongSelf._serverTimeOffset)")
+          
+        }
+      }
+    })
     
     // Auth handled via a global singleton. Prevents modules squashing each other
     FBAuth.watchAuthForRef(_root, withBlock: { [weak self]
@@ -53,6 +76,12 @@ final class DatabaseManager {
         }
       }
     })
+  }
+  
+  deinit {
+    if (_timeOffsetHandle != nil) {
+      _root.childByAppendingPath(".info/serverTimeOffset").removeObserverWithHandle(_timeOffsetHandle!)
+    }
   }
   
   func cleanup() {
@@ -166,7 +195,10 @@ final class DatabaseManager {
       print("logging out of firebase")
       FBAuth.logoutRef(self._root)
     }
-    
+  }
+  
+  func serverTimestampInMilliseconds() -> Double {
+    return (NSDate().timeIntervalSince1970 * 1000) + Double(self._serverTimeOffset)
   }
   
   //MARK: Singleton

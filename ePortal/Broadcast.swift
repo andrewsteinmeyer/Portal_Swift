@@ -17,7 +17,7 @@ protocol BroadcastDelegate: class {
 }
 
 // information for broadcast
-class Broadcast {
+class Broadcast: NSObject {
   
   weak var delegate: BroadcastDelegate?
   
@@ -36,7 +36,11 @@ class Broadcast {
   private var _title: String!
   private var _description: String!
   private var _price: Double!
-  private var _allottedTime: String!
+  private var _readableDuration: String!
+  private var _endTime: Double!
+  private var _timeRemaining: String!
+  private var _readableEndTime: String!
+  private var _timer: NSTimer?
   private var _quantity: Int!
   private var _imageUrls: [String]!
   private var _downloadedImages: [UIImage]!
@@ -54,6 +58,12 @@ class Broadcast {
   var broadcastId: String {
     get {
       return _broadcastId
+    }
+  }
+  
+  var title: String {
+    get {
+      return _title
     }
   }
   
@@ -90,15 +100,18 @@ class Broadcast {
     }
   }
   
-  var downloadedImages: [UIImage] {
+  dynamic private(set) var timeRemaining: String {
     get {
-      return _downloadedImages
+      return _timeRemaining
+    }
+    set(newValue) {
+      _timeRemaining = newValue
     }
   }
   
-  var description: String {
+  var downloadedImages: [UIImage] {
     get {
-      return _description
+      return _downloadedImages
     }
   }
   
@@ -166,6 +179,9 @@ class Broadcast {
     // set subscriberId and listen for updates
     _subscriberId = subscriberId
     startObserving()
+    
+    // start timer
+    startCountdown()
   }
   
   /*!
@@ -271,6 +287,9 @@ class Broadcast {
       _messagesRef.removeObserverWithHandle(_messagesHandle!)
       _messagesHandle = nil
     }
+    if let timer = _timer {
+      timer.invalidate()
+    }
   }
   
   /*!
@@ -295,16 +314,76 @@ class Broadcast {
    * Set details of the broadcast from what the user entered
    * User enters details before publishing
    */
-  func setDetails(title: String, description: String, price: String, time: String, quantity: String) {
+  func setDetails(title: String, description: String, price: String, duration: String, quantity: String) {
     _title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     _description = description.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     _price = Double(price)
-    _allottedTime = time.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    _readableDuration = duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     _quantity = Int(quantity)
   }
   
   func addImageUrl(imageUrl: String) {
     _imageUrls.append(imageUrl)
+  }
+  
+  /*!
+   * End time is set using the end time stored in firebase
+   * The countdown for the sale will be calculated using the end time
+   */
+  func setEndTime() {
+    // get server time
+    let timestamp = DatabaseManager.sharedInstance.serverTimestampInMilliseconds()
+    
+    let clockParts = _readableDuration.componentsSeparatedByString(":")
+    let minutes = Double(clockParts[0])
+    let seconds = clockParts.count > 1 ? Double(clockParts[1]) : 0.0
+    
+    // get duration
+    let millisecondsInFuture = (minutes! * 60 + seconds!) * 1000
+    
+    // set end time
+    _endTime = timestamp + millisecondsInFuture
+    _readableEndTime = getFormattedTime(_endTime)
+  }
+  
+  /*!
+   * The broadcast keeps record of the countdown when a subscriber starts watching
+   * The countdown is based off of the official end time stored in the database
+   * The client checks the countdown every second
+   */
+  func startCountdown() {
+    _timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCountdown"), userInfo: nil, repeats: true)
+  }
+  
+  /*!
+   * The end time is the official end time stored in the database
+   */
+  func updateCountdown() {
+    let millisecondsRemaining = _endTime - DatabaseManager.sharedInstance.serverTimestampInMilliseconds()
+    
+    if millisecondsRemaining > 0 {
+      let (m,s) = millisecondsToMinutesSeconds(millisecondsRemaining)
+      
+      switch m {
+      case _ where m > 1:
+        _timeRemaining = (s < 10) ? "\(m):0\(s)" : "\(m):\(s)"
+      case _ where m < 1:
+        _timeRemaining = (s < 10) ? "00:0\(s)" : "00:\(s)"
+      default:
+        break
+      }
+    } else {
+      _timeRemaining = "00:00"
+      
+      if let timer = _timer {
+        timer.invalidate()
+      }
+    }
+    
+    // set accessible property
+    // this triggers KVO
+    timeRemaining = _timeRemaining
+    
   }
   
   /*!
@@ -320,7 +399,9 @@ class Broadcast {
                         "title": _title,
                         "description": _description,
                         "price": _price,
-                        "time": _allottedTime,
+                        "readableDuration": _readableDuration,
+                        "endTime": _endTime,
+                        "readableEndTime": _readableEndTime,
                         "quantity": _quantity,
                         "subscriberCount": _subscriberCount
                         ]
@@ -366,7 +447,8 @@ class Broadcast {
     _description = data["description"].string ?? ""
     _price = data["price"].double ?? 0.0
     _quantity = data["quantity"].int ?? 0
-    _allottedTime = data["time"].string ?? ""
+    _readableDuration = data["readableDuration"].string ?? ""
+    _endTime = data["endTime"].double ?? 0.0
     
     _subscriberCount = data["subscriberCount"].int ?? 0
     

@@ -45,8 +45,25 @@ func afterDelay(delay: Double = 0, block: () -> ()) {
   }
 }
 
+var dateFormatter: NSDateFormatter = {
+  let formatter = NSDateFormatter()
+  formatter.dateStyle = .MediumStyle
+  formatter.timeStyle = .MediumStyle
+  return formatter
+}()
+
+func getFormattedTime(milliseconds: Double) -> String {
+  let seconds = milliseconds / 1000
+  return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: seconds))
+}
+
 func timeStamp() -> String {
   return String(Int(NSDate().timeIntervalSince1970))
+}
+
+func millisecondsToMinutesSeconds (milliseconds : Double) -> (Int, Int) {
+  let seconds = Int(milliseconds / 1000)
+  return ((seconds % 3600) / 60, (seconds % 3600) % 60)
 }
 
 //MARK: Dictionary merge extension

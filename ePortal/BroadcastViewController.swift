@@ -197,6 +197,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     //       Otherwise, the DiscoverCollectionViewController sees the new broadcast too quickly
     //       and attempts to download the pictures from Fastly before they have had time to get there.
     afterDelay(2) {
+      self._broadcast.setEndTime()
       self._broadcast.saveWithCompletionBlock() {
         error in
 

@@ -364,11 +364,11 @@ class SaleOptionsViewController: UITableViewController {
       let title = self.titleField.text!
       let description = self.descriptionTextView.text!
       let price = "\(self.dollarsTextField.text!).\(self.centsTextField.text!)"
-      let time = "\(self.minutesTextField.text!):\(self.secondsTextField.text!)"
+      let duration = "\(self.minutesTextField.text!):\(self.secondsTextField.text!)"
       let quantity = self.quantityTextField.text!
       
       // give the details to the broadcast
-      self.broadcast.setDetails(title, description: description, price: price, time: time, quantity: quantity)
+      self.broadcast.setDetails(title, description: description, price: price, duration: duration, quantity: quantity)
       
       return task
     }

@@ -17,6 +17,7 @@ class ChatViewController: UIViewController {
   @IBOutlet weak var quantityButton: DesignableButton!
   @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var buyButton: DesignableButton!
+  @IBOutlet weak var timeRemainingLabel: UILabel!
   
   var broadcast: Broadcast!
   var firstMessageReceived = false
@@ -29,11 +30,17 @@ class ChatViewController: UIViewController {
     broadcast.delegate = self
     broadcast.startObservingMessages()
     
+    //set the KVO
+    broadcast.addObserver(self, forKeyPath: "timeRemaining", options: NSKeyValueObservingOptions.New, context: nil)
+    
     setupAppearance()
   }
   
   deinit {
     broadcast.stopObservingMessages()
+    
+    //remove the KVO
+    broadcast.removeObserver(self, forKeyPath: "timeRemaining")
   }
   
   func setupAppearance() {
@@ -42,6 +49,7 @@ class ChatViewController: UIViewController {
     
     subscriberCount.text! = String(broadcast.subscriberCount)
     quantityLabel.text! = String(broadcast.quantity)
+    timeRemainingLabel.text! = broadcast.timeRemaining
     
     buyButton.animation = "fadeInLeft"
     buyButton.curve = "easeIn"
@@ -49,6 +57,12 @@ class ChatViewController: UIViewController {
     buyButton.duration = 1.0
     buyButton.animate()
     
+  }
+  
+  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    if keyPath == "timeRemaining" {
+      timeRemainingLabel.text! = broadcast.timeRemaining
+    }
   }
 
 }
