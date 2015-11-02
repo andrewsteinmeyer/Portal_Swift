@@ -22,8 +22,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     self.containerView.layer.cornerRadius = 5
     
-    // get description from broadcast
-    descriptionLabel.text = broadcast.description
+    // get title from broadcast
+    descriptionLabel.text = broadcast.title
     
     // start scroll near bottom and limit how far up it can go
     self.scrollView.delegate = self
