@@ -39,6 +39,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -333,7 +334,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="ZhK-r8-3T7"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -1232,10 +1233,22 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fF0-BY-ioi">
+                                                <rect key="frame" x="243" y="99" width="102" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="41" id="AXN-9z-ewI"/>
+                                                    <constraint firstAttribute="width" constant="102" id="m1M-jU-rAG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="26"/>
+                                                <color key="textColor" red="0.3843137254901961" green="0.3843137254901961" blue="0.3843137254901961" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="uM0-nF-enm" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="294" id="JDH-iO-uAi"/>
+                                            <constraint firstItem="fF0-BY-ioi" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="243" id="NqM-iq-mn9"/>
+                                            <constraint firstItem="fF0-BY-ioi" firstAttribute="top" secondItem="kSg-SS-Yl2" secondAttribute="bottom" id="YGh-yb-VPQ"/>
                                             <constraint firstItem="g9A-ES-pYg" firstAttribute="top" secondItem="kSg-SS-Yl2" secondAttribute="bottom" constant="445" id="ZGC-iz-g3s"/>
                                             <constraint firstItem="gMt-8q-bfF" firstAttribute="top" secondItem="JWl-9Z-Cub" secondAttribute="top" constant="70" id="ZZv-bb-dI2"/>
                                             <constraint firstItem="kSg-SS-Yl2" firstAttribute="leading" secondItem="JWl-9Z-Cub" secondAttribute="leading" constant="285" id="Zeg-PR-xmj"/>
@@ -1325,6 +1338,7 @@
                         <outlet property="quantityButton" destination="kSg-SS-Yl2" id="ItE-mo-cq7"/>
                         <outlet property="quantityLabel" destination="uM0-nF-enm" id="9f8-xx-a8k"/>
                         <outlet property="subscriberCount" destination="9WN-bz-hMr" id="Rzq-EP-Ogo"/>
+                        <outlet property="timeRemainingLabel" destination="fF0-BY-ioi" id="zHd-Sn-BqD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0U-Ke-sze" userLabel="First Responder" sceneMemberID="firstResponder"/>
