@@ -662,9 +662,9 @@
 				4E6C42141B5DB4DD009B22AF /* AppDelegate.swift */,
 				4EA65E921B5DC16600B18107 /* Storyboard */,
 				4E94603F1B7042B20084C9C6 /* API */,
-				4E94604D1B704F280084C9C6 /* View */,
-				4E9460401B7042C20084C9C6 /* Controller */,
-				4ED5A5851B82B2DC0003C19D /* Nib */,
+				4E94604D1B704F280084C9C6 /* Views */,
+				4E9460401B7042C20084C9C6 /* View Controllers */,
+				4ED5A5851B82B2DC0003C19D /* Nibs */,
 				4E6C421B1B5DB4DD009B22AF /* Images.xcassets */,
 				4E6C42121B5DB4DD009B22AF /* Supporting Files */,
 			);
@@ -674,17 +674,17 @@
 		4E6C42121B5DB4DD009B22AF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4E30A4B81BACDF5D00C28F59 /* Spring */,
-				4EFF31E11B9A36FB00147B38 /* Asset Picker */,
-				4EA65E6B1B5DBEAC00B18107 /* Fonts */,
-				4E6C42131B5DB4DD009B22AF /* Info.plist */,
 				4E9460411B7043D00084C9C6 /* Colors.swift */,
 				4EA65E951B5DC7F300B18107 /* Constants.swift */,
 				4EA65E931B5DC62100B18107 /* Utils.swift */,
 				4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */,
-				4E6C42341B5DB7FE009B22AF /* ePortal-Bridging-Header.h */,
+				4E30A4B81BACDF5D00C28F59 /* Spring */,
+				4EFF31E11B9A36FB00147B38 /* Asset Picker */,
+				4EA65E6B1B5DBEAC00B18107 /* Fonts */,
 				4E3769CE1BD7097700BEFE7A /* TPKeyboardAvoiding */,
 				4E6440491BD296FA000D6879 /* CSStickyHeaderFlowLayout */,
+				4E6C42131B5DB4DD009B22AF /* Info.plist */,
+				4E6C42341B5DB7FE009B22AF /* ePortal-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -710,12 +710,12 @@
 			isa = PBXGroup;
 			children = (
 				4ED5A5931B82B8630003C19D /* AWS */,
-				4ED5A58E1B82B8550003C19D /* Database */,
+				4ED5A58E1B82B8550003C19D /* Firebase */,
 			);
 			name = API;
 			sourceTree = "<group>";
 		};
-		4E9460401B7042C20084C9C6 /* Controller */ = {
+		4E9460401B7042C20084C9C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4EA65E691B5DBCCE00B18107 /* LoginViewController.swift */,
@@ -724,17 +724,17 @@
 				4E31C1281BC085E20053B969 /* Broadcast */,
 				4E31C12A1BC0864B0053B969 /* Subscribe */,
 			);
-			name = Controller;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		4E94604D1B704F280084C9C6 /* View */ = {
+		4E94604D1B704F280084C9C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				4E31C12C1BC086A90053B969 /* Discover */,
 				4E31C12B1BC086A10053B969 /* Broadcast */,
 				4E643FE31BCF299C000D6879 /* Subscribe */,
 			);
-			name = View;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		4EA65E6B1B5DBEAC00B18107 /* Fonts */ = {
@@ -794,17 +794,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4ED5A5851B82B2DC0003C19D /* Nib */ = {
+		4ED5A5851B82B2DC0003C19D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
 				4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */,
 				4E643FCF1BCDFD2C000D6879 /* Discover */,
 				4E643FD11BCF0355000D6879 /* Subscribe */,
 			);
-			name = Nib;
+			name = Nibs;
 			sourceTree = "<group>";
 		};
-		4ED5A58E1B82B8550003C19D /* Database */ = {
+		4ED5A58E1B82B8550003C19D /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
 				4EDEEE861B698E8C002582DE /* DatabaseManager.swift */,
@@ -812,7 +812,7 @@
 				4ED204E51B7519500070A2E0 /* FBUser.swift */,
 				4EFF31BB1B953FA800147B38 /* Broadcast.swift */,
 			);
-			name = Database;
+			name = Firebase;
 			sourceTree = "<group>";
 		};
 		4ED5A5931B82B8630003C19D /* AWS */ = {
