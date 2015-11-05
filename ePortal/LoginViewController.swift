@@ -12,7 +12,7 @@ import TwitterKit
 /*!
  * LoginViewController handles user login to app
  */
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
   @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var loginButton: DesignableButton!

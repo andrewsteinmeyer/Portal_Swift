@@ -48,8 +48,6 @@
 		4E3769D91BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D41BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m */; settings = {ASSET_TAGS = (); }; };
 		4E3769DA1BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */; settings = {ASSET_TAGS = (); }; };
 		4E3769E71BD7171700BEFE7A /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769E61BD7171700BEFE7A /* ChatTextView.swift */; settings = {ASSET_TAGS = (); }; };
-		4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; };
-		4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
@@ -122,8 +120,9 @@
 		4EAE8C9B1B9FAAB10085E143 /* CheckMark2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE8C9A1B9FAAB10085E143 /* CheckMark2.swift */; };
 		4EAE8C9D1B9FB8BD0085E143 /* EditImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */; };
 		4EC6D6891B9DB16E00318A54 /* ImagePickerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */; };
-		4ECED6841BBF2AE500A4E489 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECED6831BBF2A6700A4E489 /* WebImage.framework */; };
-		4ECED6851BBF2AE500A4E489 /* WebImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECED6831BBF2A6700A4E489 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; };
+		4ECADF901BEAECBD0062DFB7 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4ECADFA41BEAED100062DFB7 /* WebImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECADFA11BEAED050062DFB7 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204D91B722DC00070A2E0 /* FBAuth.swift */; };
 		4ED204E61B7519500070A2E0 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204E51B7519500070A2E0 /* FBUser.swift */; };
 		4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */; };
@@ -143,41 +142,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4E43A0EF1BAF726F009444D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 140F195C1A49D79400B0016A;
-			remoteInfo = "KeychainAccess-iOS";
-		};
-		4E43A0F11BAF726F009444D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 140F19671A49D79500B0016A;
-			remoteInfo = "KeychainAccess-iOSTests";
-		};
-		4E43A0F31BAF726F009444D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 140C8F0A1A4EBE3100F85556;
-			remoteInfo = "KeychainAccess-Mac";
-		};
-		4E43A0F51BAF726F009444D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 140C8F141A4EBE3100F85556;
-			remoteInfo = "KeychainAccess-MacTests";
-		};
-		4E43A0F71BAF726F009444D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 14FDD4601B49B9AD00C39FE8;
-			remoteInfo = "KeychainAccess-watchOS";
-		};
 		4E6C42251B5DB4DD009B22AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4E6C42071B5DB4DD009B22AF /* Project object */;
@@ -185,40 +149,75 @@
 			remoteGlobalIDString = 4E6C420E1B5DB4DD009B22AF;
 			remoteInfo = ePortal;
 		};
-		4ECED67C1BBF2A6700A4E489 /* PBXContainerItemProxy */ = {
+		4ECADF851BEAEC490062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 140F195C1A49D79400B0016A;
+			remoteInfo = "KeychainAccess-iOS";
+		};
+		4ECADF871BEAEC490062DFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 140F19671A49D79500B0016A;
+			remoteInfo = "KeychainAccess-iOSTests";
+		};
+		4ECADF891BEAEC490062DFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 140C8F0A1A4EBE3100F85556;
+			remoteInfo = "KeychainAccess-Mac";
+		};
+		4ECADF8B1BEAEC490062DFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 140C8F141A4EBE3100F85556;
+			remoteInfo = "KeychainAccess-MacTests";
+		};
+		4ECADF8D1BEAEC490062DFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14FDD4601B49B9AD00C39FE8;
+			remoteInfo = "KeychainAccess-watchOS";
+		};
+		4ECADF9A1BEAED050062DFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 53761325155AD0D5005750A4;
 			remoteInfo = SDWebImage;
 		};
-		4ECED67E1BBF2A6700A4E489 /* PBXContainerItemProxy */ = {
+		4ECADF9C1BEAED050062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 537D95C117ECC1FE0097C263;
 			remoteInfo = "SDWebImage+WebP";
 		};
-		4ECED6801BBF2A6700A4E489 /* PBXContainerItemProxy */ = {
+		4ECADF9E1BEAED050062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 531041E0157EAFA400BBABC3;
 			remoteInfo = "SDWebImage+MKAnnotation";
 		};
-		4ECED6821BBF2A6700A4E489 /* PBXContainerItemProxy */ = {
+		4ECADFA01BEAED050062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4A2CADFF1AB4BB5300B6BC39;
 			remoteInfo = WebImage;
 		};
-		4ECED6861BBF2AE500A4E489 /* PBXContainerItemProxy */ = {
+		4ECADFA21BEAED050062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A2CADFE1AB4BB5300B6BC39;
-			remoteInfo = WebImage;
+			containerPortal = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00733A4C1BC487C000A5A117;
+			remoteInfo = "WebImage tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -229,8 +228,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E43A0FA1BAF72A0009444D8 /* KeychainAccess.framework in CopyFiles */,
-				4ECED6851BBF2AE500A4E489 /* WebImage.framework in CopyFiles */,
+				4ECADFA41BEAED100062DFB7 /* WebImage.framework in CopyFiles */,
+				4ECADF901BEAECBD0062DFB7 /* KeychainAccess.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +283,6 @@
 		4E3769D51BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		4E3769E61BD7171700BEFE7A /* ChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
-		4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
 		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
@@ -366,7 +364,8 @@
 		4EAE8C9A1B9FAAB10085E143 /* CheckMark2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckMark2.swift; sourceTree = "<group>"; };
 		4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditImageViewController.swift; sourceTree = "<group>"; };
 		4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerNavigationController.swift; sourceTree = "<group>"; };
-		4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = "../../../Downloads/SDWebImage-3.7.3/SDWebImage.xcodeproj"; sourceTree = "<group>"; };
+		4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../thirdParty/KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
+		4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = ../../thirdParty/SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		4ED204D91B722DC00070A2E0 /* FBAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		4ED204E51B7519500070A2E0 /* FBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
 		4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
@@ -391,10 +390,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E43A0F91BAF7293009444D8 /* KeychainAccess.framework in Frameworks */,
+				4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */,
 				4E69769B1B82CC1900FF4A32 /* VideoToolbox.framework in Frameworks */,
 				4E6976991B82CC0B00FF4A32 /* UIKit.framework in Frameworks */,
-				4ECED6841BBF2AE500A4E489 /* WebImage.framework in Frameworks */,
 				4E6976971B82CC0000FF4A32 /* SystemConfiguration.framework in Frameworks */,
 				4E6976951B82CBEE00FF4A32 /* QuartzCore.framework in Frameworks */,
 				4E6976931B82CBE300FF4A32 /* OpenGLES.framework in Frameworks */,
@@ -553,18 +551,6 @@
 			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
-		4E43A0E81BAF726F009444D8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */,
-				4E43A0F21BAF726F009444D8 /* KeychainAccess-iOSTests.xctest */,
-				4E43A0F41BAF726F009444D8 /* KeychainAccess.framework */,
-				4E43A0F61BAF726F009444D8 /* KeychainAccess-MacTests.xctest */,
-				4E43A0F81BAF726F009444D8 /* KeychainAccess.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4E643FAD1BCDDCDF000D6879 /* PeriscommentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,8 +644,8 @@
 		4E6C42061B5DB4DD009B22AF = {
 			isa = PBXGroup;
 			children = (
-				4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */,
-				4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */,
+				4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */,
+				4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */,
 				4E6C42111B5DB4DD009B22AF /* ePortal */,
 				4E6C42271B5DB4DD009B22AF /* ePortalTests */,
 				4E6C42101B5DB4DD009B22AF /* Products */,
@@ -792,13 +778,26 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
-		4ECED6701BBF2A6600A4E489 /* Products */ = {
+		4ECADF7E1BEAEC490062DFB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4ECED67D1BBF2A6700A4E489 /* libSDWebImage.a */,
-				4ECED67F1BBF2A6700A4E489 /* libSDWebImage+WebP.a */,
-				4ECED6811BBF2A6700A4E489 /* libSDWebImage+MKAnnotation.a */,
-				4ECED6831BBF2A6700A4E489 /* WebImage.framework */,
+				4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */,
+				4ECADF881BEAEC490062DFB7 /* KeychainAccess-iOSTests.xctest */,
+				4ECADF8A1BEAEC490062DFB7 /* KeychainAccess.framework */,
+				4ECADF8C1BEAEC490062DFB7 /* KeychainAccess-MacTests.xctest */,
+				4ECADF8E1BEAEC490062DFB7 /* KeychainAccess.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4ECADF921BEAED040062DFB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4ECADF9B1BEAED050062DFB7 /* libSDWebImage.a */,
+				4ECADF9D1BEAED050062DFB7 /* libSDWebImage+WebP.a */,
+				4ECADF9F1BEAED050062DFB7 /* libSDWebImage+MKAnnotation.a */,
+				4ECADFA11BEAED050062DFB7 /* WebImage.framework */,
+				4ECADFA31BEAED050062DFB7 /* WebImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -874,7 +873,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4ECED6871BBF2AE500A4E489 /* PBXTargetDependency */,
 			);
 			name = ePortal;
 			productName = ePortal;
@@ -933,12 +931,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4E43A0E81BAF726F009444D8 /* Products */;
-					ProjectRef = 4E43A0E71BAF726F009444D8 /* KeychainAccess.xcodeproj */;
+					ProductGroup = 4ECADF7E1BEAEC490062DFB7 /* Products */;
+					ProjectRef = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
 				},
 				{
-					ProductGroup = 4ECED6701BBF2A6600A4E489 /* Products */;
-					ProjectRef = 4ECED66F1BBF2A6600A4E489 /* SDWebImage.xcodeproj */;
+					ProductGroup = 4ECADF921BEAED040062DFB7 /* Products */;
+					ProjectRef = 4ECADF911BEAED040062DFB7 /* SDWebImage.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -950,67 +948,74 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4E43A0F01BAF726F009444D8 /* KeychainAccess.framework */ = {
+		4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E43A0EF1BAF726F009444D8 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF851BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E43A0F21BAF726F009444D8 /* KeychainAccess-iOSTests.xctest */ = {
+		4ECADF881BEAEC490062DFB7 /* KeychainAccess-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KeychainAccess-iOSTests.xctest";
-			remoteRef = 4E43A0F11BAF726F009444D8 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF871BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E43A0F41BAF726F009444D8 /* KeychainAccess.framework */ = {
+		4ECADF8A1BEAEC490062DFB7 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E43A0F31BAF726F009444D8 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF891BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E43A0F61BAF726F009444D8 /* KeychainAccess-MacTests.xctest */ = {
+		4ECADF8C1BEAEC490062DFB7 /* KeychainAccess-MacTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KeychainAccess-MacTests.xctest";
-			remoteRef = 4E43A0F51BAF726F009444D8 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF8B1BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4E43A0F81BAF726F009444D8 /* KeychainAccess.framework */ = {
+		4ECADF8E1BEAEC490062DFB7 /* KeychainAccess.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KeychainAccess.framework;
-			remoteRef = 4E43A0F71BAF726F009444D8 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF8D1BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECED67D1BBF2A6700A4E489 /* libSDWebImage.a */ = {
+		4ECADF9B1BEAED050062DFB7 /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImage.a;
-			remoteRef = 4ECED67C1BBF2A6700A4E489 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF9A1BEAED050062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECED67F1BBF2A6700A4E489 /* libSDWebImage+WebP.a */ = {
+		4ECADF9D1BEAED050062DFB7 /* libSDWebImage+WebP.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSDWebImage+WebP.a";
-			remoteRef = 4ECED67E1BBF2A6700A4E489 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF9C1BEAED050062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECED6811BBF2A6700A4E489 /* libSDWebImage+MKAnnotation.a */ = {
+		4ECADF9F1BEAED050062DFB7 /* libSDWebImage+MKAnnotation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSDWebImage+MKAnnotation.a";
-			remoteRef = 4ECED6801BBF2A6700A4E489 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADF9E1BEAED050062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECED6831BBF2A6700A4E489 /* WebImage.framework */ = {
+		4ECADFA11BEAED050062DFB7 /* WebImage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = WebImage.framework;
-			remoteRef = 4ECED6821BBF2A6700A4E489 /* PBXContainerItemProxy */;
+			remoteRef = 4ECADFA01BEAED050062DFB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4ECADFA31BEAED050062DFB7 /* WebImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WebImage.framework;
+			remoteRef = 4ECADFA21BEAED050062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1229,11 +1234,6 @@
 			isa = PBXTargetDependency;
 			target = 4E6C420E1B5DB4DD009B22AF /* ePortal */;
 			targetProxy = 4E6C42251B5DB4DD009B22AF /* PBXContainerItemProxy */;
-		};
-		4ECED6871BBF2AE500A4E489 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = WebImage;
-			targetProxy = 4ECED6861BBF2AE500A4E489 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
