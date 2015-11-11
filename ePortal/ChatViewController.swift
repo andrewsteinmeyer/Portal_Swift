@@ -14,10 +14,9 @@ class ChatViewController: UIViewController {
   @IBOutlet weak var periscommentView: PeriscommentView!
   @IBOutlet weak var chatTextView: ChatTextView!
   @IBOutlet weak var subscriberCount: UILabel!
-  @IBOutlet weak var quantityButton: DesignableButton!
-  @IBOutlet weak var quantityLabel: UILabel!
+
   @IBOutlet weak var buyButton: DesignableButton!
-  @IBOutlet weak var timeRemainingLabel: UILabel!
+
   
   var broadcast: Broadcast!
   var firstMessageReceived = false
@@ -29,9 +28,6 @@ class ChatViewController: UIViewController {
     
     broadcast.delegate = self
     broadcast.startObservingMessages()
-    
-    //set the KVO
-    broadcast.addObserver(self, forKeyPath: "timeRemaining", options: NSKeyValueObservingOptions.New, context: nil)
     
     setupAppearance()
   }
@@ -48,21 +44,12 @@ class ChatViewController: UIViewController {
     periscommentView.backgroundColor = UIColor.clearColor()
     
     subscriberCount.text! = String(broadcast.subscriberCount)
-    quantityLabel.text! = String(broadcast.quantity)
-    timeRemainingLabel.text! = broadcast.timeRemaining
     
     buyButton.animation = "fadeInLeft"
     buyButton.curve = "easeIn"
     buyButton.delay = 0.5
     buyButton.duration = 1.0
     buyButton.animate()
-    
-  }
-  
-  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-    if keyPath == "timeRemaining" {
-      timeRemainingLabel.text! = broadcast.timeRemaining
-    }
   }
 
 }
@@ -70,11 +57,7 @@ class ChatViewController: UIViewController {
 extension ChatViewController: BroadcastDelegate {
   
   func broadcastQuantityDidUpdate(quantity: Int) {
-    quantityLabel.text! = String(quantity)
-    quantityButton.animation = "flash"
-    quantityButton.curve = "easeOutQuad"
-    quantityButton.duration = 0.5
-    quantityButton.animate()
+    // stub
   }
   
   func broadcastSubscriberCountDidUpdate(count: Int) {

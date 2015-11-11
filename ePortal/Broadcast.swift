@@ -353,6 +353,9 @@ class Broadcast: NSObject {
    */
   func startCountdown() {
     _timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCountdown"), userInfo: nil, repeats: true)
+    
+    // use NSRunLoopCommonModes so timer continues to countdown when user interacts with screen
+    NSRunLoop.mainRunLoop().addTimer(_timer!, forMode: NSRunLoopCommonModes)
   }
   
   /*!

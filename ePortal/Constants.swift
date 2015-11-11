@@ -93,6 +93,7 @@ struct Constants {
     static let EditImage = "EditImageSegue"
     static let Subscribe = "SubscribeSegue"
     static let DetailCollection = "DetailCollection"
+    static let OverlayPageControl = "OverlayPageControl"
   }
   
 }

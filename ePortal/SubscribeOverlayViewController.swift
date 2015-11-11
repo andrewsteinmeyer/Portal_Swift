@@ -8,55 +8,68 @@
 
 import UIKit
 
-class SubscribeOverlayViewController: UIViewController, UIPageViewControllerDataSource {
+class SubscribeOverlayViewController: UIViewController {
   
-  var pageViewController: UIPageViewController!
-  var chatViewController: ChatViewController!
-  var detailViewController: DetailViewController!
+  @IBOutlet weak var quantityButton: DesignableButton!
+  @IBOutlet weak var quantityLabel: UILabel!
+  @IBOutlet weak var timeRemainingLabel: UILabel!
   
+  private var overlayPageViewController: OverlayPageViewController!
   var broadcast: Broadcast!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
-    self.pageViewController.dataSource = self
+    broadcast.delegate = self
     
-    // page 1 setup
-    detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
-    detailViewController.broadcast = broadcast
+    //set the KVO
+    broadcast.addObserver(self, forKeyPath: "timeRemaining", options: NSKeyValueObservingOptions.New, context: nil)
     
-    // page 2 setup
-    chatViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-    chatViewController.broadcast = broadcast
-    
-    // set initial page
-    pageViewController.setViewControllers([self.detailViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
-    
-    // set size equal to entire view
-    pageViewController.view.frame = self.view.bounds
-    
-    // add pageViewController
-    self.view.addSubview(pageViewController.view)
-    self.addChildViewController(pageViewController)
-    self.pageViewController.didMoveToParentViewController(self)
+    setupAppearance()
   }
   
-  func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    if viewController is DetailViewController {
-      return nil
-    } else {
-      return self.detailViewController
+  deinit {
+    //remove the KVO
+    broadcast.removeObserver(self, forKeyPath: "timeRemaining")
+  }
+  
+  func setupAppearance() {
+    quantityLabel.text! = String(broadcast.quantity)
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // pass broadcast to DetailCollectionViewController
+    if (segue.identifier == Constants.Segue.OverlayPageControl) {
+      overlayPageViewController = segue.destinationViewController as! OverlayPageViewController
+      overlayPageViewController.broadcast = broadcast
     }
   }
   
-  func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    if viewController is DetailViewController {
-      return self.chatViewController
-    } else {
-      return nil
+  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    if keyPath == "timeRemaining" {
+      timeRemainingLabel.text! = broadcast.timeRemaining
+      timeRemainingLabel.layer.setNeedsDisplay()
     }
   }
   
 }
 
+
+extension SubscribeOverlayViewController: BroadcastDelegate {
+  
+  func broadcastQuantityDidUpdate(quantity: Int) {
+    quantityLabel.text! = String(quantity)
+    quantityButton.animation = "flash"
+    quantityButton.curve = "easeOutQuad"
+    quantityButton.duration = 0.5
+    quantityButton.animate()
+  }
+  
+  func broadcastSubscriberCountDidUpdate(count: Int) {
+    // stub
+  }
+  
+  func broadcastDidReceiveMessage(data: JSON) {
+    // stub
+  }
+}

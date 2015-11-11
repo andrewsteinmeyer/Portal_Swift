@@ -122,7 +122,8 @@
 		4EC6D6891B9DB16E00318A54 /* ImagePickerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */; };
 		4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; };
 		4ECADF901BEAECBD0062DFB7 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4ECAE05D1BEC15FB0062DFB7 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECAE0561BEC15E90062DFB7 /* libSDWebImage.a */; };
+		4ECAE05F1BEC1D670062DFB7 /* OverlayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECAE05E1BEC1D670062DFB7 /* OverlayPageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4ECAE0B51BF2D59A0062DFB7 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECAE0AD1BF2D5000062DFB7 /* libSDWebImage.a */; };
 		4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204D91B722DC00070A2E0 /* FBAuth.swift */; };
 		4ED204E61B7519500070A2E0 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204E51B7519500070A2E0 /* FBUser.swift */; };
 		4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */; };
@@ -184,30 +185,30 @@
 			remoteGlobalIDString = 14FDD4601B49B9AD00C39FE8;
 			remoteInfo = "KeychainAccess-watchOS";
 		};
-		4ECAE0551BEC15E90062DFB7 /* PBXContainerItemProxy */ = {
+		4ECAE0AC1BF2D5000062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 53761325155AD0D5005750A4;
 			remoteInfo = SDWebImage;
 		};
-		4ECAE0571BEC15E90062DFB7 /* PBXContainerItemProxy */ = {
+		4ECAE0AE1BF2D5000062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 537D95C117ECC1FE0097C263;
 			remoteInfo = "SDWebImage+WebP";
 		};
-		4ECAE0591BEC15E90062DFB7 /* PBXContainerItemProxy */ = {
+		4ECAE0B01BF2D5000062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 531041E0157EAFA400BBABC3;
 			remoteInfo = "SDWebImage+MKAnnotation";
 		};
-		4ECAE05B1BEC15E90062DFB7 /* PBXContainerItemProxy */ = {
+		4ECAE0B21BF2D5000062DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */;
+			containerPortal = 4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4A2CADFF1AB4BB5300B6BC39;
 			remoteInfo = WebImage;
@@ -357,7 +358,8 @@
 		4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditImageViewController.swift; sourceTree = "<group>"; };
 		4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerNavigationController.swift; sourceTree = "<group>"; };
 		4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../thirdParty/KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
-		4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = "../../../../Downloads/SDWebImage-3.7.3 2/SDWebImage.xcodeproj"; sourceTree = "<group>"; };
+		4ECAE05E1BEC1D670062DFB7 /* OverlayPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayPageViewController.swift; sourceTree = "<group>"; };
+		4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = "../../../../Downloads/SDWebImage-3.7.3 3/SDWebImage.xcodeproj"; sourceTree = "<group>"; };
 		4ED204D91B722DC00070A2E0 /* FBAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		4ED204E51B7519500070A2E0 /* FBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
 		4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
@@ -382,7 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECAE05D1BEC15FB0062DFB7 /* libSDWebImage.a in Frameworks */,
+				4ECAE0B51BF2D59A0062DFB7 /* libSDWebImage.a in Frameworks */,
 				4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */,
 				4E69769B1B82CC1900FF4A32 /* VideoToolbox.framework in Frameworks */,
 				4E6976991B82CC0B00FF4A32 /* UIKit.framework in Frameworks */,
@@ -502,6 +504,7 @@
 			children = (
 				4EF4AB331BBC88A800BDADF7 /* SubscribeViewController.swift */,
 				4E643F9E1BCDD57A000D6879 /* SubscribeOverlayViewController.swift */,
+				4ECAE05E1BEC1D670062DFB7 /* OverlayPageViewController.swift */,
 				4E643FBF1BCDEAEF000D6879 /* Detail */,
 				4E643FBE1BCDEAB8000D6879 /* Chat */,
 			);
@@ -637,7 +640,7 @@
 		4E6C42061B5DB4DD009B22AF = {
 			isa = PBXGroup;
 			children = (
-				4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */,
+				4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */,
 				4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */,
 				4E6C42111B5DB4DD009B22AF /* ePortal */,
 				4E6C42271B5DB4DD009B22AF /* ePortalTests */,
@@ -783,13 +786,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4ECAE04E1BEC15E80062DFB7 /* Products */ = {
+		4ECAE0A51BF2D4FF0062DFB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4ECAE0561BEC15E90062DFB7 /* libSDWebImage.a */,
-				4ECAE0581BEC15E90062DFB7 /* libSDWebImage+WebP.a */,
-				4ECAE05A1BEC15E90062DFB7 /* libSDWebImage+MKAnnotation.a */,
-				4ECAE05C1BEC15E90062DFB7 /* WebImage.framework */,
+				4ECAE0AD1BF2D5000062DFB7 /* libSDWebImage.a */,
+				4ECAE0AF1BF2D5000062DFB7 /* libSDWebImage+WebP.a */,
+				4ECAE0B11BF2D5000062DFB7 /* libSDWebImage+MKAnnotation.a */,
+				4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -927,8 +930,8 @@
 					ProjectRef = 4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */;
 				},
 				{
-					ProductGroup = 4ECAE04E1BEC15E80062DFB7 /* Products */;
-					ProjectRef = 4ECAE04D1BEC15E80062DFB7 /* SDWebImage.xcodeproj */;
+					ProductGroup = 4ECAE0A51BF2D4FF0062DFB7 /* Products */;
+					ProjectRef = 4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -975,32 +978,32 @@
 			remoteRef = 4ECADF8D1BEAEC490062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECAE0561BEC15E90062DFB7 /* libSDWebImage.a */ = {
+		4ECAE0AD1BF2D5000062DFB7 /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImage.a;
-			remoteRef = 4ECAE0551BEC15E90062DFB7 /* PBXContainerItemProxy */;
+			remoteRef = 4ECAE0AC1BF2D5000062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECAE0581BEC15E90062DFB7 /* libSDWebImage+WebP.a */ = {
+		4ECAE0AF1BF2D5000062DFB7 /* libSDWebImage+WebP.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSDWebImage+WebP.a";
-			remoteRef = 4ECAE0571BEC15E90062DFB7 /* PBXContainerItemProxy */;
+			remoteRef = 4ECAE0AE1BF2D5000062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECAE05A1BEC15E90062DFB7 /* libSDWebImage+MKAnnotation.a */ = {
+		4ECAE0B11BF2D5000062DFB7 /* libSDWebImage+MKAnnotation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSDWebImage+MKAnnotation.a";
-			remoteRef = 4ECAE0591BEC15E90062DFB7 /* PBXContainerItemProxy */;
+			remoteRef = 4ECAE0B01BF2D5000062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECAE05C1BEC15E90062DFB7 /* WebImage.framework */ = {
+		4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = WebImage.framework;
-			remoteRef = 4ECAE05B1BEC15E90062DFB7 /* PBXContainerItemProxy */;
+			remoteRef = 4ECAE0B21BF2D5000062DFB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1122,6 +1125,7 @@
 				4E3769D71BD7097700BEFE7A /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */,
 				4E64403F1BD296F4000D6879 /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
+				4ECAE05F1BEC1D670062DFB7 /* OverlayPageViewController.swift in Sources */,
 				4E30A4EC1BACDF5D00C28F59 /* SpringImageView.swift in Sources */,
 				4E2BAD801BADA9AE003EA49A /* SwiftyJSON.swift in Sources */,
 				4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */,

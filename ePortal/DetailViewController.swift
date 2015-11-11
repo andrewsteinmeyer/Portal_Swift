@@ -14,7 +14,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var descriptionLabel: UILabel!
   
-  var detailCollectionViewController: DetailCollectionViewController!
+
+  private var detailCollectionViewController: DetailCollectionViewController!
   var broadcast: Broadcast!
   
   override func viewDidLoad() {
@@ -47,3 +48,4 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
   }
 
 }
+
