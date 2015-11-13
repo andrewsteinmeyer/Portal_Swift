@@ -47,7 +47,7 @@ class ChatViewController: UIViewController {
     
     buyButton.animation = "fadeInLeft"
     buyButton.curve = "easeIn"
-    buyButton.delay = 0.5
+    buyButton.delay = 0.3
     buyButton.duration = 1.0
     buyButton.animate()
   }
