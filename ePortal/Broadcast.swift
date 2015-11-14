@@ -10,16 +10,8 @@ import WebImage
 
 typealias FSaveCompletionBlock = (error: NSError?) -> Void
 
-protocol BroadcastDelegate: class {
-  func broadcastSubscriberCountDidUpdate(count: Int) -> Void
-  func broadcastQuantityDidUpdate(quantity: Int) -> Void
-  func broadcastDidReceiveMessage(data: JSON) -> Void
-}
-
 // information for broadcast
 class Broadcast: NSObject {
-  
-  weak var delegate: BroadcastDelegate?
   
   private var _ref: Firebase!
   private var _valueHandle: UInt?
@@ -122,7 +114,6 @@ class Broadcast: NSObject {
   }
   
   init(root: Firebase, broadcastId: String) {
-    
     // url to the publisher's broadcast
     _ref = root.childByAppendingPath("broadcasts").childByAppendingPath(broadcastId)
     _messagesRef = root.childByAppendingPath("messages").childByAppendingPath(broadcastId)
@@ -137,7 +128,6 @@ class Broadcast: NSObject {
     //TODO: list of people watching
     _subscriberIds = []
     _subscriberCount = 0
-    
   }
   
   /*!
@@ -149,7 +139,7 @@ class Broadcast: NSObject {
     // set broadcastId as the userId plus a timestamp
     let broadcastId = "\(publisherId)-\(timeStamp())"
     
-    // init
+    // initialize
     self.init(root: root, broadcastId: broadcastId)
 
     // set publisherId and listen for updates
@@ -169,7 +159,7 @@ class Broadcast: NSObject {
     //print("broadcastId: \(broadcastId)")
     //print("subscriberId: \(subscriberId)")
     
-    // init
+    // initialize
     self.init(root: root, broadcastId: broadcastId)
     
     // unpackage the snapshot
@@ -207,12 +197,12 @@ class Broadcast: NSObject {
           
           if let quantity = data["quantity"].int {
             strongSelf._quantity = quantity
-            strongSelf.delegate?.broadcastQuantityDidUpdate(quantity)
+            strongSelf.sendQuantityUpdatedNotification(quantity)
           }
           
           if let count = data["subscriberCount"].int {
             strongSelf._subscriberCount = count
-            strongSelf.delegate?.broadcastSubscriberCountDidUpdate(count)
+            strongSelf.sendSubscriberCountUpdatedNotification(count)
           }
           
           //print("update isPublishing: \(strongSelf._isPublishing)")
@@ -239,8 +229,8 @@ class Broadcast: NSObject {
         }
         else {
           // new message received
-          let data = JSON(val)
-          strongSelf.delegate?.broadcastDidReceiveMessage(data)
+          let message = val
+          strongSelf.sendBroadcastDidReceiveMessageNotification(message)
           
         }
       }
@@ -256,7 +246,7 @@ class Broadcast: NSObject {
     
     let newMessage: [String: String] = [
                       "author": _subscriberId,
-                      "message": text,
+                      "comment": text,
                       "timestamp": timeStamp()
                       ]
     
@@ -272,7 +262,6 @@ class Broadcast: NSObject {
         //block(error: nil)
       }
     }
-    
   }
   
   /*!
@@ -455,12 +444,15 @@ class Broadcast: NSObject {
     
     _subscriberCount = data["subscriberCount"].int ?? 0
     
+    // set initial countdown for timer
+    updateCountdown()
+    
     for (_, url):(String, JSON) in data["photos"] {
       // if we have an image url, save it
       if let imageUrl = url.string {
         _imageUrls.append(imageUrl)
         
-        // construct url
+        // construct Fastly image url
         let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(imageUrl)
         let url = NSURL(string: cacheUrl)
         
@@ -476,11 +468,29 @@ class Broadcast: NSObject {
             self._downloadedImages.append(image)
             
             //send notification 
-            NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: self, userInfo: ["images": self._downloadedImages])
+            self.sendImageDownloadedNotification(image)
           }
         })
       }
     }
+  }
+  
+  //MARK: NSNotifications
+  
+  private func sendImageDownloadedNotification(image: UIImage) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BroadcastImageDidDownload, object: self, userInfo: ["image": image])
+  }
+  
+  private func sendQuantityUpdatedNotification(quantity: Int) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BroadcastQuantityDidUpdate, object: self, userInfo: ["quantity": quantity])
+  }
+  
+  private func sendSubscriberCountUpdatedNotification(count: Int) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BroadcastSubscriberCountDidUpdate, object: self, userInfo: ["count": count])
+  }
+  
+  private func sendBroadcastDidReceiveMessageNotification(message: AnyObject) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BroadcastDidReceiveMessage, object: self, userInfo: ["message": message])
   }
   
 }

@@ -64,7 +64,7 @@ class DetailViewController: UIViewController {
     // set header size and item size
     // not using section header so disable sticky header for now
     if let layout = self.collectionView.collectionViewLayout as? CSStickyHeaderFlowLayout {
-      
+      // enable lines between cells
       layout.enableDecorationView = true
       layout.minimumLineSpacing = 0.50
       

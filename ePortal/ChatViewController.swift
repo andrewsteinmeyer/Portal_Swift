@@ -14,70 +14,85 @@ class ChatViewController: UIViewController {
   @IBOutlet weak var periscommentView: PeriscommentView!
   @IBOutlet weak var chatTextView: ChatTextView!
   @IBOutlet weak var subscriberCount: UILabel!
-
   @IBOutlet weak var buyButton: DesignableButton!
-
   
   var broadcast: Broadcast!
-  var firstMessageReceived = false
+  
+  private var firstMessageReceived = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // register observer to listen to broadcast
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshSubscriberCount:", name: Constants.Notifications.BroadcastSubscriberCountDidUpdate, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayMessage:", name: Constants.Notifications.BroadcastDidReceiveMessage, object: nil)
+    
     chatTextView.delegate = self
     
-    broadcast.delegate = self
+    //broadcast.delegate = self
     broadcast.startObservingMessages()
     
     setupAppearance()
   }
   
   deinit {
+    // stop broadcast from observing messages
     broadcast.stopObservingMessages()
     
-    //remove the KVO
-    broadcast.removeObserver(self, forKeyPath: "timeRemaining")
+    // stop observing notifications
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   func setupAppearance() {
+    // set backgrounds to be transparent
     chatBarView.backgroundColor = UIColor.clearColor()
     periscommentView.backgroundColor = UIColor.clearColor()
     
+    // set initial subscriber count
     subscriberCount.text! = String(broadcast.subscriberCount)
     
+    // animate buy button
     buyButton.animation = "fadeInLeft"
     buyButton.curve = "easeIn"
     buyButton.delay = 0.3
-    buyButton.duration = 1.0
+    buyButton.duration = 0.3
     buyButton.animate()
   }
-
-}
-
-extension ChatViewController: BroadcastDelegate {
   
-  func broadcastQuantityDidUpdate(quantity: Int) {
-    // stub
+  //MARK: Notifications
+  
+  func refreshSubscriberCount(notification: NSNotification) {
+    //extract quantity
+    let userInfo = notification.userInfo as! [String: AnyObject]
+    let count = userInfo["count"] as! Int?
+    
+    if let unwrappedCount = count {
+      subscriberCount.text! = String(unwrappedCount)
+    }
   }
   
-  func broadcastSubscriberCountDidUpdate(count: Int) {
-    subscriberCount.text! = String(count)
-  }
-  
-  func broadcastDidReceiveMessage(data: JSON) {
-    // don't broadcast first message
-    // firebase sends first child initially
-    if firstMessageReceived {
-      let comment = data["message"].string ?? ""
-      let author = data["author"].string ?? ""
+  func displayMessage(notification: NSNotification) {
+    //extract message
+    let userInfo = notification.userInfo as! [String: AnyObject]
+    let data = userInfo["message"]
+    
+    if let unwrappedMessage = data {
+      // firebase sends last message after registering for updates
+      // so ignore first message
+      guard firstMessageReceived else {
+        firstMessageReceived = true
+        return
+      }
+      
+      let message = JSON(unwrappedMessage)
+      let comment = message["comment"].string ?? ""
+      let author = message["author"].string ?? ""
       
       let profileImage = UIImage(named: "penny")!
       self.periscommentView.addCell(profileImage, name: author, comment: comment)
     }
-    
-    // set flag so that all other messages are transmitted
-    firstMessageReceived = true
   }
+
 }
 
 extension ChatViewController: UITextViewDelegate {

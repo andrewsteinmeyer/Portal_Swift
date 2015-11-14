@@ -30,7 +30,7 @@ struct PeriscommentConfig {
     let layout: PeriscommentLayout
     let commentFont = PeriscommentFont(font: UIFont.systemFontOfSize(14.0), color: UIColor.blackColor())
     let nameFont = PeriscommentFont(font: UIFont.systemFontOfSize(12.0), color: UIColor.lightGrayColor())
-    let disappearDuration = 6.0
+    let disappearDuration = 3.0
     let appearDuration = 1.0
     init() {
         self.layout = PeriscommentLayout()

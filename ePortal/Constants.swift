@@ -96,4 +96,12 @@ struct Constants {
     static let OverlayPageControl = "OverlayPageControl"
   }
   
+  // Notifications
+  struct Notifications {
+    static let BroadcastImageDidDownload = "BroadcastImageDidDownload"
+    static let BroadcastQuantityDidUpdate = "BroadcastQuantityDidUpdate"
+    static let BroadcastSubscriberCountDidUpdate = "BroadcastSubscriberCountDidUpdate"
+    static let BroadcastDidReceiveMessage = "BroadcastDidReceiveMessage"
+  }
+  
 }

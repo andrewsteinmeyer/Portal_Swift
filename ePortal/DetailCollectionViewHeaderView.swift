@@ -8,20 +8,42 @@
 
 import UIKit
 
-
-
-class DetailCollectionViewHeaderView: UICollectionReusableView, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailCollectionViewHeaderView: UICollectionReusableView {
   
   @IBOutlet weak var publisherThumbnailView: UIImageView!
   @IBOutlet weak var publisherNameLabel: UILabel!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var pageControl: UIPageControl!
   
+  var images:[UIImage]! {
+    didSet {
+      collectionView.reloadData()
+      pageControl.numberOfPages = images.count
+    }
+  }
+
+  private var collectionViewLayout:UICollectionViewFlowLayout {
+    get {
+      return collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    }
+  }
+  
+  private var currentPage:Int {
+    get {
+      return Int((collectionView.contentOffset.x / collectionView.contentSize.width) * CGFloat(images.count))
+    }
+  }
+  
+  private func setupPageControl() {
+    pageControl.currentPage = 0
+    pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
     // register observer to listen to broadcast
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshImages:", name: "DownloadImageNotification", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshImages:", name: Constants.Notifications.BroadcastImageDidDownload, object: nil)
     
     let imageViewNib = UINib(nibName: "ImageSliderCell", bundle: nil)
     self.collectionView?.registerNib(imageViewNib, forCellWithReuseIdentifier: "ImageSliderCell")
@@ -44,40 +66,21 @@ class DetailCollectionViewHeaderView: UICollectionReusableView, UICollectionView
   }
   
   func refreshImages(notification: NSNotification) {
-    //extract images
+    //extract image
     let userInfo = notification.userInfo as! [String: AnyObject]
-    let downloadedImages = userInfo["images"] as! [UIImage]?
+    let downloadedImage = userInfo["image"] as! UIImage?
     
-    if let unwrappedImages = downloadedImages {
-      images = unwrappedImages
+    if let unwrappedImage = downloadedImage {
+      images.append(unwrappedImage)
     }
   }
   
-  var collectionViewLayout:UICollectionViewFlowLayout {
-    get {
-      return collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    }
-  }
+}
+
+
+extension DetailCollectionViewHeaderView: UICollectionViewDelegate, UICollectionViewDataSource {
   
-  var images:[UIImage]! {
-    didSet {
-      collectionView.reloadData()
-      pageControl.numberOfPages = images.count
-    }
-  }
-  
-  var currentPage:Int {
-    get {
-      return Int((collectionView.contentOffset.x / collectionView.contentSize.width) * CGFloat(images.count))
-    }
-  }
-  
-  private func setupPageControl() {
-    pageControl.currentPage = 0
-    pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
-  }
-  
-  //MARK: UICollectionView Delegate
+  //MARK: UICollectionView dataSource methods
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return 1
@@ -103,8 +106,8 @@ class DetailCollectionViewHeaderView: UICollectionReusableView, UICollectionView
     return collectionView.bounds.size
   }
   
-  // MARK: - Delegate methods
-  // MARK: UICollectionViewDelegate methods
+  // MARK: UICollectionView delegate methods
+  
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
     // If the scroll animation ended, update the page control to reflect the current page we are on
     pageControl.currentPage = currentPage
