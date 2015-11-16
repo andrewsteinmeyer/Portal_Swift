@@ -61,7 +61,8 @@ struct Constants {
   static let MainTabBarVC = "MainTabBarController"
   static let BroadcastVC = "BroadcastViewController"
   static let SaleOptionsVC = "SaleOptionsTableViewController"
-  static let SubscribeOverlayVC = "SubscribeOverlayViewController" 
+  static let SubscribeOverlayVC = "SubscribeOverlayViewController"
+  static let BroadcastOverlayVC = "BroadcastOverlayViewController"
   
   // Photo Album
   static let PhotoAlbumTitle = "Portal"

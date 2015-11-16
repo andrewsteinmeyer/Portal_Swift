@@ -193,7 +193,6 @@ class Broadcast: NSObject {
           let data = JSON(val)
           strongSelf._isPublishing = data["isPublishing"].bool
           strongSelf._streamId = data["streamId"].string
-          strongSelf._quantity = data["quantity"].int
           
           if let quantity = data["quantity"].int {
             strongSelf._quantity = quantity
@@ -336,7 +335,7 @@ class Broadcast: NSObject {
   }
   
   /*!
-   * The broadcast keeps record of the countdown when a subscriber starts watching
+   * The broadcast keeps a local record of the countdown
    * The countdown is based off of the official end time stored in the database
    * The client checks the countdown every second
    */
@@ -348,6 +347,7 @@ class Broadcast: NSObject {
   }
   
   /*!
+   * Called to update the countdown timer
    * The end time is the official end time stored in the database
    */
   func updateCountdown() {
@@ -419,6 +419,9 @@ class Broadcast: NSObject {
       if error != nil {
         block(error: error)
       } else {
+        // set the timer and start it
+        self.updateCountdown()
+        self.startCountdown()
         block(error: nil)
       }
     }

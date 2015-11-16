@@ -1,32 +1,35 @@
 //
-//  SubscribeOverlayViewController.swift
+//  BroadcastOverlayViewController.swift
 //  ePortal
 //
-//  Created by Andrew Steinmeyer on 10/6/15.
+//  Created by Andrew Steinmeyer on 11/15/15.
 //  Copyright © 2015 Andrew Steinmeyer. All rights reserved.
 //
 
 import UIKit
 
-class SubscribeOverlayViewController: UIViewController {
+class BroadcastOverlayViewController: UIViewController {
   
   @IBOutlet weak var quantityButton: DesignableButton!
   @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var timeRemainingLabel: UILabel!
+  @IBOutlet weak var remainingLabel: UILabel!
   
-  private var overlayPageViewController: OverlayPageViewController!
   var broadcast: Broadcast!
+  
+  private var _broadcastDetailsPopulated = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // hide details initially
+    toggleBroadcastDetails(hidden: true)
     
     // register observer to listen to broadcast
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshQuantity:", name: Constants.Notifications.BroadcastQuantityDidUpdate, object: nil)
     
     //set the KVO
     broadcast.addObserver(self, forKeyPath: "timeRemaining", options: NSKeyValueObservingOptions.New, context: nil)
-    
-    setBroadcastDetails()
   }
   
   deinit {
@@ -37,17 +40,28 @@ class SubscribeOverlayViewController: UIViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
-  private func setBroadcastDetails() {
-    quantityLabel.text! = String(broadcast.quantity)
-    timeRemainingLabel.text! = broadcast.timeRemaining
+  func toggleBroadcastDetails(hidden hidden: Bool) {
+    if hidden == true {
+      timeRemainingLabel.alpha = 0
+      quantityLabel.alpha = 0
+      quantityButton.alpha = 0
+      remainingLabel.alpha = 0
+    }
+    else {
+      timeRemainingLabel.alpha = 1
+      quantityLabel.alpha = 1
+      quantityButton.alpha = 1
+      remainingLabel.alpha = 1
+    }
+    
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // pass broadcast to DetailCollectionViewController
-    if (segue.identifier == Constants.Segue.OverlayPageControl) {
-      overlayPageViewController = segue.destinationViewController as! OverlayPageViewController
-      overlayPageViewController.broadcast = broadcast
-    }
+  func populateAndDisplayBroadcastDetails() {
+    quantityLabel.text! = String(broadcast.quantity)
+    timeRemainingLabel.text! = broadcast.timeRemaining
+    
+    toggleBroadcastDetails(hidden: false)
+    _broadcastDetailsPopulated = true
   }
   
   override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -60,10 +74,15 @@ class SubscribeOverlayViewController: UIViewController {
   //MARK: Notifications
   
   func refreshQuantity(notification: NSNotification) {
+    
+    guard _broadcastDetailsPopulated else {
+      return
+    }
+    
     //extract quantity
     let userInfo = notification.userInfo as! [String: AnyObject]
     let quantity = userInfo["quantity"] as! Int?
-  
+    
     if let unwrappedQuantity = quantity {
       quantityLabel.text! = String(unwrappedQuantity)
       quantityButton.animation = "flash"

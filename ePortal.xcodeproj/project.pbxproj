@@ -48,6 +48,8 @@
 		4E3769D91BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D41BD7097700BEFE7A /* TPKeyboardAvoidingTableView.m */; settings = {ASSET_TAGS = (); }; };
 		4E3769DA1BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */; settings = {ASSET_TAGS = (); }; };
 		4E3769E71BD7171700BEFE7A /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3769E61BD7171700BEFE7A /* ChatTextView.swift */; settings = {ASSET_TAGS = (); }; };
+		4E3F42F01BF95AB200BEFEBD /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */; };
+		4E3F42F61BF95B2C00BEFEBD /* WebImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
@@ -122,7 +124,7 @@
 		4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; };
 		4ECADF901BEAECBD0062DFB7 /* KeychainAccess.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECADF861BEAEC490062DFB7 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ECAE05F1BEC1D670062DFB7 /* OverlayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECAE05E1BEC1D670062DFB7 /* OverlayPageViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		4ECAE0B51BF2D59A0062DFB7 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECAE0AD1BF2D5000062DFB7 /* libSDWebImage.a */; };
+		4ECAE0C91BF94C640062DFB7 /* BroadcastOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECAE0C81BF94C640062DFB7 /* BroadcastOverlayViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4ED204DA1B722DC00070A2E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204D91B722DC00070A2E0 /* FBAuth.swift */; };
 		4ED204E61B7519500070A2E0 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED204E51B7519500070A2E0 /* FBUser.swift */; };
 		4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */; };
@@ -221,6 +223,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4E3F42F61BF95B2C00BEFEBD /* WebImage.framework in CopyFiles */,
 				4ECADF901BEAECBD0062DFB7 /* KeychainAccess.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +361,7 @@
 		4ECADF7D1BEAEC490062DFB7 /* KeychainAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainAccess.xcodeproj; path = ../../thirdParty/KeychainAccess/Lib/KeychainAccess.xcodeproj; sourceTree = "<group>"; };
 		4ECAE05E1BEC1D670062DFB7 /* OverlayPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayPageViewController.swift; sourceTree = "<group>"; };
 		4ECAE0A41BF2D4FF0062DFB7 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = "../../../../Downloads/SDWebImage-3.7.3 3/SDWebImage.xcodeproj"; sourceTree = "<group>"; };
+		4ECAE0C81BF94C640062DFB7 /* BroadcastOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastOverlayViewController.swift; sourceTree = "<group>"; };
 		4ED204D91B722DC00070A2E0 /* FBAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		4ED204E51B7519500070A2E0 /* FBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
 		4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
@@ -382,7 +386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECAE0B51BF2D59A0062DFB7 /* libSDWebImage.a in Frameworks */,
+				4E3F42F01BF95AB200BEFEBD /* WebImage.framework in Frameworks */,
 				4ECADF8F1BEAECAB0062DFB7 /* KeychainAccess.framework in Frameworks */,
 				4E69769B1B82CC1900FF4A32 /* VideoToolbox.framework in Frameworks */,
 				4E6976991B82CC0B00FF4A32 /* UIKit.framework in Frameworks */,
@@ -478,11 +482,9 @@
 			isa = PBXGroup;
 			children = (
 				4ED5A57D1B8170780003C19D /* BroadcastViewController.swift */,
-				4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */,
-				4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */,
-				4EFF31E31B9C5D8D00147B38 /* ProductImageCollectionViewController.swift */,
-				4EAE8C961B9F9C050085E143 /* EditImageNavigationController.swift */,
-				4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */,
+				4ECAE0C81BF94C640062DFB7 /* BroadcastOverlayViewController.swift */,
+				4ECAE0C61BF94BEB0062DFB7 /* Sale Options */,
+				4ECAE0C71BF94BFE0062DFB7 /* Edit Image */,
 			);
 			name = Broadcast;
 			sourceTree = "<group>";
@@ -792,6 +794,25 @@
 				4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4ECAE0C61BF94BEB0062DFB7 /* Sale Options */ = {
+			isa = PBXGroup;
+			children = (
+				4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */,
+				4EC6D6881B9DB16E00318A54 /* ImagePickerNavigationController.swift */,
+				4EFF31E31B9C5D8D00147B38 /* ProductImageCollectionViewController.swift */,
+			);
+			name = "Sale Options";
+			sourceTree = "<group>";
+		};
+		4ECAE0C71BF94BFE0062DFB7 /* Edit Image */ = {
+			isa = PBXGroup;
+			children = (
+				4EAE8C961B9F9C050085E143 /* EditImageNavigationController.swift */,
+				4EAE8C9C1B9FB8BD0085E143 /* EditImageViewController.swift */,
+			);
+			name = "Edit Image";
 			sourceTree = "<group>";
 		};
 		4ED5A5851B82B2DC0003C19D /* Nibs */ = {
@@ -1177,6 +1198,7 @@
 				4E643F9F1BCDD57A000D6879 /* SubscribeOverlayViewController.swift in Sources */,
 				4EA65E941B5DC62100B18107 /* Utils.swift in Sources */,
 				4E643FB31BCDDCDF000D6879 /* PeriscommentMark.swift in Sources */,
+				4ECAE0C91BF94C640062DFB7 /* BroadcastOverlayViewController.swift in Sources */,
 				4E643FCE1BCDF65A000D6879 /* DetailCollectionViewHeaderView.swift in Sources */,
 				4E6440561BD29BB9000D6879 /* CSSCollectionSeparator.m in Sources */,
 				4EFF31DC1B9A36F300147B38 /* AssetsViewController.swift in Sources */,

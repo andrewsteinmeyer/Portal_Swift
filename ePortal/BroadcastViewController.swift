@@ -16,6 +16,8 @@ class BroadcastViewController: UIViewController {
   private var _broadcast: Broadcast!
   private var _firstAppearance = true
   
+  private var _overlayViewController: BroadcastOverlayViewController!
+  
   var broadcast: Broadcast {
     get {
       return _broadcast
@@ -78,9 +80,30 @@ class BroadcastViewController: UIViewController {
         // make broadcastViewController's view visible after the SaleOptionsViewController is presented
         // after user dismisses the SaleOptionsViewController, the broadcastViewController will be present
         self.view.alpha = 1
+        self._overlayViewController.view.alpha = 1
       }
       _firstAppearance = false
     }
+  }
+  
+  private func initializeOverlayViewController() {
+    // create overlay and pass broadcast
+    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.BroadcastOverlayVC) as! BroadcastOverlayViewController
+    _overlayViewController.broadcast = broadcast
+    
+    // set frame equal to current view's bounds
+    _overlayViewController.view.frame = self.view.bounds
+    
+    // add BroadcastOverlayViewController
+    self.view.addSubview(_overlayViewController.view)
+    self.addChildViewController(_overlayViewController)
+    _overlayViewController.didMoveToParentViewController(self)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    initializeOverlayViewController()
   }
   
   func doConnectToSession(sessionId: String, WithToken token: String, apiKey: String) {
@@ -141,6 +164,7 @@ extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   
   func saleOptionsViewControllerDidCancelSale() {
     self.dismissViewControllerAnimated(true, completion: nil)
+    
   }
   
   func saleOptionsViewControllerDidStartBroadcast() {
@@ -192,8 +216,8 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     
     // save broadcast to firebase once the user is publishing
     // broadcast will immediately show up in subscriber's DiscoverCollectionViewController
-    // once it is save to firebase.
-    // NOTE: Need delay so that images have time to be uploaded to AWS and cached by Fastly
+    // once it is saved to firebase.
+    // NOTE: Need delay so that images have time to be uploaded to AWS and cached to Fastly
     //       Otherwise, the DiscoverCollectionViewController sees the new broadcast too quickly
     //       and attempts to download the pictures from Fastly before they have had time to get there.
     afterDelay(2) {
@@ -204,6 +228,8 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
         if error != nil {
           print("error saving broadcast to firebase")
         }
+        
+        self._overlayViewController.populateAndDisplayBroadcastDetails()
       }
     }
   }

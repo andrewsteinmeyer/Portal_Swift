@@ -29,7 +29,10 @@ class SubscribeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+  
+  }
+  
+  private func initializeOverlayViewController() {
     // create overlay and pass broadcast
     _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
     _overlayViewController.broadcast = broadcast
@@ -42,10 +45,11 @@ class SubscribeViewController: UIViewController {
     self.addChildViewController(_overlayViewController)
     _overlayViewController.didMoveToParentViewController(self)
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    initializeOverlayViewController()
   }
   
   /**
