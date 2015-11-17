@@ -122,7 +122,6 @@ class Broadcast: NSObject {
     _isPublishing = false
     _imageUrls = []
     _downloadedImages = []
-    
     _quantity = 0
     
     //TODO: list of people watching
@@ -155,9 +154,6 @@ class Broadcast: NSObject {
     
     let data = JSON(val)
     let broadcastId = snapshot.key
-    
-    //print("broadcastId: \(broadcastId)")
-    //print("subscriberId: \(subscriberId)")
     
     // initialize
     self.init(root: root, broadcastId: broadcastId)
@@ -203,9 +199,6 @@ class Broadcast: NSObject {
             strongSelf._subscriberCount = count
             strongSelf.sendSubscriberCountUpdatedNotification(count)
           }
-          
-          //print("update isPublishing: \(strongSelf._isPublishing)")
-          //print("update streamId: \(strongSelf._streamId)")
         }
       }
     })
@@ -227,6 +220,7 @@ class Broadcast: NSObject {
           // no message
         }
         else {
+          print("broadcast: \(val)")
           // new message received
           let message = val
           strongSelf.sendBroadcastDidReceiveMessageNotification(message)
@@ -236,15 +230,23 @@ class Broadcast: NSObject {
     })
   }
   
+  func transmitMessageFromSubscriber(text: String) {
+    guard _subscriberId != nil else {
+      return
+    }
+    
+    transmitMessage(author: _subscriberId, text: text)
+  }
+  
   /*!
    * Send a message to the subscribers
    */
-  func transmitMessage(text: String) {
+  func transmitMessage(author author: String, text: String) {
     // auto-increment
     let messageRef = _messagesRef.childByAutoId()
     
     let newMessage: [String: String] = [
-                      "author": _subscriberId,
+                      "author": author,
                       "comment": text,
                       "timestamp": timeStamp()
                       ]
@@ -419,12 +421,20 @@ class Broadcast: NSObject {
       if error != nil {
         block(error: error)
       } else {
+        
+        // add first message to database for this broadcast
+        // this is to get around child_added issue
+        // message listeners will ignore first message
+        self.transmitMessage(author: "Application", text: "Populating with first message")
+        
         // set the timer and start it
         self.updateCountdown()
         self.startCountdown()
         block(error: nil)
       }
     }
+    
+
   }
   
   /*!

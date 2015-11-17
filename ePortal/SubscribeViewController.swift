@@ -29,14 +29,13 @@ class SubscribeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-  
-  }
-  
-  private func initializeOverlayViewController() {
+    
     // create overlay and pass broadcast
     _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
     _overlayViewController.broadcast = broadcast
-    
+  }
+  
+  private func initializeOverlayViewController() {
     // set frame equal to current view's bounds
     _overlayViewController.view.frame = self.view.bounds
     

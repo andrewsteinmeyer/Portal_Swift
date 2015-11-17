@@ -18,18 +18,17 @@ class ChatViewController: UIViewController {
   
   var broadcast: Broadcast!
   
-  private var firstMessageReceived = false
+  private var _firstMessageReceived = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // register observer to listen to broadcast
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshSubscriberCount:", name: Constants.Notifications.BroadcastSubscriberCountDidUpdate, object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayMessage:", name: Constants.Notifications.BroadcastDidReceiveMessage, object: nil)
-    
+
     chatTextView.delegate = self
     
-    //broadcast.delegate = self
+    // turn on notifications
+    registerNotifications()
+    
+    // monitor user messages
     broadcast.startObservingMessages()
     
     setupAppearance()
@@ -59,7 +58,17 @@ class ChatViewController: UIViewController {
     buyButton.animate()
   }
   
-  //MARK: Notifications
+}
+
+//MARK: Notifications
+
+extension ChatViewController {
+  
+  func registerNotifications() {
+    // register observer to listen to broadcast
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshSubscriberCount:", name: Constants.Notifications.BroadcastSubscriberCountDidUpdate, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayMessage:", name: Constants.Notifications.BroadcastDidReceiveMessage, object: nil)
+  }
   
   func refreshSubscriberCount(notification: NSNotification) {
     //extract quantity
@@ -79,8 +88,8 @@ class ChatViewController: UIViewController {
     if let unwrappedMessage = data {
       // firebase sends last message after registering for updates
       // so ignore first message
-      guard firstMessageReceived else {
-        firstMessageReceived = true
+      guard _firstMessageReceived else {
+        _firstMessageReceived = true
         return
       }
       
@@ -105,7 +114,7 @@ extension ChatViewController: UITextViewDelegate {
         let strippedMessage = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         // transmit to subscribers
-        broadcast.transmitMessage(strippedMessage)
+        broadcast.transmitMessageFromSubscriber(strippedMessage)
         
         // clear text view
         textView.text = ""

@@ -36,6 +36,10 @@ class BroadcastViewController: UIViewController {
     // initialize broadcast with firebase ref
     _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: DatabaseManager.sharedInstance.userId)
     
+    // create overlay and pass broadcast
+    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.BroadcastOverlayVC) as! BroadcastOverlayViewController
+    _overlayViewController.broadcast = broadcast
+    
     // request sessionId and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
       task in
@@ -86,11 +90,7 @@ class BroadcastViewController: UIViewController {
     }
   }
   
-  private func initializeOverlayViewController() {
-    // create overlay and pass broadcast
-    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.BroadcastOverlayVC) as! BroadcastOverlayViewController
-    _overlayViewController.broadcast = broadcast
-    
+  private func arrangeOverlayViewController() {
     // set frame equal to current view's bounds
     _overlayViewController.view.frame = self.view.bounds
     
@@ -103,7 +103,7 @@ class BroadcastViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    initializeOverlayViewController()
+    arrangeOverlayViewController()
   }
   
   func doConnectToSession(sessionId: String, WithToken token: String, apiKey: String) {

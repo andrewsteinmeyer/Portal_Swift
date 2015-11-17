@@ -631,7 +631,6 @@
 			isa = PBXGroup;
 			children = (
 				4E3769E61BD7171700BEFE7A /* ChatTextView.swift */,
-				4E643FAD1BCDDCDF000D6879 /* PeriscommentView */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -680,6 +679,7 @@
 				4EA65E951B5DC7F300B18107 /* Constants.swift */,
 				4EA65E931B5DC62100B18107 /* Utils.swift */,
 				4E2BAD7F1BADA9AE003EA49A /* SwiftyJSON.swift */,
+				4E643FAD1BCDDCDF000D6879 /* PeriscommentView */,
 				4E30A4B81BACDF5D00C28F59 /* Spring */,
 				4EFF31E11B9A36FB00147B38 /* Asset Picker */,
 				4EA65E6B1B5DBEAC00B18107 /* Fonts */,
