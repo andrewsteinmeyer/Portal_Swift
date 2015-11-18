@@ -13,39 +13,33 @@ import Firebase
  */
 final class DatabaseManager {
   
-  private var _root: Firebase
-  private var _userRef: Firebase?
-  private var _loggedInUser: FBUser?
-  private var _feeds: [String: String]
-  private var _users: [String: String]
-  private var _providerData: [String: String]?
+  private (set) var root: Firebase
+  private var userRef: Firebase?
+  private var loggedInUser: FBUser?
+  private var feeds: [String: String]
+  private var users: [String: String]
+  private var providerData: [String: String]?
   
-  private var _timeOffsetHandle: UInt?
-  private var _serverTimeOffset: Int!
-  
-  var root: Firebase {
-    get {
-      return _root
-    }
-  }
+  private var timeOffsetHandle: UInt?
+  private var serverTimeOffset: Int!
   
   var userId: String? {
     get {
-        return _loggedInUser?.userId ?? nil
+        return loggedInUser?.userId ?? nil
     }
   }
   
   private init() {
     // firebase root for database calls
-    _root = Firebase(url: Constants.Firebase.RootUrl)
+    root = Firebase(url: Constants.Firebase.RootUrl)
     
     //TODO: implement these
-    _feeds = [:]
-    _users = [:]
+    feeds = [:]
+    users = [:]
     
-    _serverTimeOffset = 0
+    serverTimeOffset = 0
     
-    self._timeOffsetHandle = _root.childByAppendingPath(".info/serverTimeOffset").observeEventType(.Value, withBlock: { [weak self]
+    timeOffsetHandle = root.childByAppendingPath(".info/serverTimeOffset").observeEventType(.Value, withBlock: { [weak self]
       (snapshot: FDataSnapshot!) in
       
       if let strongSelf = self {
@@ -55,15 +49,15 @@ final class DatabaseManager {
           // no value found
         }
         else {
-          strongSelf._serverTimeOffset = (val as! Int)
-          print("offset: \(strongSelf._serverTimeOffset)")
+          strongSelf.serverTimeOffset = (val as! Int)
+          print("offset: \(strongSelf.serverTimeOffset)")
           
         }
       }
     })
     
     // Auth handled via a global singleton. Prevents modules squashing each other
-    FBAuth.watchAuthForRef(_root, withBlock: { [weak self]
+    FBAuth.watchAuthForRef(root, withBlock: { [weak self]
       (error: NSError?, user: FAuthData?) in
     
       if let strongSelf = self {
@@ -79,13 +73,13 @@ final class DatabaseManager {
   }
   
   deinit {
-    if (_timeOffsetHandle != nil) {
-      _root.childByAppendingPath(".info/serverTimeOffset").removeObserverWithHandle(_timeOffsetHandle!)
+    if (timeOffsetHandle != nil) {
+      root.childByAppendingPath(".info/serverTimeOffset").removeObserverWithHandle(timeOffsetHandle!)
     }
   }
   
   func cleanup() {
-    for handle in _feeds {
+    for handle in feeds {
       //TODO
       //print(handle)
     }
@@ -113,7 +107,7 @@ final class DatabaseManager {
     // initialize user data given by provider
     self.populateProviderData(data)
     
-    return FBAuth.loginRef(_root, withToken: token, providerData: data)
+    return FBAuth.loginRef(root, withToken: token, providerData: data)
   }
   
   /*!
@@ -142,30 +136,30 @@ final class DatabaseManager {
     if let userData = user {
       // add userId given by firebase to data
       var initData: [String: String] = [ "userId": userData.uid ]
-      if let providerData = _providerData {
+      if let providerData = providerData {
         initData.unionInPlace(providerData)
       }
       
       // set firebase root path for user (root/users/uid)
       // TODO: not using userRef yet
-      _userRef = _root.childByAppendingPath("users").childByAppendingPath(userData.uid)
+      userRef = root.childByAppendingPath("users").childByAppendingPath(userData.uid)
       
       // populate user with updated information from Firebase and set up observers
       // callback block only gets called on first login
-      _loggedInUser = FBUser.loadFromRoot(_root, withUserData: initData) {
+      loggedInUser = FBUser.loadFromRoot(root, withUserData: initData) {
         user in
         
-        user.updateFromRoot(self._root)
-        self._loggedInUser?.delegate = self
+        user.updateFromRoot(self.root)
+        self.loggedInUser?.delegate = self
         //TODO: self.delegate.loginStateDidChange(user)
       }
     } else {
       // User is no longer logged in.  If we had one before, remove observers
-      if (self._loggedInUser != nil) {
-        self._loggedInUser!.stopObserving()
+      if (loggedInUser != nil) {
+        loggedInUser!.stopObserving()
       }
       
-      self._loggedInUser = nil
+      loggedInUser = nil
       //TODO: self.delegate.loginStateDidChange(nil)
     }
   }
@@ -174,7 +168,7 @@ final class DatabaseManager {
    * Check to see if user is authorized to access database
    */
   func isAuthenticated() -> Bool {
-    return (_root.authData != nil ? true : false)
+    return (root.authData != nil ? true : false)
   }
   
   /*!
@@ -183,7 +177,7 @@ final class DatabaseManager {
    */
   func populateProviderData(data: [String:String]?) {
     if let data = data {
-      _providerData = data
+      providerData = data
     }
   }
   
@@ -193,12 +187,12 @@ final class DatabaseManager {
   func logout() {
     if (self.isAuthenticated()) {
       print("logging out of firebase")
-      FBAuth.logoutRef(self._root)
+      FBAuth.logoutRef(root)
     }
   }
   
   func serverTimestampInMilliseconds() -> Double {
-    return (NSDate().timeIntervalSince1970 * 1000) + Double(self._serverTimeOffset)
+    return (NSDate().timeIntervalSince1970 * 1000) + Double(serverTimeOffset)
   }
   
   //MARK: Singleton
