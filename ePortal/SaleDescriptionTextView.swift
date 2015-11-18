@@ -10,7 +10,7 @@ import UIKit
 
 class SaleDescriptionTextView: DesignableTextView {
   
-  private var _placeholderLabel: UILabel!
+  private var placeholderLabel: UILabel!
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -27,21 +27,21 @@ class SaleDescriptionTextView: DesignableTextView {
     
     // set placeholder appearance
     // placeholder is visible inside description text until user enters a description
-    _placeholderLabel = UILabel(frame: CGRectMake(0, 0, self.bounds.width - 10, self.bounds.height))
-    _placeholderLabel.numberOfLines = 0
-    _placeholderLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-    _placeholderLabel.text = "Enter a description to let everyone know more about your product!"
-    _placeholderLabel.font = UIFont(name: "Lato-Regular", size: 15)
-    _placeholderLabel.sizeToFit()
-    _placeholderLabel.frame.origin = CGPointMake(5, self.font!.pointSize / 2)
-    _placeholderLabel.textColor = UIColor.lightGrayColor()
-    _placeholderLabel.hidden = self.text.characters.count != 0
-    self.addSubview(_placeholderLabel)
+    placeholderLabel = UILabel(frame: CGRectMake(0, 0, self.bounds.width - 10, self.bounds.height))
+    placeholderLabel.numberOfLines = 0
+    placeholderLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    placeholderLabel.text = "Enter a description to let everyone know more about your product!"
+    placeholderLabel.font = UIFont(name: "Lato-Regular", size: 15)
+    placeholderLabel.sizeToFit()
+    placeholderLabel.frame.origin = CGPointMake(5, self.font!.pointSize / 2)
+    placeholderLabel.textColor = UIColor.lightGrayColor()
+    placeholderLabel.hidden = self.text.characters.count != 0
+    self.addSubview(placeholderLabel)
     
   }
   
   func togglePlaceholder() {
-    _placeholderLabel.hidden = self.text.characters.count != 0
+    placeholderLabel.hidden = self.text.characters.count != 0
   }
   
   func showWarning() {
