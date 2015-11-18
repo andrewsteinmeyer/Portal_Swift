@@ -18,7 +18,7 @@ class ChatViewController: UIViewController {
   
   var broadcast: Broadcast!
   
-  private var _firstMessageReceived = false
+  private var firstMessageReceived = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -88,8 +88,8 @@ extension ChatViewController {
     if let unwrappedMessage = data {
       // firebase sends last message after registering for updates
       // so ignore first message
-      guard _firstMessageReceived else {
-        _firstMessageReceived = true
+      guard firstMessageReceived else {
+        firstMessageReceived = true
         return
       }
       
@@ -98,7 +98,7 @@ extension ChatViewController {
       let author = message["author"].string ?? ""
       
       let profileImage = UIImage(named: "penny")!
-      self.periscommentView.addCell(profileImage, name: author, comment: comment)
+      periscommentView.addCell(profileImage, name: author, comment: comment)
     }
   }
 

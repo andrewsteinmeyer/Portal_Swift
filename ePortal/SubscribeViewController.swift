@@ -13,36 +13,28 @@ import UIKit
  */
 class SubscribeViewController: UIViewController {
   
-  private var _session: OTSession!
-  private var _subscriber: OTSubscriber!
-  private var _broadcast: Broadcast!
+  private var session: OTSession!
+  private var subscriber: OTSubscriber?
+  private var broadcast: Broadcast!
   
-  private var _overlayViewController: SubscribeOverlayViewController!
+  private var overlayViewController: SubscribeOverlayViewController!
   
-  var broadcast: Broadcast {
-    get {
-      return _broadcast
-    } set(newBroadcast) {
-      _broadcast = newBroadcast
-    }
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // create overlay and pass broadcast
-    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
-    _overlayViewController.broadcast = broadcast
+    overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.SubscribeOverlayVC) as! SubscribeOverlayViewController
+    overlayViewController.broadcast = broadcast
   }
   
   private func initializeOverlayViewController() {
     // set frame equal to current view's bounds
-    _overlayViewController.view.frame = self.view.bounds
+    overlayViewController.view.frame = self.view.bounds
     
     // add SubscriberOverlayViewController
-    self.view.addSubview(_overlayViewController.view)
-    self.addChildViewController(_overlayViewController)
-    _overlayViewController.didMoveToParentViewController(self)
+    self.view.addSubview(overlayViewController.view)
+    self.addChildViewController(overlayViewController)
+    overlayViewController.didMoveToParentViewController(self)
   }
   
   override func viewWillLayoutSubviews() {
@@ -57,14 +49,14 @@ class SubscribeViewController: UIViewController {
   */
   func loadBroadcastFromSnapshot(snapshot: FDataSnapshot) {
     // initialize broadcast object for the subscriber
-    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, snapshot: snapshot, subscriberId: DatabaseManager.sharedInstance.userId)
+    broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, snapshot: snapshot, subscriberId: DatabaseManager.sharedInstance.userId)
     
     // get a token for the session
     generateOpentokToken()
   }
   
   func generateOpentokToken() {
-    let sessionId = _broadcast.sessionId
+    let sessionId = broadcast.sessionId
     
     // request a token for the session so the subscriber can connect to the stream
     LambdaHandler.sharedInstance.generateOpentokTokenForSessionId(sessionId).continueWithBlock() { [weak self]
@@ -94,11 +86,11 @@ class SubscribeViewController: UIViewController {
   
   func doConnectToSession(sessionId: String, WithToken token: String, apiKey: String) {
     // Initalize the session and connect the subscriber to the broadcast
-    _session = OTSession(apiKey: apiKey, sessionId: sessionId, delegate: self)
+    session = OTSession(apiKey: apiKey, sessionId: sessionId, delegate: self)
     
-    if (_session != nil) {
+    if (session != nil) {
       var error: OTError?
-      _session?.connectWithToken(token, error: &error)
+      session?.connectWithToken(token, error: &error)
       if error != nil {
         print("Unable to connect to session \(error?.localizedDescription)")
       }
@@ -106,16 +98,16 @@ class SubscribeViewController: UIViewController {
   }
   
   func doSubscribe(stream: OTStream) {
-    _subscriber = OTSubscriber(stream: stream, delegate: self)
+    subscriber = OTSubscriber(stream: stream, delegate: self)
     
-    if (_subscriber != nil) {
+    if (subscriber != nil) {
       var error: OTError?
-      _session?.subscribe(_subscriber, error: &error)
+      session?.subscribe(subscriber, error: &error)
       
       // expand the subscriber's view to entire screen
       // insert the view under the overlay view
-      _subscriber?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
-      self.view.insertSubview(_subscriber!.view, belowSubview: _overlayViewController!.view)
+      subscriber?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+      self.view.insertSubview(subscriber!.view, belowSubview: overlayViewController!.view)
       
       if error != nil {
         print("Unable to subscribe \(error?.localizedDescription)")
@@ -124,9 +116,9 @@ class SubscribeViewController: UIViewController {
   }
   
   func cleanupSubscriber() {
-    if (_subscriber != nil) {
-      _subscriber!.view.removeFromSuperview()
-      _subscriber = nil
+    if (subscriber != nil) {
+      subscriber!.view.removeFromSuperview()
+      subscriber = nil
     }
   }
   
@@ -158,16 +150,16 @@ extension SubscribeViewController: OTSessionDelegate, OTSubscriberDelegate {
   func session(session: OTSession!, streamCreated stream: OTStream!) {
     print("session streamCreated: \(stream.streamId)")
     
-    if (_subscriber == nil) {
-      self.doSubscribe(stream)
+    if (subscriber == nil) {
+      doSubscribe(stream)
     }
   }
   
   func session(session: OTSession!, streamDestroyed stream: OTStream!) {
     print("session streamDestroyed: \(stream.streamId)")
     
-    if (_subscriber.stream.streamId == stream.streamId) {
-      self.cleanupSubscriber()
+    if (subscriber!.stream.streamId == stream.streamId) {
+      cleanupSubscriber()
     }
   }
   

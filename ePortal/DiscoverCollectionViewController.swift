@@ -10,8 +10,8 @@ import UIKit
 
 class DiscoverCollectionViewController: UICollectionViewController {
   
-  private var _ref: Firebase!
-  private var _dataSource: FirebaseCollectionViewDataSource!
+  private var ref: Firebase!
+  private var dataSource: FirebaseCollectionViewDataSource!
   
   @IBAction func logoutUser(sender: AnyObject) {
     ClientManager.sharedInstance.logoutWithCompletionHandler() {
@@ -36,7 +36,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
     super.viewDidLoad()
     
     // set reference to firebase root
-    _ref = DatabaseManager.sharedInstance.root
+    ref = DatabaseManager.sharedInstance.root
     
     // setup custom layout
     reloadLayout()
@@ -49,10 +49,10 @@ class DiscoverCollectionViewController: UICollectionViewController {
     self.collectionView?.registerNib(discoverViewNib, forCellWithReuseIdentifier: Constants.DiscoverCollection.CellIdentifier)
     
     // set datasource to root/broadcasts firebase url
-    self._dataSource = DiscoverCollectionViewDataSource(ref: _ref.childByAppendingPath("broadcasts"), nibNamed: Constants.DiscoverCollection.CellIdentifier, cellReuseIdentifier: Constants.DiscoverCollection.CellIdentifier, view: self.collectionView!)
+    dataSource = DiscoverCollectionViewDataSource(ref: ref.childByAppendingPath("broadcasts"), nibNamed: Constants.DiscoverCollection.CellIdentifier, cellReuseIdentifier: Constants.DiscoverCollection.CellIdentifier, view: self.collectionView!)
     
     // setup callback to populate cells with broadcasts from firebase
-    self._dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
+    dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
       let snapshot = obj as! FDataSnapshot
       
       // configure cell after we receive data
@@ -62,7 +62,7 @@ class DiscoverCollectionViewController: UICollectionViewController {
     }
     
     // set source to firebase source
-    self.collectionView?.dataSource = self._dataSource
+    self.collectionView?.dataSource = dataSource
     
   }
   
@@ -96,7 +96,7 @@ extension DiscoverCollectionViewController {
   override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
     // pass the cell in order to pass broadcast data to SubscribeViewController during segue
     let row = UInt(indexPath.row)
-    let snapshot = _dataSource.objectAtIndex(row) as! FDataSnapshot
+    let snapshot = dataSource.objectAtIndex(row) as! FDataSnapshot
     performSegueWithIdentifier(Constants.Segue.Subscribe, sender: snapshot)
     
     return true
