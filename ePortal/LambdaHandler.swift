@@ -11,28 +11,28 @@
  */
 final class LambdaHandler {
   
-  private var _lambdaInvoker: AWSLambdaInvoker!
+  private var lambdaInvoker: AWSLambdaInvoker!
   
   private init() {
-    _lambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
+    lambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
   }
   
   func generateFirebaseTokenWithId(id: String) -> AWSTask {
     // use lambda to request a login token from Firebase tied to the user's unique cognito identity
     let params = [ "identity" : id ]
-    return self._lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetFirebaseToken, JSONObject: params)
+    return lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetFirebaseToken, JSONObject: params)
   }
   
   func generateOpentokSessionIdWithToken() -> AWSTask {
     // use lambda to request a session id and token from Opentok service
     let params = []
-    return self._lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokSessionId, JSONObject: params)
+    return lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokSessionId, JSONObject: params)
   }
   
   func generateOpentokTokenForSessionId(sessionId: String) -> AWSTask {
     // use lambda to request a session id and token from Opentok service
     let params = [ "sessionId" : sessionId ]
-    return self._lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokTokenForSessionId, JSONObject: params)
+    return lambdaInvoker.invokeFunction(Constants.AWS.Lambda.GetOpentokTokenForSessionId, JSONObject: params)
   }
   
   //MARK: Singleton

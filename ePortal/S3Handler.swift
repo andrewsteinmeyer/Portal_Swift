@@ -11,15 +11,15 @@
 */
 final class S3Handler {
   
-  private var _S3TransferUtility: AWSS3TransferUtility!
+  private var S3TransferUtility: AWSS3TransferUtility!
   
   private init() {
-    _S3TransferUtility = AWSS3TransferUtility.defaultS3TransferUtility()
+    S3TransferUtility = AWSS3TransferUtility.defaultS3TransferUtility()
   }
   
   func uploadImageData(data: NSData, imageUrl: String) -> AWSTask {
     
-    return _S3TransferUtility!.uploadData(data,
+    return S3TransferUtility!.uploadData(data,
                                           bucket: Constants.AWS.S3.SaleImagesBucket,
                                           key: imageUrl,
                                           contentType: "image/jpeg",
@@ -51,7 +51,7 @@ final class S3Handler {
     }
     
     // download picture from AWS S3
-    _S3TransferUtility!
+    S3TransferUtility!
       .downloadDataFromBucket(Constants.AWS.S3.SaleImagesBucket,
         key: key,
         expression: nil,
