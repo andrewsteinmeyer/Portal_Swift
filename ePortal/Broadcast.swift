@@ -13,143 +13,75 @@ typealias FSaveCompletionBlock = (error: NSError?) -> Void
 // information for broadcast
 class Broadcast: NSObject {
   
-  private var _ref: Firebase!
-  private var _valueHandle: UInt?
-  private var _messagesRef: Firebase!
-  private var _messagesHandle: UInt?
+  private var ref: Firebase!
+  private var valueHandle: UInt?
+  private var messagesRef: Firebase!
+  private var messagesHandle: UInt?
+  private var subscribersRef: Firebase!
+  private var subscribersHandle: UInt?
   
-  private var _publisherId: String!
-  private var _subscriberId: String!
-  private var _broadcastId: String!
-  private var _sessionId: String!
-  private var _isPublishing: Bool!
-  private var _streamId: String!
+  private (set) var publisherId: String!
+  private (set) var subscriberId: String!
+  private (set) var broadcastId: String!
+  private (set) var streamId: String!
+  var sessionId: String!
+  var isPublishing: Bool!
   
-  private var _title: String!
-  private var _description: String!
-  private var _price: Double!
-  private var _readableDuration: String!
-  private var _endTime: Double!
-  private var _timeRemaining: String!
-  private var _readableEndTime: String!
-  private var _timer: NSTimer?
-  private var _quantity: Int!
-  private var _imageUrls: [String]!
-  private var _downloadedImages: [UIImage]!
+  private (set) var title: String!
+  private (set) var shortDescription: String!
+  private (set) var price: Double!
+  private (set) var readableDuration: String!
+  private (set) var endTime: Double!
+  dynamic private (set) var timeRemaining: String!
+  private (set) var readableEndTime: String!
+  private (set) var timer: NSTimer?
+  private (set) var quantity: Int!
+  private (set) var imageUrls: [String]!
+  private (set) var downloadedImages: [UIImage]!
   
   //TODO: list of people watching
-  private var _subscriberIds: [String]!
-  private var _subscriberCount: Int!
+  private var subscriberIds: [String]!
+  var subscriberCount: Int!
   
-  var publisherId: String {
-    get {
-      return _publisherId
-    }
-  }
   
-  var broadcastId: String {
-    get {
-      return _broadcastId
-    }
-  }
-  
-  var title: String {
-    get {
-      return _title
-    }
-  }
-  
-  var isPublishing: Bool! {
-    get {
-      return _isPublishing
-    }
-    set(newValue) {
-      _isPublishing = newValue
-    }
-  }
-  
-  var subscriberCount: Int! {
-    get {
-      return _subscriberCount
-    }
-    set(newValue) {
-      _subscriberCount = newValue
-    }
-  }
-  
-  var sessionId: String {
-    get {
-      return _sessionId
-    }
-    set(newId) {
-      _sessionId = newId
-    }
-  }
-  
-  var streamId: String {
-    get {
-      return _streamId
-    }
-  }
-  
-  dynamic private(set) var timeRemaining: String {
-    get {
-      return _timeRemaining
-    }
-    set(newValue) {
-      _timeRemaining = newValue
-    }
-  }
-  
-  var downloadedImages: [UIImage] {
-    get {
-      return _downloadedImages
-    }
-  }
-  
-  var quantity: Int {
-    get {
-      return _quantity
-    }
-  }
-  
-  init(root: Firebase, broadcastId: String) {
+  init(root: Firebase, broadcastId id: String) {
     // url to the publisher's broadcast
-    _ref = root.childByAppendingPath("broadcasts").childByAppendingPath(broadcastId)
-    _messagesRef = root.childByAppendingPath("messages").childByAppendingPath(broadcastId)
+    ref = root.childByAppendingPath("broadcasts").childByAppendingPath(id)
+    messagesRef = root.childByAppendingPath("messages").childByAppendingPath(id)
+    //subscribersRef = root.childByAppendingPath("subscribers").childByAppendingPath(id)
     
-    _broadcastId = broadcastId
-    _isPublishing = false
-    _imageUrls = []
-    _downloadedImages = []
-    _quantity = 0
+    broadcastId = id
+    isPublishing = false
+    imageUrls = []
+    downloadedImages = []
+    quantity = 0
     
     //TODO: list of people watching
-    _subscriberIds = []
-    _subscriberCount = 0
+    subscriberIds = []
+    subscriberCount = 0
   }
   
   /*!
    * Initializer for when the user creates a new broadcast to publish
    */
-  convenience init(root: Firebase, publisherId: String!) {
+  convenience init(root: Firebase, publisherId id: String!) {
     // TODO: Bug - app crashes if we don't have userId by the time the user clicks the "Broadcast" tab item
     
     // set broadcastId as the userId plus a timestamp
-    let broadcastId = "\(publisherId)-\(timeStamp())"
+    let broadcastId = "\(id)-\(timeStamp())"
     
     // initialize
     self.init(root: root, broadcastId: broadcastId)
 
     // set publisherId and listen for updates
-    _publisherId = publisherId
+    publisherId = id
     startObserving()
   }
   
   /*!
    * Initializer for when the user subscribes to a broadcast already in session
    */
-  convenience init(root: Firebase, snapshot: FDataSnapshot, subscriberId: String!) {
+  convenience init(root: Firebase, snapshot: FDataSnapshot, subscriberId id: String!) {
     let val: AnyObject! = snapshot.value
     
     let data = JSON(val)
@@ -163,7 +95,7 @@ class Broadcast: NSObject {
     extractData(data)
     
     // set subscriberId and listen for updates
-    _subscriberId = subscriberId
+    subscriberId = id
     startObserving()
     
     // start timer
@@ -175,7 +107,7 @@ class Broadcast: NSObject {
    */
   func startObserving() {
     // listen for updates to the broadcast
-    self._valueHandle = _ref.observeEventType(FEventType.Value, withBlock: { [weak self]
+    self.valueHandle = ref.observeEventType(FEventType.Value, withBlock: { [weak self]
       snapshot in
       
       if let strongSelf = self {
@@ -187,16 +119,16 @@ class Broadcast: NSObject {
         else {
           // update data for user from firebase snapshot
           let data = JSON(val)
-          strongSelf._isPublishing = data["isPublishing"].bool
-          strongSelf._streamId = data["streamId"].string
+          strongSelf.isPublishing = data["isPublishing"].bool
+          strongSelf.streamId = data["streamId"].string
           
           if let quantity = data["quantity"].int {
-            strongSelf._quantity = quantity
+            strongSelf.quantity = quantity
             strongSelf.sendQuantityUpdatedNotification(quantity)
           }
           
           if let count = data["subscriberCount"].int {
-            strongSelf._subscriberCount = count
+            strongSelf.subscriberCount = count
             strongSelf.sendSubscriberCountUpdatedNotification(count)
           }
         }
@@ -210,7 +142,7 @@ class Broadcast: NSObject {
    */
   func startObservingMessages() {
     // listen for new messages
-    self._messagesHandle = _messagesRef.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { [weak self]
+    messagesHandle = messagesRef.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { [weak self]
       snapshot in
     
       if let strongSelf = self {
@@ -231,11 +163,11 @@ class Broadcast: NSObject {
   }
   
   func transmitMessageFromSubscriber(text: String) {
-    guard _subscriberId != nil else {
+    guard (subscriberId != nil) else {
       return
     }
     
-    transmitMessage(author: _subscriberId, text: text)
+    transmitMessage(author: subscriberId, text: text)
   }
   
   /*!
@@ -243,7 +175,7 @@ class Broadcast: NSObject {
    */
   func transmitMessage(author author: String, text: String) {
     // auto-increment
-    let messageRef = _messagesRef.childByAutoId()
+    let messageRef = messagesRef.childByAutoId()
     
     let newMessage: [String: String] = [
                       "author": author,
@@ -269,15 +201,15 @@ class Broadcast: NSObject {
    * Remove all observers and clear the observer handles
    */
   func stopObserving() {
-    if (_valueHandle != nil) {
-      _ref.removeObserverWithHandle(_valueHandle!)
-      _valueHandle = nil
+    if (valueHandle != nil) {
+      ref.removeObserverWithHandle(valueHandle!)
+      valueHandle = nil
     }
-    if (_messagesHandle != nil) {
-      _messagesRef.removeObserverWithHandle(_messagesHandle!)
-      _messagesHandle = nil
+    if (messagesHandle != nil) {
+      messagesRef.removeObserverWithHandle(messagesHandle!)
+      messagesHandle = nil
     }
-    if let timer = _timer {
+    if let timer = timer {
       timer.invalidate()
     }
   }
@@ -286,34 +218,34 @@ class Broadcast: NSObject {
    * Remove the messages observer and clear the handle
    */
   func stopObservingMessages() {
-    if (_messagesHandle != nil) {
-      _messagesRef.removeObserverWithHandle(_messagesHandle!)
-      _messagesHandle = nil
+    if (messagesHandle != nil) {
+      messagesRef.removeObserverWithHandle(messagesHandle!)
+      messagesHandle = nil
     }
   }
   
   /*!
    * Broadcast is now publishing on a stream
    */
-  func isPublishing(publishing: Bool, onStream streamId: String) {
-    _isPublishing = publishing
-    _streamId = streamId
+  func isPublishing(publishing: Bool, onStream stream: String) {
+    isPublishing = publishing
+    streamId = stream
   }
   
   /*!
    * Set details of the broadcast from what the user entered
    * User enters details before publishing
    */
-  func setDetails(title: String, description: String, price: String, duration: String, quantity: String) {
-    _title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    _description = description.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    _price = Double(price)
-    _readableDuration = duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    _quantity = Int(quantity)
+  func setDetails(title t: String, description d: String, price p: String, duration dur: String, quantity q: String) {
+    title = t.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    shortDescription = d.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    price = Double(p)
+    readableDuration = dur.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    quantity = Int(q)
   }
   
   func addImageUrl(imageUrl: String) {
-    _imageUrls.append(imageUrl)
+    imageUrls.append(imageUrl)
   }
   
   /*!
@@ -324,7 +256,7 @@ class Broadcast: NSObject {
     // get server time
     let timestamp = DatabaseManager.sharedInstance.serverTimestampInMilliseconds()
     
-    let clockParts = _readableDuration.componentsSeparatedByString(":")
+    let clockParts = readableDuration.componentsSeparatedByString(":")
     let minutes = Double(clockParts[0])
     let seconds = clockParts.count > 1 ? Double(clockParts[1]) : 0.0
     
@@ -332,8 +264,8 @@ class Broadcast: NSObject {
     let millisecondsInFuture = (minutes! * 60 + seconds!) * 1000
     
     // set end time
-    _endTime = timestamp + millisecondsInFuture
-    _readableEndTime = getFormattedTime(_endTime)
+    endTime = timestamp + millisecondsInFuture
+    readableEndTime = getFormattedTime(endTime)
   }
   
   /*!
@@ -342,10 +274,10 @@ class Broadcast: NSObject {
    * The client checks the countdown every second
    */
   func startCountdown() {
-    _timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCountdown"), userInfo: nil, repeats: true)
+    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCountdown"), userInfo: nil, repeats: true)
     
     // use NSRunLoopCommonModes so timer continues to countdown when user interacts with screen
-    NSRunLoop.mainRunLoop().addTimer(_timer!, forMode: NSRunLoopCommonModes)
+    NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSRunLoopCommonModes)
   }
   
   /*!
@@ -353,31 +285,26 @@ class Broadcast: NSObject {
    * The end time is the official end time stored in the database
    */
   func updateCountdown() {
-    let millisecondsRemaining = _endTime - DatabaseManager.sharedInstance.serverTimestampInMilliseconds()
+    let millisecondsRemaining = endTime - DatabaseManager.sharedInstance.serverTimestampInMilliseconds()
     
     if millisecondsRemaining > 0 {
       let (m,s) = millisecondsToMinutesSeconds(millisecondsRemaining)
       
       switch m {
       case _ where m > 1:
-        _timeRemaining = (s < 10) ? "\(m):0\(s)" : "\(m):\(s)"
+        timeRemaining = (s < 10) ? "\(m):0\(s)" : "\(m):\(s)"
       case _ where m < 1:
-        _timeRemaining = (s < 10) ? "00:0\(s)" : "00:\(s)"
+        timeRemaining = (s < 10) ? "00:0\(s)" : "00:\(s)"
       default:
         break
       }
     } else {
-      _timeRemaining = "00:00"
+      timeRemaining = "00:00"
       
-      if let timer = _timer {
+      if let timer = timer {
         timer.invalidate()
       }
     }
-    
-    // set accessible property
-    // this triggers KVO
-    timeRemaining = _timeRemaining
-    
   }
   
   /*!
@@ -386,22 +313,22 @@ class Broadcast: NSObject {
   func saveWithCompletionBlock(block: FSaveCompletionBlock) {
     // build broadcast
     var newBroadcast: [String: AnyObject] = [
-                        "publisherId": _publisherId,
-                        "sessionId": _sessionId,
-                        "streamId": _streamId,
-                        "isPublishing": _isPublishing,
-                        "title": _title,
-                        "description": _description,
-                        "price": _price,
-                        "readableDuration": _readableDuration,
-                        "endTime": _endTime,
-                        "readableEndTime": _readableEndTime,
-                        "quantity": _quantity,
-                        "subscriberCount": _subscriberCount
+                        "publisherId": publisherId,
+                        "sessionId": sessionId,
+                        "streamId": streamId,
+                        "isPublishing": isPublishing,
+                        "title": title,
+                        "description": description,
+                        "price": price,
+                        "readableDuration": readableDuration,
+                        "endTime": endTime,
+                        "readableEndTime": readableEndTime,
+                        "quantity": quantity,
+                        "subscriberCount": subscriberCount
                         ]
     // add images
     // image1: url
-    if let urls = _imageUrls {
+    if let urls = imageUrls {
       var imageCount = 0
       var images = [String: String]()
       for imageUrl in urls {
@@ -415,7 +342,7 @@ class Broadcast: NSObject {
     }
     
      // save to firebase
-    _ref.setValue(newBroadcast) {
+    ref.setValue(newBroadcast) {
       (error: NSError?, ref: Firebase!) in
       
       if error != nil {
@@ -442,20 +369,20 @@ class Broadcast: NSObject {
    */
   func extractData(data: JSON) {
     // get the sessionId
-    _sessionId = data["sessionId"].string ?? ""
-    _streamId = data["streamId"].string ?? ""
+    sessionId = data["sessionId"].string ?? ""
+    streamId = data["streamId"].string ?? ""
     
-    _publisherId = data["publisherId"].string ?? ""
-    _isPublishing = data["isPublishing"].bool ?? false
+    publisherId = data["publisherId"].string ?? ""
+    isPublishing = data["isPublishing"].bool ?? false
     
-    _title = data["title"].string ?? ""
-    _description = data["description"].string ?? ""
-    _price = data["price"].double ?? 0.0
-    _quantity = data["quantity"].int ?? 0
-    _readableDuration = data["readableDuration"].string ?? ""
-    _endTime = data["endTime"].double ?? 0.0
+    title = data["title"].string ?? ""
+    shortDescription = data["description"].string ?? ""
+    price = data["price"].double ?? 0.0
+    quantity = data["quantity"].int ?? 0
+    readableDuration = data["readableDuration"].string ?? ""
+    endTime = data["endTime"].double ?? 0.0
     
-    _subscriberCount = data["subscriberCount"].int ?? 0
+    subscriberCount = data["subscriberCount"].int ?? 0
     
     // set initial countdown for timer
     updateCountdown()
@@ -463,7 +390,7 @@ class Broadcast: NSObject {
     for (_, url):(String, JSON) in data["photos"] {
       // if we have an image url, save it
       if let imageUrl = url.string {
-        _imageUrls.append(imageUrl)
+        imageUrls.append(imageUrl)
         
         // construct Fastly image url
         let cacheUrl = Constants.Fastly.RootUrl.stringByAppendingString(imageUrl)
@@ -478,7 +405,7 @@ class Broadcast: NSObject {
           }
           else {
             print("cached image successfully fetched and storing on broadcast")
-            self._downloadedImages.append(image)
+            self.downloadedImages.append(image)
             
             //send notification 
             self.sendImageDownloadedNotification(image)

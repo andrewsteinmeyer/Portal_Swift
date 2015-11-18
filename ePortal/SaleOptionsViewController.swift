@@ -368,7 +368,7 @@ class SaleOptionsViewController: UITableViewController {
       let quantity = self.quantityTextField.text!
       
       // give the details to the broadcast
-      self.broadcast.setDetails(title, description: description, price: price, duration: duration, quantity: quantity)
+      self.broadcast.setDetails(title: title, description: description, price: price, duration: duration, quantity: quantity)
       
       return task
     }
