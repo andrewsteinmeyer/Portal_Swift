@@ -31,7 +31,7 @@ class SaleDescriptionTextView: DesignableTextView {
     placeholderLabel.numberOfLines = 0
     placeholderLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
     placeholderLabel.text = "Enter a description to let everyone know more about your product!"
-    placeholderLabel.font = UIFont(name: "Lato-Regular", size: 15)
+    placeholderLabel.font = UIFont(name: "Lato-Regular", size: 17)
     placeholderLabel.sizeToFit()
     placeholderLabel.frame.origin = CGPointMake(5, self.font!.pointSize / 2)
     placeholderLabel.textColor = UIColor.lightGrayColor()
