@@ -19,8 +19,8 @@ class BroadcastOverlayViewController: UIViewController {
   
   var broadcast: Broadcast!
   
-  var _firstMessageReceived = false
-  private var _broadcastDetailsPopulated = false
+  private var firstMessageReceived = false
+  private var broadcastDetailsPopulated = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -79,7 +79,7 @@ class BroadcastOverlayViewController: UIViewController {
     timeRemainingLabel.text! = broadcast.timeRemaining
     
     toggleBroadcastDetails(hidden: false)
-    _broadcastDetailsPopulated = true
+    broadcastDetailsPopulated = true
   }
   
   override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -103,7 +103,7 @@ extension BroadcastOverlayViewController {
   }
   
   func refreshQuantity(notification: NSNotification) {
-    guard _broadcastDetailsPopulated else {
+    guard broadcastDetailsPopulated else {
       return
     }
     
@@ -140,8 +140,8 @@ extension BroadcastOverlayViewController {
     if let unwrappedMessage = data {
       // firebase sends last message after registering for updates
       // so ignore first message
-      guard _firstMessageReceived else {
-        _firstMessageReceived = true
+      guard firstMessageReceived else {
+        firstMessageReceived = true
         return
       }
       
@@ -150,7 +150,7 @@ extension BroadcastOverlayViewController {
       let author = message["author"].string ?? ""
       
       let profileImage = UIImage(named: "penny")!
-      self.commentView.addCell(profileImage, name: author, comment: comment)
+      commentView.addCell(profileImage, name: author, comment: comment)
     }
   }
   

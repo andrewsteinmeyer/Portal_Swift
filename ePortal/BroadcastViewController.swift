@@ -11,20 +11,12 @@
  */
 class BroadcastViewController: UIViewController {
   
-  private var _session: OTSession!
-  private var _publisher: OTPublisher!
-  private var _broadcast: Broadcast!
-  private var _firstAppearance = true
+  private var session: OTSession!
+  private var publisher: OTPublisher!
+  private var firstAppearance = true
+  private (set) var broadcast: Broadcast!
   
-  private var _overlayViewController: BroadcastOverlayViewController!
-  
-  var broadcast: Broadcast {
-    get {
-      return _broadcast
-    } set(newBroadcast) {
-      _broadcast = newBroadcast
-    }
-  }
+  private var overlayViewController: BroadcastOverlayViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,11 +26,11 @@ class BroadcastViewController: UIViewController {
     self.view.alpha = 0
     
     // initialize broadcast with firebase ref
-    _broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: DatabaseManager.sharedInstance.userId)
+    broadcast = Broadcast(root: DatabaseManager.sharedInstance.root, publisherId: DatabaseManager.sharedInstance.userId)
     
     // create overlay and pass broadcast
-    _overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.BroadcastOverlayVC) as! BroadcastOverlayViewController
-    _overlayViewController.broadcast = broadcast
+    overlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier(Constants.BroadcastOverlayVC) as! BroadcastOverlayViewController
+    overlayViewController.broadcast = broadcast
     
     // request sessionId and token from opentok using aws lambda
     LambdaHandler.sharedInstance.generateOpentokSessionIdWithToken().continueWithBlock() { [weak self]
@@ -76,7 +68,7 @@ class BroadcastViewController: UIViewController {
     
     // Only present SaleOptionsViewController on first appearance
     // instantiate SaleOptionsViewController and pass the broadcast object
-    if _firstAppearance {
+    if firstAppearance {
       let viewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.SaleOptionsVC) as! SaleOptionsViewController
       viewController.broadcast = broadcast
       viewController.delegate = self
@@ -84,20 +76,20 @@ class BroadcastViewController: UIViewController {
         // make broadcastViewController's view visible after the SaleOptionsViewController is presented
         // after user dismisses the SaleOptionsViewController, the broadcastViewController will be present
         self.view.alpha = 1
-        self._overlayViewController.view.alpha = 1
+        self.overlayViewController.view.alpha = 1
       }
-      _firstAppearance = false
+      firstAppearance = false
     }
   }
   
   private func arrangeOverlayViewController() {
     // set frame equal to current view's bounds
-    _overlayViewController.view.frame = self.view.bounds
+    overlayViewController.view.frame = self.view.bounds
     
     // add BroadcastOverlayViewController
-    self.view.addSubview(_overlayViewController.view)
-    self.addChildViewController(_overlayViewController)
-    _overlayViewController.didMoveToParentViewController(self)
+    self.view.addSubview(overlayViewController.view)
+    self.addChildViewController(overlayViewController)
+    overlayViewController.didMoveToParentViewController(self)
   }
   
   override func viewWillLayoutSubviews() {
@@ -108,11 +100,11 @@ class BroadcastViewController: UIViewController {
   
   func doConnectToSession(sessionId: String, WithToken token: String, apiKey: String) {
     // Initalize a new instance of OTSession and begin the connection process
-    _session = OTSession(apiKey: apiKey, sessionId: sessionId, delegate: self)
+    session = OTSession(apiKey: apiKey, sessionId: sessionId, delegate: self)
     
-    if (_session != nil) {
+    if (session != nil) {
       var error: OTError?
-      _session?.connectWithToken(token, error: &error)
+      session?.connectWithToken(token, error: &error)
       if error != nil {
         print("Unable to connect to session \(error?.localizedDescription)")
       }
@@ -120,11 +112,11 @@ class BroadcastViewController: UIViewController {
   }
   
   func doPublish() {
-    _publisher = OTPublisher(delegate: self)
+    publisher = OTPublisher(delegate: self)
     
-    if (_publisher != nil) {
+    if (publisher != nil) {
       var error: OTError?
-      _session?.publish(_publisher, error: &error)
+      session?.publish(publisher, error: &error)
       if error != nil {
         print("Unable to publish \(error?.localizedDescription)")
       }
@@ -132,19 +124,19 @@ class BroadcastViewController: UIViewController {
       // call async so UI can continue
       // seems to speed up publisher presentation
       dispatch_async(GlobalUserInitiatedQueue) {
-        self._publisher?.cameraPosition = .Back
+        publisher?.cameraPosition = .Back
       }
       
       // expand view to entire screen
-      _publisher?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
-      self.view.addSubview(_publisher!.view)
+      publisher?.view.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+      self.view.addSubview(publisher!.view)
     }
   }
   
   func cleanupPublisher() {
-    if (_publisher != nil) {
-      _publisher!.view.removeFromSuperview()
-      _publisher = nil
+    if (publisher != nil) {
+      publisher!.view.removeFromSuperview()
+      publisher = nil
     }
   }
   
@@ -169,7 +161,7 @@ extension BroadcastViewController: SaleOptionsViewControllerDelegate {
   
   func saleOptionsViewControllerDidStartBroadcast() {
     print("got to start publishing broadcast in broadcast controller")
-    self.doPublish()
+    doPublish()
   }
 }
 
@@ -210,7 +202,7 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
   // OTPublisher 
   
   func publisher(publisher: OTPublisherKit!, streamCreated stream: OTStream!) {
-    _broadcast.isPublishing(true, onStream: stream.streamId)
+    broadcast.isPublishing(true, onStream: stream.streamId)
     NSLog("Now publishing on stream...")
     print("StreamId: \(stream.streamId)")
     
@@ -221,28 +213,28 @@ extension BroadcastViewController: OTSessionDelegate, OTPublisherDelegate {
     //       Otherwise, the DiscoverCollectionViewController sees the new broadcast too quickly
     //       and attempts to download the pictures from Fastly before they have had time to get there.
     afterDelay(2) {
-      self._broadcast.setEndTime()
-      self._broadcast.saveWithCompletionBlock() {
+      self.broadcast.setEndTime()
+      self.broadcast.saveWithCompletionBlock() {
         error in
 
         if error != nil {
           print("error saving broadcast to firebase")
         }
         
-        self._overlayViewController.populateAndDisplayBroadcastDetails()
+        self.overlayViewController.populateAndDisplayBroadcastDetails()
       }
     }
   }
 
   func publisher(publisher: OTPublisherKit!, streamDestroyed stream: OTStream!) {
-    _broadcast.isPublishing = false
-    self.cleanupPublisher()
+    broadcast.isPublishing = false
+    cleanupPublisher()
   }
   
   func publisher(publisher: OTPublisherKit!, didFailWithError error: OTError) {
-    _broadcast.isPublishing = false
+    broadcast.isPublishing = false
     print("publisher didFailWithError %@", error)
-    self.cleanupPublisher()
+    cleanupPublisher()
   }
   
 }
