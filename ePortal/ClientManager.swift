@@ -16,25 +16,25 @@ import Fabric
  */
 final class ClientManager {
   
-  private var _credentialsProvider: AWSCognitoCredentialsProvider!
-  private var _completionHandler: AWSContinuationBlock!
-  private var _keychain: Keychain!
+  private var credentialsProvider: AWSCognitoCredentialsProvider!
+  private var completionHandler: AWSContinuationBlock!
+  private var keychain: Keychain!
   
-  private var _firstName: String?
-  private var _lastName: String?
-  private var _fullName: String?
+  private var firstName: String?
+  private var lastName: String?
+  private var fullName: String?
   
-  private var _twitterUserData: TWTRUser? {
+  private var twitterUserData: TWTRUser? {
     get {
-      return self._twitterUserData
+      return self.twitterUserData
     }
-    set(data) {
-      if let fullName = data?.name {
-        _fullName = fullName
+    set(user) {
+      if let name = user?.name {
+        fullName = name
         
-        let fullNameArr = fullName.componentsSeparatedByString(" ")
-        _firstName = fullNameArr[0]
-        _lastName = fullNameArr[1]
+        let fullNameArr = fullName!.componentsSeparatedByString(" ")
+        firstName = fullNameArr[0]
+        lastName = fullNameArr[1]
       }
     }
   }
@@ -42,7 +42,7 @@ final class ClientManager {
   //MARK: Lifecycle
 
   private init() {
-    _keychain = Keychain(service: String(format: "%@.%@", NSBundle.mainBundle().bundleIdentifier!, "ClientManager"))
+    keychain = Keychain(service: String(format: "%@.%@", NSBundle.mainBundle().bundleIdentifier!, "ClientManager"))
   }
 
   class var sharedInstance: ClientManager {
@@ -54,41 +54,41 @@ final class ClientManager {
   
   //MARK: Login Helpers
   
-  func initializeCredentials(logins: [NSObject: AnyObject]?) -> AWSTask {
+  private func initializeCredentials(logins: [NSObject: AnyObject]?) -> AWSTask {
     // Setup AWS Credentials
-    self._credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.AWS.Cognito.RegionType,
+    credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.AWS.Cognito.RegionType,
                                                              identityPoolId: Constants.AWS.Cognito.IdentityPoolId)
     
     // set logins if they exist
     if let logins = logins {
-      self._credentialsProvider.logins = logins
+      credentialsProvider.logins = logins
     }
     
     let configuration = AWSServiceConfiguration(region: Constants.AWS.Cognito.DefaultServiceRegionType,
-                                                credentialsProvider: self._credentialsProvider)
+                                                credentialsProvider: credentialsProvider)
     
     AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
     
-    return self._credentialsProvider.getIdentityId()
+    return credentialsProvider.getIdentityId()
   }
   
-  func completeLogin(logins: [NSObject: AnyObject]?) {
+  private func completeLogin(logins: [NSObject: AnyObject]?) {
     var task: AWSTask
     
-    if (self._credentialsProvider == nil) {
-      task = self.initializeCredentials(logins)
+    if (credentialsProvider == nil) {
+      task = initializeCredentials(logins)
     }
     else {
-      if (self._credentialsProvider.logins != nil) {
+      if (credentialsProvider.logins != nil) {
         //should not get into this block until we add more login providers
-        let merge = NSMutableDictionary(dictionary: self._credentialsProvider.logins)
+        let merge = NSMutableDictionary(dictionary: credentialsProvider.logins)
         merge.addEntriesFromDictionary(logins!)
       
-        self._credentialsProvider.logins = merge as [NSObject: AnyObject]
+        credentialsProvider.logins = merge as [NSObject: AnyObject]
       }
       else {
         if let logins = logins {
-          self._credentialsProvider.logins = logins
+          credentialsProvider.logins = logins
         }
       }
       
@@ -96,7 +96,7 @@ final class ClientManager {
       //User is initially unauthorized.  When they login with Twitter, the new authorized identity
       //needs to be merged with the previous unauthorized identity to retain the cognito identity id.
       //Currently only supporting Twitter as login provider, but could add more later (Digits, Facebook, Amazon, etc)
-      task = self._credentialsProvider.refresh()
+      task = credentialsProvider.refresh()
     }
     
     task.continueWithBlock {
@@ -110,65 +110,65 @@ final class ClientManager {
       }
       return task
       
-    }.continueWithBlock(self._completionHandler)
+    }.continueWithBlock(completionHandler)
     
   }
   
-  func resumeSessionWithCompletionHandler(completionHandler: AWSContinuationBlock) {
-    self._completionHandler = completionHandler
+  func resumeSessionWithCompletionHandler(handler: AWSContinuationBlock) {
+    completionHandler = handler
     
-    if ((self._keychain[Constants.AWS.Cognito.Provider.Twitter]) != nil) {
+    if ((keychain[Constants.AWS.Cognito.Provider.Twitter]) != nil) {
       print("logging in with twitter")
       loginWithTwitter()
     }
-    else if (self._credentialsProvider == nil) {
+    else if (credentialsProvider == nil) {
       print("no login info yet, just setting up aws credentials")
-      self.completeLogin(nil)
+      completeLogin(nil)
     }
   }
   
-  func loginWithCompletionHandler(completionHandler: AWSContinuationBlock) {
-    self._completionHandler = completionHandler
+  func loginWithCompletionHandler(handler: AWSContinuationBlock) {
+    completionHandler = handler
     
     self.loginWithTwitter()
   }
   
   func logoutWithCompletionHandler(completionHandler: AWSContinuationBlock) {
-    if (self.isLoggedInWithTwitter()) {
-      self.logoutTwitter()
+    if (isLoggedInWithTwitter()) {
+      logoutTwitter()
     }
     
     //TODO: Does wiping the credential Provider keychain reset the user's cognito id?
     //      Or is it remembered when the user logs back in? Pretty sure it is remembered
     //      If it gets wiped, we don't want to clearKeyChain in wipeAll() function
     
-    self.wipeAll()
+    wipeAll()
     
     AWSTask(result: nil).continueWithBlock(completionHandler)
   }
   
-  func wipeAll() {
+  private func wipeAll() {
     print("wiping credentials")
-    self._credentialsProvider.logins = nil
-    self._credentialsProvider.clearKeychain()
+    credentialsProvider.logins = nil
+    credentialsProvider.clearKeychain()
   }
   
   func isLoggedIn() -> Bool {
-    return self.isLoggedInWithTwitter()
+    return isLoggedInWithTwitter()
   }
   
   func getIdentityId() -> String {
-    return self._credentialsProvider.identityId
+    return credentialsProvider.identityId
   }
   
   //MARK: Twitter
   
-  func isLoggedInWithTwitter() -> Bool {
+  private func isLoggedInWithTwitter() -> Bool {
     let loggedIn = Twitter.sharedInstance().session() != nil
-    return self._keychain[Constants.AWS.Cognito.Provider.Twitter] != nil && loggedIn
+    return keychain[Constants.AWS.Cognito.Provider.Twitter] != nil && loggedIn
   }
   
-  func loginWithTwitter() {
+  private func loginWithTwitter() {
     Twitter.sharedInstance().logInWithCompletion { session, error in
       if (session != nil) {
         if let sessionId = session?.userID {
@@ -190,38 +190,38 @@ final class ClientManager {
     }
   }
   
-  func completeTwitterLogin() {
-    self._keychain[Constants.AWS.Cognito.Provider.Twitter] = "YES"
-    self.completeLogin( ["api.twitter.com": self.loginForTwitterSession( Twitter.sharedInstance().session()! )])
+  private func completeTwitterLogin() {
+    keychain[Constants.AWS.Cognito.Provider.Twitter] = "YES"
+    completeLogin( ["api.twitter.com": self.loginForTwitterSession( Twitter.sharedInstance().session()! )])
     
   }
   
-  func loginForTwitterSession(session: TWTRAuthSession) -> String {
+  private func loginForTwitterSession(session: TWTRAuthSession) -> String {
     return String(format: "%@;%@", session.authToken, session.authTokenSecret)
   }
   
-  func logoutTwitter() {
+  private func logoutTwitter() {
     if (Twitter.sharedInstance().session() != nil) {
       Twitter.sharedInstance().logOut()
-      self._keychain[Constants.AWS.Cognito.Provider.Twitter] = nil
-      self.clearTwitterUserData()
+      keychain[Constants.AWS.Cognito.Provider.Twitter] = nil
+      clearTwitterUserData()
     }
   }
   
   func setTwitterUserData(user: TWTRUser) {
-    _twitterUserData = user
+    twitterUserData = user
   }
   
   func getTwitterUserData() -> [String: String]? {
     var data = [String: String]()
     
-    if let firstName = _firstName {
+    if let firstName = firstName {
       data["firstName"] = firstName
     }
-    if let lastName = _lastName {
+    if let lastName = lastName {
       data["lastName"] = lastName
     }
-    if let fullName = _fullName {
+    if let fullName = fullName {
       data["fullName"] = fullName
     }
     
@@ -229,7 +229,7 @@ final class ClientManager {
   }
   
   func clearTwitterUserData() {
-    _twitterUserData = nil
+    twitterUserData = nil
   }
   
   
