@@ -17,8 +17,6 @@ class Broadcast: NSObject {
   private var valueHandle: UInt?
   private var messagesRef: Firebase!
   private var messagesHandle: UInt?
-  private var subscribersRef: Firebase!
-  private var subscribersHandle: UInt?
   
   private (set) var publisherId: String!
   private (set) var subscriberId: String!
@@ -39,8 +37,8 @@ class Broadcast: NSObject {
   private (set) var imageUrls: [String]!
   private (set) var downloadedImages: [UIImage]!
   
-  //TODO: list of people watching
-  private var subscriberIds: [String]!
+  private var subscribersRef: Firebase!
+  private var subscriberCountRef: Firebase!
   var subscriberCount: Int!
   
   
@@ -48,16 +46,14 @@ class Broadcast: NSObject {
     // url to the publisher's broadcast
     ref = root.childByAppendingPath("broadcasts").childByAppendingPath(id)
     messagesRef = root.childByAppendingPath("messages").childByAppendingPath(id)
-    //subscribersRef = root.childByAppendingPath("subscribers").childByAppendingPath(id)
+    subscribersRef = root.childByAppendingPath("subscribers").childByAppendingPath(id)
+    subscriberCountRef = ref.childByAppendingPath("subscriberCount")
     
     broadcastId = id
     isPublishing = false
     imageUrls = []
     downloadedImages = []
     quantity = 0
-    
-    //TODO: list of people watching
-    subscriberIds = []
     subscriberCount = 0
   }
   
@@ -413,6 +409,43 @@ class Broadcast: NSObject {
         })
       }
     }
+  }
+  
+  /*!
+   * Add subscriber to the list of subscribers by saving to firebase
+   * Increment the subscriber count
+   */
+  func addSubscriberWithCompletionBlock(block: FSaveCompletionBlock) {
+    let subscribed = [subscriberId : true]
+    
+    // save to firebase
+    subscribersRef.setValue(subscribed) {
+      (error: NSError?, ref: Firebase!) in
+      
+      if error != nil {
+        block(error: error)
+      } else {
+        
+        self.incrementSubscriberCount()
+        block(error: nil)
+      }
+    }
+    
+  }
+  
+  /*!
+   * Increments the subscriber count when a subscriber joins a broadcast
+   */
+  func incrementSubscriberCount() {
+    subscriberCountRef.runTransactionBlock({
+      (currentData:FMutableData!) in
+      var value = currentData.value as? Int
+      if (value == nil) {
+        value = 0
+      }
+      currentData.value = value! + 1
+      return FTransactionResult.successWithValue(currentData)
+    })
   }
   
   //MARK: NSNotifications

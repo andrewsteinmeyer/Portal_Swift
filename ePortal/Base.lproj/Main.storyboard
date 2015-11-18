@@ -245,7 +245,7 @@
         <scene sceneID="eNb-KT-5G4">
             <objects>
                 <collectionViewController id="oWR-OE-r8o" customClass="DiscoverCollectionViewController" customModule="ePortal" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="TYQ-N6-hGI" userLabel="Sale Collection View">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="TYQ-N6-hGI" userLabel="Discover Collection View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>

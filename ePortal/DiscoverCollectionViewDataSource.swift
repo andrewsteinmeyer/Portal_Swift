@@ -10,10 +10,7 @@
 /*!
  * Subclass in order to properly display the StickyHeaderView in the DiscoverCollectionViewController
  */
-
 class DiscoverCollectionViewDataSource: FirebaseCollectionViewDataSource {
-  
-  // MARK: UICollectionViewDataSource
   
   override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
     switch kind {

@@ -15,10 +15,16 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var titleLabel: UILabel!
   
+  private var ref: Firebase!
+  private var dataSource: DetailCollectionViewDataSource!
+  
   var broadcast: Broadcast!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // set reference to firebase root
+    ref = DatabaseManager.sharedInstance.root
     
     // add scrollViewOnTop's panGestureRecognizer so this view will receive it's pan gestures
     // remove the panGestureRecognizer from collectionView so it does not compete with the scrollViewOnTop's
@@ -39,8 +45,23 @@ class DetailViewController: UIViewController {
     let detailViewNib = UINib(nibName: Constants.DetailCollection.CellIdentifier, bundle: nil)
     self.collectionView.registerNib(detailViewNib, forCellWithReuseIdentifier: Constants.DetailCollection.CellIdentifier)
     
-    // set as collectionView data source
-    self.collectionView.dataSource = self
+    // set datasource to root/subscribers firebase url
+    // pass broadcast to datasource
+    dataSource = DetailCollectionViewDataSource(ref: ref.childByAppendingPath("subscribers"), nibNamed: Constants.DetailCollection.CellIdentifier, cellReuseIdentifier: Constants.DetailCollection.CellIdentifier, view: self.collectionView!)
+    dataSource.broadcast = broadcast
+    
+    // setup callback to populate cells with subscribers from firebase
+    dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
+      let snapshot = obj as! FDataSnapshot
+      
+      // configure cell after we receive data
+      if let detailCell = cell as? DetailCollectionViewCell {
+        detailCell.configureCellWithSnapshotData(snapshot)
+      }
+    }
+    
+    // set source to firebase source
+    self.collectionView.dataSource = dataSource
     
     // set as the delegate
     self.scrollViewOnTop.delegate = self
@@ -109,42 +130,6 @@ extension DetailViewController: UIScrollViewDelegate {
 
 }
 
-extension DetailViewController: UICollectionViewDataSource {
-  
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return 1
-  }
-  
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
-  }
-  
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.DetailCollection.CellIdentifier, forIndexPath: indexPath)
-    
-    return cell
-  }
-  
-  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    switch kind {
-    case UICollectionElementKindSectionHeader:
-      let cell = self.collectionView?.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.SectionHeaderIdentifier, forIndexPath: indexPath) as! DetailCollectionViewSectionHeader
-      
-      cell.titleLabel?.text = "LIVE VIEWERS"
-      
-      return cell
-    case CSStickyHeaderParallaxHeader:
-      // make sure the header cell uses the proper identifier
-      let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.DetailCollection.HeaderViewIdentifier, forIndexPath: indexPath) as! DetailCollectionViewHeaderView
-      
-      // set initial images that have downloaded
-      cell.images = broadcast.downloadedImages
-      
-      return cell
-    default:
-      assert(false, "Unexpected element kind")
-    }
-  }
-  
-}
+
+
 

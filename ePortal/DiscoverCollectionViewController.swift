@@ -11,7 +11,7 @@ import UIKit
 class DiscoverCollectionViewController: UICollectionViewController {
   
   private var ref: Firebase!
-  private var dataSource: FirebaseCollectionViewDataSource!
+  private var dataSource: DiscoverCollectionViewDataSource!
   
   @IBAction func logoutUser(sender: AnyObject) {
     ClientManager.sharedInstance.logoutWithCompletionHandler() {

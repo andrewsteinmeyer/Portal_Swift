@@ -140,6 +140,13 @@ extension SubscribeViewController: OTSessionDelegate, OTSubscriberDelegate {
   
   func sessionDidConnect(session: OTSession!) {
     print("session did connect")
+    broadcast.addSubscriberWithCompletionBlock() {
+      error in
+
+      if error != nil {
+        print("Unable to save subscriber and add to subscribers list \(error?.localizedDescription)")
+      }
+    }
   }
   
   func sessionDidDisconnect(session: OTSession!) {

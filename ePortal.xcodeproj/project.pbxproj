@@ -51,6 +51,7 @@
 		4E3F42F01BF95AB200BEFEBD /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */; };
 		4E3F42F61BF95B2C00BEFEBD /* WebImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4ECAE0B31BF2D5000062DFB7 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E43A1051BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		4E4D08511BFC21E400028F19 /* DetailCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4D08501BFC21E400028F19 /* DetailCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		4E4E9FB31BAA3FEF007FEBB1 /* SaleOptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */; };
 		4E50B1501B8D58110072B85C /* SaleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */; };
 		4E50B1611B8D7C8E0072B85C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */; };
@@ -279,6 +280,7 @@
 		4E3769D61BD7097700BEFE7A /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		4E3769E61BD7171700BEFE7A /* ChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		4E43A1041BB5F31B009444D8 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		4E4D08501BFC21E400028F19 /* DetailCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4E4E9FB21BAA3FEF007FEBB1 /* SaleOptionFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionFieldView.swift; sourceTree = "<group>"; };
 		4E50B14E1B8D58110072B85C /* SaleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleOptionsViewController.swift; sourceTree = "<group>"; };
 		4E50B1601B8D7C8E0072B85C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				4E643FA91BCDDCAC000D6879 /* DetailViewController.swift */,
+				4E4D08501BFC21E400028F19 /* DetailCollectionViewDataSource.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -1221,6 +1224,7 @@
 				4E30A4F01BACDF5D00C28F59 /* SpringView.swift in Sources */,
 				4ED5A57E1B8170780003C19D /* BroadcastViewController.swift in Sources */,
 				4E30A4DB1BACDF5D00C28F59 /* DesignableButton.swift in Sources */,
+				4E4D08511BFC21E400028F19 /* DetailCollectionViewDataSource.swift in Sources */,
 				4E3769C71BD5A84300BEFE7A /* DetailCollectionViewSectionHeader.swift in Sources */,
 				4E30A4DC1BACDF5D00C28F59 /* DesignableImageView.swift in Sources */,
 			);
