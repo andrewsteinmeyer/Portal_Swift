@@ -8,7 +8,7 @@ I developed this application for fun using Swift & OpenTok (Livestream).
 
 ## Login page
 
-![image](https://user-images.githubusercontent.com/6377577/77604265-73a6ca00-6ee8-11ea-9e93-0261c5316791.png)
+![image](https://user-images.githubusercontent.com/6377577/77605422-38f26100-6eeb-11ea-91cd-bef6cb970a5c.png)
 
 ## Broadcast feed
 
